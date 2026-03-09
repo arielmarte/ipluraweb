@@ -111,7 +111,7 @@ const Hero = () => {
               style={{ letterSpacing: '-0.035em' }}
             >
               Jogo responsável com
-              <span className="text-gradient"><br/>estrutura técnica, humana e regulatória</span>
+              <span className="text-gradient"> estrutura técnica, humana e regulatória</span>
             </h1>
 
             <p
