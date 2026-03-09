@@ -405,6 +405,21 @@ export const homeContent = {
     titleSegments: contactTitle,
     intro:
       'Fale com o IPLURA para conhecer soluções em jogo responsável, acolhimento especializado, capacitação e suporte técnico à operadora.',
+    quickWhatsappCtaLabel: 'Atendimento direto no WhatsApp',
+    status: {
+      loadingTitle: 'Enviando mensagem...',
+      loadingDescription: 'Estamos processando seus dados com segurança.',
+      successTitle: 'Mensagem enviada com sucesso',
+      successDescription: 'Recebemos seu contato e nossa equipe retornará em breve.',
+      errorTitle: 'Não foi possível enviar sua mensagem agora',
+      errorDescription:
+        'Tente novamente em instantes ou fale conosco pelo WhatsApp.',
+      unavailableTitle: 'Envio por e-mail em breve',
+      unavailableDescription:
+        'No momento, utilize o WhatsApp para falar com o IPLURA.',
+      resetActionLabel: 'Enviar nova mensagem',
+      backToTopLabel: 'Voltar ao início',
+    },
     success: {
       title: 'Mensagem enviada!',
       description: 'Entraremos em contato em breve.',
@@ -418,10 +433,9 @@ export const homeContent = {
         telefone: { label: 'Telefone', placeholder: '(XX) XXXXX-XXXX' },
         mensagem: { label: 'Mensagem', placeholder: 'Conte-nos sobre sua necessidade...' },
       },
-      submitLabel: 'Entrar em contato',
+      submitLabel: 'Enviar por E-mail',
       whatsapp: {
         label: 'Falar no WhatsApp',
-        href: '#',
       },
     },
   },
