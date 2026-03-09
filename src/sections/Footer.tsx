@@ -53,8 +53,7 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="py-16 border-t border-gray-100 opacity-0"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="py-20 border-t border-white/10 opacity-0 surface-dark text-white"
     >
       <div className="container-clean">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -66,12 +65,17 @@ const Footer = () => {
                 e.preventDefault();
                 scrollToSection('#hero');
               }}
-              className="text-2xl font-bold tracking-tight mb-4 inline-block"
-              style={{ color: 'hsl(var(--iplura-purple))' }}
+              className="inline-flex items-center mb-5"
             >
-              IPLURA
+              <div className="rounded-2xl bg-white px-4 py-3 shadow-[0_14px_30px_rgba(8,11,21,0.26)]">
+                <img
+                  src="/iplura-logo-icon-wordmark-description.svg"
+                  alt="IPLURA"
+                  className="w-full max-w-[22rem] h-auto object-contain"
+                />
+              </div>
             </a>
-            <p className="text-sm leading-relaxed max-w-sm" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="text-sm leading-relaxed max-w-sm text-white/72">
               Instituto de Promoção da Legalidade e Uso Responsável de Apostas. 
               Transformando obrigação regulatória em cuidado real.
             </p>
@@ -81,7 +85,7 @@ const Footer = () => {
           <div>
             <h4
               className="text-sm font-semibold uppercase tracking-wider mb-4"
-              style={{ color: 'hsl(var(--iplura-dark))' }}
+              style={{ color: 'hsl(var(--iplura-white))' }}
             >
               Links
             </h4>
@@ -94,8 +98,7 @@ const Footer = () => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-sm hover:text-iplura-purple transition-colors duration-300 underline-subtle"
-                    style={{ color: 'hsl(var(--iplura-gray))' }}
+                    className="text-sm text-white/68 hover:text-white transition-colors duration-300 underline-subtle"
                   >
                     {link.label}
                   </a>
@@ -108,15 +111,15 @@ const Footer = () => {
           <div>
             <h4
               className="text-sm font-semibold uppercase tracking-wider mb-4"
-              style={{ color: 'hsl(var(--iplura-dark))' }}
+              style={{ color: 'hsl(var(--iplura-white))' }}
             >
               Contato
             </h4>
             <ul className="space-y-2">
-              <li className="text-sm" style={{ color: 'hsl(var(--iplura-gray))' }}>
+              <li className="text-sm text-white/72">
                 contato@iplura.org.br
               </li>
-              <li className="text-sm" style={{ color: 'hsl(var(--iplura-gray))' }}>
+              <li className="text-sm text-white/72">
                 São Paulo, SP - Brasil
               </li>
             </ul>
@@ -126,16 +129,14 @@ const Footer = () => {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-iplura-purple/10 hover:text-iplura-purple transition-all duration-300"
-                style={{ color: 'hsl(var(--iplura-gray))' }}
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/75"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-iplura-purple/10 hover:text-iplura-purple transition-all duration-300"
-                style={{ color: 'hsl(var(--iplura-gray))' }}
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/75"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -144,25 +145,23 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-gray-100">
+        <div className="pt-8 border-t border-white/12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs" style={{ color: 'hsl(var(--iplura-gray))' }}>
-              © 2025 IPLURA. Todos os direitos reservados.
+            <p className="text-xs text-white/58">
+              © 2026 IPLURA. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs hover:text-iplura-purple transition-colors duration-300"
-                style={{ color: 'hsl(var(--iplura-gray))' }}
+                className="text-xs text-white/58 hover:text-white transition-colors duration-300"
               >
                 Política de Privacidade
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs hover:text-iplura-purple transition-colors duration-300"
-                style={{ color: 'hsl(var(--iplura-gray))' }}
+                className="text-xs text-white/58 hover:text-white transition-colors duration-300"
               >
                 Termos de Uso
               </a>

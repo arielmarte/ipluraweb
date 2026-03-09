@@ -36,9 +36,16 @@ const ProblemSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative section-padding overflow-hidden"
-      style={{ background: '#F8F9FE' }}
+      className="relative section-padding overflow-hidden surface-alt"
     >
+      <div
+        className="absolute -top-16 left-[8%] h-36 w-36 rounded-full bg-iplura-purple/10 blur-3xl parallax-soft"
+        data-parallax="0.12"
+      />
+      <div
+        className="absolute bottom-8 right-[10%] h-40 w-40 rounded-full bg-iplura-purple-accent/12 blur-3xl parallax-soft"
+        data-parallax="0.14"
+      />
       <div className="container-clean relative z-10">
         <div ref={contentRef} className="max-w-4xl mx-auto text-center opacity-0">
           {/* Badge */}
@@ -51,7 +58,7 @@ const ProblemSection = () => {
 
           {/* Headline */}
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-8"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-8"
             style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
           >
             O setor cresceu.{' '}

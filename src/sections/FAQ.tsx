@@ -98,8 +98,7 @@ const FAQ = () => {
     <section
       id="faq"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-base"
     >
       <div className="container-clean">
         <div className="max-w-3xl mx-auto">
@@ -107,7 +106,7 @@ const FAQ = () => {
           <div ref={headerRef} className="text-center mb-12 opacity-0">
             <span className="badge mb-6 inline-flex">FAQ</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16]"
               style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
             >
               Perguntas <span className="text-gradient">frequentes</span>

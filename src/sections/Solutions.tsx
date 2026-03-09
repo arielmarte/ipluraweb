@@ -89,15 +89,14 @@ const Solutions = () => {
     <section
       id="solucoes"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-base"
     >
       <div className="container-clean">
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 opacity-0">
           <span className="badge mb-6 inline-flex">Nossas Soluções</span>
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16]"
             style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
           >
             Soluções para operadoras que querem atuar com{' '}

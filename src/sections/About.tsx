@@ -37,8 +37,7 @@ const About = () => {
     <section
       id="sobre"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-base"
     >
       <div className="container-clean">
         <div ref={contentRef} className="max-w-4xl mx-auto opacity-0">
@@ -49,7 +48,7 @@ const About = () => {
 
           {/* Headline */}
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-8 text-center"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-8 text-center"
             style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
           >
             Sobre o <span className="text-gradient">IPLURA</span>

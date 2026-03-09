@@ -34,7 +34,7 @@ const Trust = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding" style={{ background: 'hsl(var(--iplura-light))' }}>
+    <section ref={sectionRef} className="section-padding surface-alt">
       <div className="container-clean">
         <div ref={contentRef} className="max-w-4xl mx-auto text-center opacity-0">
           {/* Badge */}
@@ -42,7 +42,7 @@ const Trust = () => {
 
           {/* Headline */}
           <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-8"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-8"
             style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
           >
             Uma atuação baseada em{' '}

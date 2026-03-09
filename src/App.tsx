@@ -27,6 +27,30 @@ function App() {
       toggleActions: 'play none none none',
     });
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Subtle global parallax for layers that opt-in via data-parallax.
+    if (!prefersReducedMotion) {
+      const parallaxElements = gsap.utils.toArray<HTMLElement>('[data-parallax]');
+
+      parallaxElements.forEach((element) => {
+        const speed = Number(element.dataset.parallax ?? '0.16');
+        const sectionParent = element.closest('section') ?? element;
+        const distance = Math.round(window.innerHeight * speed);
+
+        gsap.to(element, {
+          y: distance,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionParent,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true,
+          },
+        });
+      });
+    }
+
     // Refresh ScrollTrigger on load
     ScrollTrigger.refresh();
 
@@ -36,7 +60,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ background: 'hsl(var(--iplura-light))' }}>
+    <div className="min-h-screen surface-base">
       <Navigation />
       <main>
         <Hero />

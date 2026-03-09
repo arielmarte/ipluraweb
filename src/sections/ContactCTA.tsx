@@ -86,16 +86,23 @@ const ContactCTA = () => {
     <section
       id="contato"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="relative section-padding surface-contrast overflow-hidden"
     >
+      <div
+        className="absolute -top-14 right-[8%] h-36 w-36 rounded-full bg-iplura-purple/16 blur-3xl parallax-soft"
+        data-parallax="0.12"
+      />
+      <div
+        className="absolute bottom-0 left-[4%] h-44 w-44 rounded-full bg-iplura-purple-accent/12 blur-3xl parallax-soft"
+        data-parallax="0.1"
+      />
       <div className="container-clean">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left - Content */}
           <div ref={contentRef} className="opacity-0">
             <span className="badge mb-6 inline-flex">Contato</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-6"
               style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
             >
               Vamos construir uma operação{' '}
@@ -111,7 +118,8 @@ const ContactCTA = () => {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="card-clean p-8 opacity-0"
+            className="card-clean p-8 opacity-0 parallax-soft"
+            data-parallax="0.06"
           >
             {isSubmitted ? (
               <div className="text-center py-12">

@@ -68,7 +68,7 @@ const CredibilityStrip = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding" style={{ background: 'hsl(var(--iplura-light))' }}>
+    <section ref={sectionRef} className="section-padding surface-base">
       <div className="container-clean">
         <div
           ref={cardsRef}

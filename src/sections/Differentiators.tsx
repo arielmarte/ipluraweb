@@ -80,14 +80,14 @@ const Differentiators = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding" style={{ background: 'hsl(var(--iplura-light))' }}>
+    <section ref={sectionRef} className="section-padding surface-contrast">
       <div className="container-clean">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left - Content */}
           <div ref={contentRef} className="opacity-0">
             <span className="badge mb-6 inline-flex">Diferenciais</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-6"
               style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
             >
               Por que o <span className="text-gradient">IPLURA</span>

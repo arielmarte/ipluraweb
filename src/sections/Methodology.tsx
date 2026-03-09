@@ -92,8 +92,7 @@ const Methodology = () => {
     <section
       id="como-funciona"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-alt"
     >
       <div className="container-clean">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
@@ -101,7 +100,7 @@ const Methodology = () => {
           <div ref={headerRef} className="lg:sticky lg:top-32 opacity-0">
             <span className="badge mb-6 inline-flex">Como Funciona</span>
             <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-6"
               style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
             >
               Como o <span className="text-gradient">IPLURA atua</span>

@@ -36,7 +36,7 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-xl py-4 shadow-sm'
+          ? 'bg-white/84 backdrop-blur-xl py-4 border-b border-iplura-purple/10 shadow-[0_8px_32px_rgba(26,28,46,0.08)]'
           : 'bg-transparent py-6'
       }`}
     >
@@ -53,9 +53,9 @@ const Navigation = () => {
             aria-label="IPLURA"
           >
             <img
-              src="/iplura-logo.png"
+              src="/iplura-logo-icon-wordmark.svg"
               alt="IPLURA"
-              className="h-8 w-auto object-contain"
+              className="h-8 sm:h-9 w-auto object-contain"
             />
           </a>
 
@@ -69,7 +69,7 @@ const Navigation = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="text-sm font-medium text-iplura-dark/70 hover:text-iplura-purple transition-colors duration-300 underline-subtle"
+                className="text-sm font-medium tracking-[0.01em] text-iplura-dark/75 hover:text-iplura-purple transition-colors duration-300 underline-subtle"
               >
                 {link.label}
               </a>
@@ -93,7 +93,7 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-white/70 transition-colors"
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5" style={{ color: 'hsl(var(--iplura-dark))' }} />
@@ -109,7 +109,7 @@ const Navigation = () => {
             isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-100">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-iplura-purple/10">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -118,7 +118,7 @@ const Navigation = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="block px-4 py-3 text-sm font-medium text-iplura-dark/70 hover:text-iplura-purple hover:bg-gray-50 rounded-lg transition-all"
+                className="block px-4 py-3 text-sm font-medium text-iplura-dark/75 hover:text-iplura-purple hover:bg-iplura-purple/5 rounded-lg transition-all"
               >
                 {link.label}
               </a>
