@@ -11,14 +11,14 @@ const solutions = [
     title: 'Acolhimento Psicológico Estruturado',
     description:
       'Suporte especializado para usuários em situação de vulnerabilidade, com escuta qualificada e acompanhamento responsável.',
-    color: 'from-rose-500/10 to-rose-600/5',
+    color: 'from-violet-500/10 to-violet-600/5',
   },
   {
     icon: Building2,
     title: 'Suporte Técnico à Operadora',
     description:
       'Apoio às equipes internas com diagnóstico de risco, capacitação, protocolos e orientação em jogo responsável.',
-    color: 'from-iplura-purple/10 to-iplura-purple-accent/5',
+    color: 'from-violet-500/10 to-violet-600/5',
   },
   {
     icon: GraduationCap,

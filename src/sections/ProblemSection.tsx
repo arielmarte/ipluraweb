@@ -80,7 +80,7 @@ const ProblemSection = () => {
       />
 
       <div className="container-clean relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-5 problem-reveal opacity-0">
             <span className="badge mb-6 inline-flex">Contexto Estratégico</span>
             <h2 className="section-title mb-6 max-w-[14ch]">
@@ -102,11 +102,11 @@ const ProblemSection = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-7 problem-reveal opacity-0">
+          <div className="lg:col-span-6 lg:col-start-7 problem-reveal opacity-0">
             <div className="relative pl-5 sm:pl-7">
               <div className="absolute left-0 top-1 bottom-1 w-px bg-iplura-purple/24" />
 
-              <div className="space-y-5">
+              <div className="space-y-5 max-w-[45rem]">
                 {narrativeSteps.map((step, index) => {
                   const Icon = step.icon;
 
@@ -127,7 +127,7 @@ const ProblemSection = () => {
                         <h3 className="text-xl font-semibold text-iplura-dark leading-[1.28] mb-2.5 max-w-[32ch]">
                           {step.title}
                         </h3>
-                        <p className="text-sm leading-[1.7] text-iplura-gray max-w-[58ch]">
+                        <p className="text-sm leading-[1.7] text-iplura-gray max-w-[52ch]">
                           {step.description}
                         </p>
                       </div>

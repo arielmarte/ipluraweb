@@ -107,7 +107,7 @@ const Hero = () => {
 
             <h1
               ref={headlineRef}
-              className="relative z-20 text-[clamp(2.12rem,4.05vw,3.78rem)] font-semibold leading-[1.15] mb-6 text-iplura-dark opacity-0 max-w-[17ch]"
+              className="relative z-20 text-[clamp(2.26rem,4.05vw,3.78rem)] font-semibold leading-[1.15] mb-6 text-iplura-dark opacity-0 max-w-[17ch]"
               style={{ letterSpacing: '-0.035em' }}
             >
               Jogo responsável com
