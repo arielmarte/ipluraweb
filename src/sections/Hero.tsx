@@ -80,7 +80,7 @@ const Hero = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden surface-hero"
+      className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden surface-hero"
     >
       <div
         className="absolute -top-10 left-[7%] h-44 w-44 rounded-full bg-iplura-purple/14 blur-3xl parallax-soft"
@@ -96,7 +96,7 @@ const Hero = () => {
       />
 
       <div className="container-clean relative z-10">
-        <div className="grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] items-center gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] items-center gap-12 lg:gap-14 xl:gap-16">
           <div>
             <div ref={badgeRef} className="mb-8 opacity-0">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-[0.12em] uppercase border border-iplura-purple/20 bg-iplura-purple/10 text-iplura-purple">
@@ -107,7 +107,7 @@ const Hero = () => {
 
             <h1
               ref={headlineRef}
-              className="text-[clamp(2.6rem,6vw,5.15rem)] font-semibold leading-[1.15] mb-8 text-iplura-dark opacity-0"
+              className="text-[clamp(2.72rem,6.3vw,5.55rem)] font-semibold leading-[1.15] mb-8 text-iplura-dark opacity-0 max-w-[14ch]"
               style={{ letterSpacing: '-0.035em' }}
             >
               Jogo responsável com
@@ -116,7 +116,7 @@ const Hero = () => {
 
             <p
               ref={subheadlineRef}
-              className="text-lg sm:text-xl leading-[1.72] mb-10 max-w-2xl text-iplura-gray opacity-0"
+              className="section-intro text-lg sm:text-[1.22rem] mb-10 max-w-[38rem] opacity-0"
             >
               O IPLURA apoia operadoras de apostas com acolhimento especializado, educação
               preventiva e implementação de processos que transformam conformidade em cuidado real.
@@ -129,7 +129,7 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToSection('#contato');
                 }}
-                className="btn-primary"
+                className="btn-primary w-full sm:w-auto text-center"
               >
                 Falar com o IPLURA
               </a>
@@ -139,14 +139,14 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToSection('#solucoes');
                 }}
-                className="btn-secondary group"
+                className="btn-secondary group w-full sm:w-auto text-center"
               >
                 Conhecer soluções
                 <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
-            <div ref={detailsRef} className="mt-10 grid sm:grid-cols-3 gap-4">
+            <div ref={detailsRef} className="mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               <div className="glass-chip opacity-0">
                 <ShieldCheck className="w-4 h-4 text-iplura-purple mb-2" />
                 <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Governança</p>
@@ -157,7 +157,7 @@ const Hero = () => {
                 <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Cuidado</p>
                 <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Acolhimento qualificado ao usuário</p>
               </div>
-              <div className="glass-chip opacity-0">
+              <div className="glass-chip opacity-0 sm:col-span-2 xl:col-span-1">
                 <GraduationCap className="w-4 h-4 text-iplura-purple mb-2" />
                 <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Educação</p>
                 <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Capacitação contínua de equipes</p>
@@ -173,10 +173,12 @@ const Hero = () => {
             <img
               src="/sasha-freemind-e_YlUfX0iKY-unsplash.jpg"
               alt="Profissional em acolhimento e suporte responsável"
-              className="w-full h-[520px] object-cover object-center"
+              className="w-full h-[460px] sm:h-[520px] lg:h-[610px] object-cover object-center"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-iplura-dark/38 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-iplura-dark/52 via-iplura-dark/12 to-white/0" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/28 via-transparent to-iplura-dark/28 mix-blend-soft-light" />
+            <div className="absolute inset-[9px] rounded-[1.62rem] border border-white/30 pointer-events-none" />
 
             <div
               className="absolute top-5 right-5 glass-chip max-w-[220px] parallax-soft"
@@ -204,6 +206,16 @@ const Hero = () => {
                   <ArrowRight className="w-5 h-5 text-iplura-purple" />
                 </div>
               </div>
+            </div>
+
+            <div
+              className="hidden lg:block absolute -left-4 bottom-24 glass-chip max-w-[190px] parallax-soft"
+              data-parallax="0.12"
+            >
+              <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70 mb-1">Implementação</p>
+              <p className="text-sm text-iplura-dark font-semibold leading-[1.35]">
+                Protocolos aplicados ao dia a dia da operação.
+              </p>
             </div>
           </div>
         </div>

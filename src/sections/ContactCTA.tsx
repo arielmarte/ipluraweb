@@ -108,7 +108,7 @@ const ContactCTA = () => {
               Vamos construir uma operação{' '}
               <span className="text-gradient">mais responsável e confiável?</span>
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro">
               Fale com o IPLURA para conhecer soluções em jogo responsável, acolhimento 
               especializado, capacitação e suporte técnico à operadora.
             </p>
@@ -118,7 +118,7 @@ const ContactCTA = () => {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="card-clean p-8 opacity-0 parallax-soft"
+            className="panel-premium p-8 opacity-0 parallax-soft"
             data-parallax="0.06"
           >
             {isSubmitted ? (

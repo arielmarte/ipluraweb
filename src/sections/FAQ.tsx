@@ -121,8 +121,10 @@ const FAQ = () => {
               return (
                 <div
                   key={index}
-                  className={`faq-item bg-white rounded-2xl border transition-all duration-300 opacity-0 ${
-                    isOpen ? 'border-iplura-purple/20 shadow-clean-hover' : 'border-gray-100'
+                  className={`faq-item rounded-2xl border transition-all duration-300 opacity-0 ${
+                    isOpen
+                      ? 'border-iplura-purple/24 bg-white shadow-[0_16px_40px_rgba(65,35,122,0.12)]'
+                      : 'border-iplura-purple/10 bg-white/88 hover:border-iplura-purple/18'
                   }`}
                 >
                   <button
@@ -138,7 +140,7 @@ const FAQ = () => {
                     </span>
                     <div
                       className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isOpen ? 'bg-iplura-purple' : 'bg-gray-100'
+                        isOpen ? 'bg-iplura-purple' : 'bg-iplura-purple/10'
                       }`}
                     >
                       {isOpen ? (

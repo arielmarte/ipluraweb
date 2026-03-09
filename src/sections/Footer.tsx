@@ -75,7 +75,7 @@ const Footer = () => {
                 />
               </div>
             </a>
-            <p className="text-sm leading-relaxed max-w-sm text-white/72">
+            <p className="text-sm leading-relaxed max-w-sm text-white/78">
               Instituto de Promoção da Legalidade e Uso Responsável de Apostas. 
               Transformando obrigação regulatória em cuidado real.
             </p>
@@ -98,7 +98,7 @@ const Footer = () => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-sm text-white/68 hover:text-white transition-colors duration-300 underline-subtle"
+                    className="text-sm text-white/74 hover:text-white transition-colors duration-300 underline-subtle"
                   >
                     {link.label}
                   </a>
@@ -116,10 +116,10 @@ const Footer = () => {
               Contato
             </h4>
             <ul className="space-y-2">
-              <li className="text-sm text-white/72">
+              <li className="text-sm text-white/78">
                 contato@iplura.org.br
               </li>
-              <li className="text-sm text-white/72">
+              <li className="text-sm text-white/78">
                 São Paulo, SP - Brasil
               </li>
             </ul>
@@ -129,14 +129,14 @@ const Footer = () => {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/75"
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/82"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/75"
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/82"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -147,21 +147,21 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-white/58">
+            <p className="text-xs text-white/70">
               © 2026 IPLURA. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/58 hover:text-white transition-colors duration-300"
+                className="text-xs text-white/70 hover:text-white transition-colors duration-300"
               >
                 Política de Privacidade
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/58 hover:text-white transition-colors duration-300"
+                className="text-xs text-white/70 hover:text-white transition-colors duration-300"
               >
                 Termos de Uso
               </a>

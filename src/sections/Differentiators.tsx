@@ -92,7 +92,7 @@ const Differentiators = () => {
             >
               Por que o <span className="text-gradient">IPLURA</span>
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro">
               Unimos cuidado humano, suporte técnico e visão regulatória para ajudar 
               operadoras a construir uma atuação mais ética, sólida e sustentável.
             </p>
@@ -105,7 +105,7 @@ const Differentiators = () => {
               return (
                 <div
                   key={index}
-                  className="diff-card flex items-start gap-5 p-6 rounded-2xl bg-white border border-gray-100 hover:border-iplura-purple/20 hover:shadow-clean-hover transition-all duration-300 group opacity-0"
+                  className="diff-card card-clean flex items-start gap-5 p-6 group opacity-0"
                 >
                   <div className="icon-box flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Icon />

@@ -105,7 +105,7 @@ const Methodology = () => {
             >
               Como o <span className="text-gradient">IPLURA atua</span>
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro">
               Uma metodologia estruturada para transformar cuidado em processo, 
               conectando todas as áreas da operação.
             </p>
@@ -116,13 +116,13 @@ const Methodology = () => {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="step-item flex items-start gap-6 p-6 rounded-2xl bg-white border border-gray-100 hover:border-iplura-purple/20 hover:shadow-clean-hover transition-all duration-300 group opacity-0"
+                className="step-item card-clean flex items-start gap-6 p-6 group opacity-0"
               >
                 {/* Number */}
                 <div className="flex-shrink-0">
                   <span
                     className="text-2xl font-bold group-hover:text-iplura-purple transition-colors duration-300"
-                    style={{ color: 'hsl(var(--iplura-gray))' }}
+                    style={{ color: 'hsl(var(--iplura-gray-soft))' }}
                   >
                     {step.number}
                   </span>

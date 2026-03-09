@@ -111,7 +111,7 @@ const Solutions = () => {
             return (
               <div
                 key={index}
-                className="solution-card card-clean p-8 group cursor-pointer opacity-0"
+                className="solution-card card-clean relative overflow-hidden p-8 group cursor-pointer opacity-0"
               >
                 {/* Gradient background */}
                 <div

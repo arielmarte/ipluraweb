@@ -49,10 +49,7 @@ const ProblemSection = () => {
       <div className="container-clean relative z-10">
         <div ref={contentRef} className="max-w-4xl mx-auto text-center opacity-0">
           {/* Badge */}
-          <span 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-wider uppercase mb-8"
-            style={{ background: 'hsl(var(--iplura-purple) / 0.08)', color: 'hsl(var(--iplura-purple))' }}
-          >
+          <span className="badge mb-8">
             O Contexto
           </span>
 
@@ -67,14 +64,14 @@ const ProblemSection = () => {
 
           {/* Text */}
           <div className="space-y-6 max-w-3xl mx-auto">
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro mx-auto">
               Com a expansão do mercado de apostas, operadoras precisam ir além do cumprimento 
               formal das normas. Hoje, jogo responsável exige estrutura, processo, evidência 
               e cuidado real com o usuário.
             </p>
 
             <p
-              className="text-lg leading-relaxed font-medium"
+              className="text-lg leading-[1.72] font-medium max-w-[62ch] mx-auto"
               style={{ color: 'hsl(var(--iplura-purple))' }}
             >
               O IPLURA atua para preencher essa lacuna, conectando conformidade, prevenção 
