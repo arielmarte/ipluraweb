@@ -80,19 +80,16 @@ const Differentiators = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-padding" style={{ background: 'hsl(var(--iplura-light))' }}>
+    <section ref={sectionRef} className="section-padding surface-contrast">
       <div className="container-clean">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left - Content */}
           <div ref={contentRef} className="opacity-0">
             <span className="badge mb-6 inline-flex">Diferenciais</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
-              style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-            >
+            <h2 className="section-title mb-6">
               Por que o <span className="text-gradient">IPLURA</span>
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro">
               Unimos cuidado humano, suporte técnico e visão regulatória para ajudar 
               operadoras a construir uma atuação mais ética, sólida e sustentável.
             </p>
@@ -105,7 +102,7 @@ const Differentiators = () => {
               return (
                 <div
                   key={index}
-                  className="diff-card flex items-start gap-5 p-6 rounded-2xl bg-white border border-gray-100 hover:border-iplura-purple/20 hover:shadow-clean-hover transition-all duration-300 group opacity-0"
+                  className="diff-card card-clean flex items-start gap-5 p-6 group opacity-0"
                 >
                   <div className="icon-box flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                     <Icon />

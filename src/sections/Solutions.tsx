@@ -11,14 +11,14 @@ const solutions = [
     title: 'Acolhimento Psicológico Estruturado',
     description:
       'Suporte especializado para usuários em situação de vulnerabilidade, com escuta qualificada e acompanhamento responsável.',
-    color: 'from-rose-500/10 to-rose-600/5',
+    color: 'from-violet-500/10 to-violet-600/5',
   },
   {
     icon: Building2,
     title: 'Suporte Técnico à Operadora',
     description:
       'Apoio às equipes internas com diagnóstico de risco, capacitação, protocolos e orientação em jogo responsável.',
-    color: 'from-iplura-purple/10 to-iplura-purple-accent/5',
+    color: 'from-violet-500/10 to-violet-600/5',
   },
   {
     icon: GraduationCap,
@@ -89,17 +89,13 @@ const Solutions = () => {
     <section
       id="solucoes"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-base"
     >
       <div className="container-clean">
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 opacity-0">
           <span className="badge mb-6 inline-flex">Nossas Soluções</span>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
-            style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-          >
+          <h2 className="section-title">
             Soluções para operadoras que querem atuar com{' '}
             <span className="text-gradient">mais segurança e responsabilidade</span>
           </h2>
@@ -112,7 +108,7 @@ const Solutions = () => {
             return (
               <div
                 key={index}
-                className="solution-card card-clean p-8 group cursor-pointer opacity-0"
+                className="solution-card card-clean relative overflow-hidden p-8 group cursor-pointer opacity-0"
               >
                 {/* Gradient background */}
                 <div

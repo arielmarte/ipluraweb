@@ -92,21 +92,17 @@ const Methodology = () => {
     <section
       id="como-funciona"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-alt"
     >
       <div className="container-clean">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left - Header */}
           <div ref={headerRef} className="lg:sticky lg:top-32 opacity-0">
             <span className="badge mb-6 inline-flex">Como Funciona</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight mb-6"
-              style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-            >
+            <h2 className="section-title mb-6">
               Como o <span className="text-gradient">IPLURA atua</span>
             </h2>
-            <p className="text-lg leading-relaxed" style={{ color: 'hsl(var(--iplura-gray))' }}>
+            <p className="section-intro">
               Uma metodologia estruturada para transformar cuidado em processo, 
               conectando todas as áreas da operação.
             </p>
@@ -117,13 +113,13 @@ const Methodology = () => {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="step-item flex items-start gap-6 p-6 rounded-2xl bg-white border border-gray-100 hover:border-iplura-purple/20 hover:shadow-clean-hover transition-all duration-300 group opacity-0"
+                className="step-item card-clean flex items-start gap-6 p-6 group opacity-0"
               >
                 {/* Number */}
                 <div className="flex-shrink-0">
                   <span
                     className="text-2xl font-bold group-hover:text-iplura-purple transition-colors duration-300"
-                    style={{ color: 'hsl(var(--iplura-gray))' }}
+                    style={{ color: 'hsl(var(--iplura-gray-soft))' }}
                   >
                     {step.number}
                   </span>

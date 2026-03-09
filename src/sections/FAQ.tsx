@@ -98,18 +98,14 @@ const FAQ = () => {
     <section
       id="faq"
       ref={sectionRef}
-      className="section-padding"
-      style={{ background: 'hsl(var(--iplura-light))' }}
+      className="section-padding surface-base"
     >
       <div className="container-clean">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div ref={headerRef} className="text-center mb-12 opacity-0">
             <span className="badge mb-6 inline-flex">FAQ</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight"
-              style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-            >
+            <h2 className="section-title">
               Perguntas <span className="text-gradient">frequentes</span>
             </h2>
           </div>
@@ -122,8 +118,10 @@ const FAQ = () => {
               return (
                 <div
                   key={index}
-                  className={`faq-item bg-white rounded-2xl border transition-all duration-300 opacity-0 ${
-                    isOpen ? 'border-iplura-purple/20 shadow-clean-hover' : 'border-gray-100'
+                  className={`faq-item rounded-2xl border transition-all duration-300 opacity-0 ${
+                    isOpen
+                      ? 'border-iplura-purple/24 bg-white shadow-[0_16px_40px_rgba(65,35,122,0.12)]'
+                      : 'border-iplura-purple/10 bg-white/88 hover:border-iplura-purple/18'
                   }`}
                 >
                   <button
@@ -139,7 +137,7 @@ const FAQ = () => {
                     </span>
                     <div
                       className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isOpen ? 'bg-iplura-purple' : 'bg-gray-100'
+                        isOpen ? 'bg-iplura-purple' : 'bg-iplura-purple/10'
                       }`}
                     >
                       {isOpen ? (
