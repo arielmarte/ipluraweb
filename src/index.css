@@ -59,6 +59,7 @@
   
   html {
     scroll-behavior: smooth;
+    background: hsl(var(--iplura-surface));
   }
   
   body {
@@ -67,6 +68,17 @@
     text-rendering: optimizeLegibility;
     line-height: 1.6;
     letter-spacing: -0.005em;
+    min-height: 100svh;
+    background: hsl(var(--iplura-surface));
+  }
+
+  #root {
+    min-height: 100svh;
+    background: hsl(var(--iplura-surface));
+  }
+
+  nav {
+    padding-top: env(safe-area-inset-top);
   }
 
   p {
@@ -99,6 +111,10 @@
 }
 
 @layer components {
+  .safe-area-main {
+    padding-top: env(safe-area-inset-top);
+  }
+
   /* Surface system for section separation */
   .surface-base {
     background: hsl(var(--iplura-surface));
@@ -273,7 +289,7 @@
 
   /* Input clean */
   .input-clean {
-    @apply w-full px-5 py-4 rounded-xl text-sm transition-all duration-300;
+    @apply w-full px-5 py-4 rounded-xl text-base transition-all duration-300;
     background: white;
     border: 1px solid #e5e7eb;
   }
