@@ -106,10 +106,10 @@ const Navigation = () => {
         {/* Mobile Menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-[calc(100vh-6.5rem)] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
-          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-iplura-purple/10">
+          <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-iplura-purple/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
             {navLinks.map((link) => (
               <a
                 key={link.href}

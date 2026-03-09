@@ -80,7 +80,7 @@ const Hero = () => {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden surface-hero"
+      className="relative min-h-screen flex items-center pt-28 pb-20 surface-hero"
     >
       <div
         className="absolute -top-10 left-[7%] h-44 w-44 rounded-full bg-iplura-purple/14 blur-3xl parallax-soft"
@@ -111,7 +111,7 @@ const Hero = () => {
               style={{ letterSpacing: '-0.035em' }}
             >
               Jogo responsável com
-              <span className="block text-gradient">estrutura técnica, humana e regulatória</span>
+              <span className="text-gradient"><br/>estrutura técnica, humana e regulatória</span>
             </h1>
 
             <p
@@ -207,7 +207,7 @@ const Hero = () => {
             </div>
 
             <div
-              className="absolute z-20 bottom-5 left-5 right-5 glass-chip parallax-soft"
+              className="absolute z-20 bottom-6 left-5 right-5 glass-chip parallax-soft"
               data-parallax="0.14"
             >
               <div className="flex items-center justify-between gap-4">
