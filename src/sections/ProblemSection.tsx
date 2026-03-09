@@ -1,30 +1,62 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AlertTriangle, ShieldAlert, Workflow } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const narrativeSteps = [
+  {
+    title: 'Crescimento acelerado do setor',
+    description:
+      'Com a expansão das apostas, aumenta a exposição da operação a risco social, reputacional e regulatório.',
+    icon: AlertTriangle,
+  },
+  {
+    title: 'Consequência operacional direta',
+    description:
+      'Sem estrutura robusta, o jogo responsável fica restrito a respostas reativas e pouco consistentes.',
+    icon: ShieldAlert,
+  },
+  {
+    title: 'Necessidade de resposta estratégica',
+    description:
+      'É preciso integrar cuidado humano, governança e evidências para sustentar crescimento com responsabilidade.',
+    icon: Workflow,
+  },
+];
+
 const ProblemSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      const contentTrigger = ScrollTrigger.create({
-        trigger: contentRef.current,
-        start: 'top 80%',
+      const revealItems = sectionRef.current?.querySelectorAll('.problem-reveal');
+
+      if (!revealItems || revealItems.length === 0) return;
+
+      const revealTrigger = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 78%',
         onEnter: () => {
           gsap.fromTo(
-            contentRef.current,
-            { opacity: 0, y: 40 },
-            { opacity: 1, y: 0, duration: 0.8, ease: 'expo.out' }
+            revealItems,
+            { opacity: 0, y: 34 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.72,
+              stagger: 0.08,
+              ease: 'expo.out',
+            }
           );
         },
         once: true,
       });
-      triggers.push(contentTrigger);
+
+      triggers.push(revealTrigger);
     }, sectionRef);
 
     return () => {
@@ -46,37 +78,64 @@ const ProblemSection = () => {
         className="absolute bottom-8 right-[10%] h-40 w-40 rounded-full bg-iplura-purple-accent/12 blur-3xl parallax-soft"
         data-parallax="0.14"
       />
+
       <div className="container-clean relative z-10">
-        <div ref={contentRef} className="max-w-4xl mx-auto text-center opacity-0">
-          {/* Badge */}
-          <span className="badge mb-8">
-            O Contexto
-          </span>
-
-          {/* Headline */}
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-8"
-            style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-          >
-            O setor cresceu.{' '}
-            <span className="text-gradient">A responsabilidade também precisa crescer.</span>
-          </h2>
-
-          {/* Text */}
-          <div className="space-y-6 max-w-3xl mx-auto">
-            <p className="section-intro mx-auto">
-              Com a expansão do mercado de apostas, operadoras precisam ir além do cumprimento 
-              formal das normas. Hoje, jogo responsável exige estrutura, processo, evidência 
-              e cuidado real com o usuário.
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <div className="lg:col-span-5 problem-reveal opacity-0">
+            <span className="badge mb-6 inline-flex">Contexto Estratégico</span>
+            <h2 className="section-title mb-6 max-w-[14ch]">
+              O mercado cresceu e a régua de responsabilidade subiu junto
+            </h2>
+            <p className="section-intro max-w-[34rem]">
+              No cenário atual, jogo responsável não é apenas uma exigência de conformidade. Ele
+              se tornou componente central de sustentabilidade institucional e confiança pública.
             </p>
 
-            <p
-              className="text-lg leading-[1.72] font-medium max-w-[62ch] mx-auto"
-              style={{ color: 'hsl(var(--iplura-purple))' }}
-            >
-              O IPLURA atua para preencher essa lacuna, conectando conformidade, prevenção 
-              e acolhimento em uma solução integrada.
-            </p>
+            <div className="panel-premium-dark p-6 mt-7 problem-reveal opacity-0 text-white">
+              <p className="text-xs uppercase tracking-[0.1em] font-semibold text-white mb-2">
+                Leitura crítica
+              </p>
+              <p className="text-base leading-[1.62] text-white font-semibold">
+                Quanto maior a escala da operação, maior a necessidade de processos claros,
+                prevenção ativa e resposta técnica qualificada.
+              </p>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 problem-reveal opacity-0">
+            <div className="relative pl-5 sm:pl-7">
+              <div className="absolute left-0 top-1 bottom-1 w-px bg-iplura-purple/24" />
+
+              <div className="space-y-5">
+                {narrativeSteps.map((step, index) => {
+                  const Icon = step.icon;
+
+                  return (
+                    <article key={step.title} className="relative">
+                      <span className="absolute -left-[26px] sm:-left-[34px] top-7 inline-flex w-5 h-5 rounded-full bg-iplura-purple border-2 border-white shadow-[0_0_0_4px_rgba(65,35,122,0.12)]" />
+
+                      <div className="panel-premium p-6 sm:p-7">
+                        <div className="flex items-start justify-between gap-4 mb-3">
+                          <p className="text-[0.68rem] uppercase tracking-[0.12em] text-iplura-purple font-semibold">
+                            Etapa {String(index + 1).padStart(2, '0')}
+                          </p>
+                          <span className="inline-flex w-10 h-10 items-center justify-center rounded-xl bg-iplura-purple/10 border border-iplura-purple/16">
+                            <Icon className="w-5 h-5 text-iplura-purple" />
+                          </span>
+                        </div>
+
+                        <h3 className="text-xl font-semibold text-iplura-dark leading-[1.28] mb-2.5 max-w-[32ch]">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm leading-[1.7] text-iplura-gray max-w-[58ch]">
+                          {step.description}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

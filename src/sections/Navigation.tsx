@@ -20,7 +20,7 @@ const Navigation = () => {
     { label: 'Como funciona', href: '#como-funciona' },
     { label: 'Benefícios', href: '#beneficios' },
     { label: 'Sobre', href: '#sobre' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Credenciais', href: '#credenciais' },
     { label: 'Contato', href: '#contato' },
   ];
 

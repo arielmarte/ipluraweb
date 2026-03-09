@@ -95,10 +95,7 @@ const Solutions = () => {
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 opacity-0">
           <span className="badge mb-6 inline-flex">Nossas Soluções</span>
-          <h2
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16]"
-            style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-          >
+          <h2 className="section-title">
             Soluções para operadoras que querem atuar com{' '}
             <span className="text-gradient">mais segurança e responsabilidade</span>
           </h2>

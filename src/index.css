@@ -88,8 +88,8 @@
   }
 
   h2 {
-    line-height: 1.18;
-    letter-spacing: -0.028em;
+    line-height: 1.16;
+    letter-spacing: -0.024em;
   }
 
   h3 {
@@ -207,8 +207,15 @@
     max-width: 1400px;
   }
 
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold;
+    color: hsl(var(--iplura-dark));
+    line-height: 1.16;
+    letter-spacing: -0.024em;
+  }
+
   .section-intro {
-    @apply text-lg leading-[1.72] max-w-3xl;
+    @apply text-lg leading-[1.68] max-w-3xl;
     color: hsl(var(--iplura-gray));
   }
 
@@ -282,12 +289,17 @@
   }
 
   .hero-visual-shell {
-    @apply relative overflow-hidden rounded-[2rem] border;
+    @apply relative rounded-[2rem] border;
     border-color: hsl(var(--iplura-purple) / 0.16);
     box-shadow:
       0 22px 58px rgba(18, 26, 48, 0.12),
       0 6px 18px rgba(65, 35, 122, 0.12);
     background: linear-gradient(170deg, hsl(var(--iplura-white)), hsl(var(--iplura-surface-alt)));
+    isolation: isolate;
+  }
+
+  .hero-visual-media {
+    @apply relative overflow-hidden rounded-[2rem];
   }
 
   .panel-premium {
@@ -307,7 +319,7 @@
 
   .panel-premium-dark {
     @apply rounded-3xl border;
-    border-color: hsl(var(--iplura-white) / 0.16);
+    border-color: hsl(var(--iplura-white) / 0.22);
     background:
       linear-gradient(
         155deg,

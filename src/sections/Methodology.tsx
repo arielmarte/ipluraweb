@@ -99,10 +99,7 @@ const Methodology = () => {
           {/* Left - Header */}
           <div ref={headerRef} className="lg:sticky lg:top-32 opacity-0">
             <span className="badge mb-6 inline-flex">Como Funciona</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16] mb-6"
-              style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-            >
+            <h2 className="section-title mb-6">
               Como o <span className="text-gradient">IPLURA atua</span>
             </h2>
             <p className="section-intro">

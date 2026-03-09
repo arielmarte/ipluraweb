@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ArrowRight, ShieldCheck, HeartHandshake, GraduationCap } from 'lucide-react';
+import { ArrowRight, ShieldCheck, HeartHandshake } from 'lucide-react';
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -107,7 +107,7 @@ const Hero = () => {
 
             <h1
               ref={headlineRef}
-              className="text-[clamp(2.72rem,6.3vw,5.55rem)] font-semibold leading-[1.15] mb-8 text-iplura-dark opacity-0 max-w-[14ch]"
+              className="relative z-20 text-[clamp(2.12rem,4.05vw,3.78rem)] font-semibold leading-[1.15] mb-6 text-iplura-dark opacity-0 max-w-[17ch]"
               style={{ letterSpacing: '-0.035em' }}
             >
               Jogo responsável com
@@ -116,7 +116,7 @@ const Hero = () => {
 
             <p
               ref={subheadlineRef}
-              className="section-intro text-lg sm:text-[1.22rem] mb-10 max-w-[38rem] opacity-0"
+              className="relative z-10 section-intro text-lg sm:text-[1.14rem] mb-9 max-w-[35rem] opacity-0"
             >
               O IPLURA apoia operadoras de apostas com acolhimento especializado, educação
               preventiva e implementação de processos que transformam conformidade em cuidado real.
@@ -146,7 +146,7 @@ const Hero = () => {
               </a>
             </div>
 
-            <div ref={detailsRef} className="mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div ref={detailsRef} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[38rem]">
               <div className="glass-chip opacity-0">
                 <ShieldCheck className="w-4 h-4 text-iplura-purple mb-2" />
                 <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Governança</p>
@@ -157,31 +157,44 @@ const Hero = () => {
                 <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Cuidado</p>
                 <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Acolhimento qualificado ao usuário</p>
               </div>
-              <div className="glass-chip opacity-0 sm:col-span-2 xl:col-span-1">
-                <GraduationCap className="w-4 h-4 text-iplura-purple mb-2" />
-                <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Educação</p>
-                <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Capacitação contínua de equipes</p>
-              </div>
             </div>
+
+            <a
+              href="#fundamentos"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('#fundamentos');
+              }}
+              className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-iplura-purple hover:text-iplura-purple-accent transition-colors"
+            >
+              Ver fundamentos operacionais
+              <ArrowRight className="w-4 h-4 rotate-90" />
+            </a>
           </div>
 
           <div
             ref={visualRef}
-            className="hero-visual-shell opacity-0 parallax-soft"
+            className="relative opacity-0 parallax-soft"
             data-parallax="0.09"
           >
-            <img
-              src="/sasha-freemind-e_YlUfX0iKY-unsplash.jpg"
-              alt="Profissional em acolhimento e suporte responsável"
-              className="w-full h-[460px] sm:h-[520px] lg:h-[610px] object-cover object-center"
-            />
+            <div className="absolute -inset-7 rounded-[2.4rem] bg-gradient-to-br from-iplura-purple/14 via-transparent to-iplura-purple-accent/10 blur-2xl -z-10 pointer-events-none" />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-iplura-dark/52 via-iplura-dark/12 to-white/0" />
-            <div className="absolute inset-0 bg-gradient-to-br from-white/28 via-transparent to-iplura-dark/28 mix-blend-soft-light" />
-            <div className="absolute inset-[9px] rounded-[1.62rem] border border-white/30 pointer-events-none" />
+            <div className="hero-visual-shell">
+              <div className="hero-visual-media">
+                <img
+                  src="/sasha-freemind-e_YlUfX0iKY-unsplash.jpg"
+                  alt="Profissional em acolhimento e suporte responsável"
+                  className="w-full h-[460px] sm:h-[520px] lg:h-[610px] object-cover object-center"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-iplura-dark/54 via-iplura-dark/12 to-white/0" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/24 via-transparent to-iplura-dark/30 mix-blend-soft-light" />
+                <div className="absolute inset-[9px] rounded-[1.62rem] border border-white/30 pointer-events-none" />
+              </div>
+            </div>
 
             <div
-              className="absolute top-5 right-5 glass-chip max-w-[220px] parallax-soft"
+              className="absolute z-20 top-5 right-5 glass-chip max-w-[220px] parallax-soft"
               data-parallax="0.18"
             >
               <div className="flex items-center gap-2 mb-1">
@@ -194,7 +207,7 @@ const Hero = () => {
             </div>
 
             <div
-              className="absolute bottom-5 left-5 right-5 glass-chip parallax-soft"
+              className="absolute z-20 bottom-5 left-5 right-5 glass-chip parallax-soft"
               data-parallax="0.14"
             >
               <div className="flex items-center justify-between gap-4">
@@ -209,7 +222,7 @@ const Hero = () => {
             </div>
 
             <div
-              className="hidden lg:block absolute -left-4 bottom-24 glass-chip max-w-[190px] parallax-soft"
+              className="hidden lg:block absolute z-20 -left-4 bottom-24 glass-chip max-w-[190px] parallax-soft"
               data-parallax="0.12"
             >
               <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70 mb-1">Implementação</p>

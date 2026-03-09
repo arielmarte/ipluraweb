@@ -105,10 +105,7 @@ const FAQ = () => {
           {/* Header */}
           <div ref={headerRef} className="text-center mb-12 opacity-0">
             <span className="badge mb-6 inline-flex">FAQ</span>
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.16]"
-              style={{ color: 'hsl(var(--iplura-dark))', letterSpacing: '-0.02em' }}
-            >
+            <h2 className="section-title">
               Perguntas <span className="text-gradient">frequentes</span>
             </h2>
           </div>

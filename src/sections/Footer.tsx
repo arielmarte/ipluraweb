@@ -11,7 +11,7 @@ const quickLinks = [
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Benefícios', href: '#beneficios' },
   { label: 'Sobre', href: '#sobre' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'Credenciais', href: '#credenciais' },
   { label: 'Contato', href: '#contato' },
 ];
 
@@ -67,16 +67,15 @@ const Footer = () => {
               }}
               className="inline-flex items-center mb-5"
             >
-              <div className="rounded-2xl bg-white px-4 py-3 shadow-[0_14px_30px_rgba(8,11,21,0.26)]">
-                <img
-                  src="/iplura-logo-icon-wordmark-description.svg"
-                  alt="IPLURA"
-                  className="w-full max-w-[22rem] h-auto object-contain"
-                />
-              </div>
+              <img
+                src="/iplura-logo-icon-wordmark-description-white.svg"
+                alt="IPLURA"
+                className="w-full max-w-[22rem] h-auto object-contain"
+              />
             </a>
-            <p className="text-sm leading-relaxed max-w-sm text-white/78">
-              Instituto de Promoção da Legalidade e Uso Responsável de Apostas. 
+            <p className="text-[0.95rem] leading-[1.75] max-w-[34rem] text-[hsl(var(--iplura-dark-muted))]">
+              Instituto de Promoção da Legalidade e Uso Responsável de Apostas.
+              <br />
               Transformando obrigação regulatória em cuidado real.
             </p>
           </div>
@@ -98,7 +97,7 @@ const Footer = () => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-sm text-white/74 hover:text-white transition-colors duration-300 underline-subtle"
+                    className="text-sm text-white/84 hover:text-white transition-colors duration-300 underline-subtle"
                   >
                     {link.label}
                   </a>
@@ -116,10 +115,10 @@ const Footer = () => {
               Contato
             </h4>
             <ul className="space-y-2">
-              <li className="text-sm text-white/78">
+              <li className="text-sm text-white/86">
                 contato@iplura.org.br
               </li>
-              <li className="text-sm text-white/78">
+              <li className="text-sm text-white/86">
                 São Paulo, SP - Brasil
               </li>
             </ul>
@@ -129,14 +128,14 @@ const Footer = () => {
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/82"
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/92"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/82"
+                className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/92"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -147,21 +146,21 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-white/70">
+            <p className="text-xs text-white/82">
               © 2026 IPLURA. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/70 hover:text-white transition-colors duration-300"
+                className="text-xs text-white/82 hover:text-white transition-colors duration-300"
               >
                 Política de Privacidade
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/70 hover:text-white transition-colors duration-300"
+                className="text-xs text-white/82 hover:text-white transition-colors duration-300"
               >
                 Termos de Uso
               </a>
