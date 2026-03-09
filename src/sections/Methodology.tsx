@@ -1,41 +1,16 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { homeContent } from '@/content/home';
+import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const steps = [
-  {
-    number: '01',
-    title: 'Diagnóstico',
-    description: 'Entendemos o contexto e as necessidades da operação.',
-  },
-  {
-    number: '02',
-    title: 'Estruturação',
-    description: 'Desenhamos fluxos, protocolos e estratégias de atuação.',
-  },
-  {
-    number: '03',
-    title: 'Acolhimento e prevenção',
-    description: 'Implementamos suporte especializado e ações educativas.',
-  },
-  {
-    number: '04',
-    title: 'Capacitação',
-    description: 'Treinamos equipes para uma atuação mais segura e alinhada.',
-  },
-  {
-    number: '05',
-    title: 'Evidências de conformidade',
-    description: 'Organizamos relatórios e registros que fortalecem a governança.',
-  },
-];
 
 const Methodology = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
+  const { methodology } = homeContent;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -98,21 +73,18 @@ const Methodology = () => {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {/* Left - Header */}
           <div ref={headerRef} className="lg:sticky lg:top-32 opacity-0">
-            <span className="badge mb-6 inline-flex">Como Funciona</span>
+            <span className="badge mb-6 inline-flex">{methodology.badge}</span>
             <h2 className="section-title mb-6">
-              Como o <span className="text-gradient">IPLURA atua</span>
+              {renderTextSegments(methodology.titleSegments, { gradient: 'text-gradient' })}
             </h2>
-            <p className="section-intro">
-              Uma metodologia estruturada para transformar cuidado em processo, 
-              conectando todas as áreas da operação.
-            </p>
+            <p className="section-intro">{methodology.intro}</p>
           </div>
 
           {/* Right - Steps */}
           <div ref={stepsRef} className="space-y-6">
-            {steps.map((step, index) => (
+            {methodology.steps.map((step) => (
               <div
-                key={index}
+                key={step.number}
                 className="step-item card-clean flex items-start gap-6 p-6 group opacity-0"
               >
                 {/* Number */}

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, CheckCircle } from 'lucide-react';
+import { homeContent } from '@/content/home';
+import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +11,7 @@ const ContactCTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const { contact } = homeContent;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     nome: '',
@@ -100,15 +103,11 @@ const ContactCTA = () => {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left - Content */}
           <div ref={contentRef} className="opacity-0">
-            <span className="badge mb-6 inline-flex">Contato</span>
+            <span className="badge mb-6 inline-flex">{contact.badge}</span>
             <h2 className="section-title mb-6">
-              Vamos construir uma operação{' '}
-              <span className="text-gradient">mais responsável e confiável?</span>
+              {renderTextSegments(contact.titleSegments, { gradient: 'text-gradient' })}
             </h2>
-            <p className="section-intro">
-              Fale com o IPLURA para conhecer soluções em jogo responsável, acolhimento 
-              especializado, capacitação e suporte técnico à operadora.
-            </p>
+            <p className="section-intro">{contact.intro}</p>
           </div>
 
           {/* Right - Form */}
@@ -133,16 +132,16 @@ const ContactCTA = () => {
                   className="text-xl font-semibold mb-2"
                   style={{ color: 'hsl(var(--iplura-dark))' }}
                 >
-                  Mensagem enviada!
+                  {contact.success.title}
                 </h3>
-                <p style={{ color: 'hsl(var(--iplura-gray))' }}>Entraremos em contato em breve.</p>
+                <p style={{ color: 'hsl(var(--iplura-gray))' }}>{contact.success.description}</p>
               </div>
             ) : (
               <div className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                      Nome
+                      {contact.form.fields.nome.label}
                     </label>
                     <input
                       type="text"
@@ -151,12 +150,12 @@ const ContactCTA = () => {
                       onChange={handleChange}
                       required
                       className="input-clean"
-                      placeholder="Seu nome"
+                      placeholder={contact.form.fields.nome.placeholder}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                      Empresa
+                      {contact.form.fields.empresa.label}
                     </label>
                     <input
                       type="text"
@@ -165,7 +164,7 @@ const ContactCTA = () => {
                       onChange={handleChange}
                       required
                       className="input-clean"
-                      placeholder="Nome da empresa"
+                      placeholder={contact.form.fields.empresa.placeholder}
                     />
                   </div>
                 </div>
@@ -173,7 +172,7 @@ const ContactCTA = () => {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                      Cargo
+                      {contact.form.fields.cargo.label}
                     </label>
                     <input
                       type="text"
@@ -182,12 +181,12 @@ const ContactCTA = () => {
                       onChange={handleChange}
                       required
                       className="input-clean"
-                      placeholder="Seu cargo"
+                      placeholder={contact.form.fields.cargo.placeholder}
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                      E-mail
+                      {contact.form.fields.email.label}
                     </label>
                     <input
                       type="email"
@@ -196,14 +195,14 @@ const ContactCTA = () => {
                       onChange={handleChange}
                       required
                       className="input-clean"
-                      placeholder="seu@email.com"
+                      placeholder={contact.form.fields.email.placeholder}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                    Telefone
+                    {contact.form.fields.telefone.label}
                   </label>
                   <input
                     type="tel"
@@ -212,13 +211,13 @@ const ContactCTA = () => {
                     onChange={handleChange}
                     required
                     className="input-clean"
-                    placeholder="(XX) XXXXX-XXXX"
+                    placeholder={contact.form.fields.telefone.placeholder}
                   />
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
-                    Mensagem
+                    {contact.form.fields.mensagem.label}
                   </label>
                   <textarea
                     name="mensagem"
@@ -226,13 +225,13 @@ const ContactCTA = () => {
                     onChange={handleChange}
                     rows={4}
                     className="input-clean resize-none"
-                    placeholder="Conte-nos sobre sua necessidade..."
+                    placeholder={contact.form.fields.mensagem.placeholder}
                   />
                 </div>
 
                 <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2">
                   <Send className="w-4 h-4" />
-                  Entrar em contato
+                  {contact.form.submitLabel}
                 </button>
               </div>
             )}

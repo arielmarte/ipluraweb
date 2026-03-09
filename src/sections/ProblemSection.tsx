@@ -2,32 +2,19 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { AlertTriangle, ShieldAlert, Workflow } from 'lucide-react';
+import { homeContent } from '@/content/home';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const narrativeSteps = [
-  {
-    title: 'Crescimento acelerado do setor',
-    description:
-      'Com a expansão das apostas, aumenta a exposição da operação a risco social, reputacional e regulatório.',
-    icon: AlertTriangle,
-  },
-  {
-    title: 'Consequência operacional direta',
-    description:
-      'Sem estrutura robusta, o jogo responsável fica restrito a respostas reativas e pouco consistentes.',
-    icon: ShieldAlert,
-  },
-  {
-    title: 'Necessidade de resposta estratégica',
-    description:
-      'É preciso integrar cuidado humano, governança e evidências para sustentar crescimento com responsabilidade.',
-    icon: Workflow,
-  },
-];
-
 const ProblemSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { problemSection } = homeContent;
+
+  const iconByStepId = {
+    growth: AlertTriangle,
+    'operational-consequence': ShieldAlert,
+    'strategic-response': Workflow,
+  } as const;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -82,22 +69,20 @@ const ProblemSection = () => {
       <div className="container-clean relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           <div className="lg:col-span-5 problem-reveal opacity-0">
-            <span className="badge mb-6 inline-flex">Contexto Estratégico</span>
+            <span className="badge mb-6 inline-flex">{problemSection.badge}</span>
             <h2 className="section-title mb-6 max-w-[14ch]">
-              O mercado cresceu e a régua de responsabilidade subiu junto
+              {problemSection.title}
             </h2>
             <p className="section-intro max-w-[34rem]">
-              No cenário atual, jogo responsável não é apenas uma exigência de conformidade. Ele
-              se tornou componente central de sustentabilidade institucional e confiança pública.
+              {problemSection.intro}
             </p>
 
             <div className="panel-premium-dark p-6 mt-7 problem-reveal opacity-0 text-white">
               <p className="text-xs uppercase tracking-[0.1em] font-semibold text-white mb-2">
-                Leitura crítica
+                {problemSection.criticalLabel}
               </p>
               <p className="text-base leading-[1.62] text-white font-semibold">
-                Quanto maior a escala da operação, maior a necessidade de processos claros,
-                prevenção ativa e resposta técnica qualificada.
+                {problemSection.criticalText}
               </p>
             </div>
           </div>
@@ -107,8 +92,8 @@ const ProblemSection = () => {
               <div className="absolute left-0 top-1 bottom-1 w-px bg-iplura-purple/24" />
 
               <div className="space-y-5 max-w-[45rem]">
-                {narrativeSteps.map((step, index) => {
-                  const Icon = step.icon;
+                {problemSection.steps.map((step, index) => {
+                  const Icon = iconByStepId[step.id];
 
                   return (
                     <article key={step.title} className="relative">
@@ -117,7 +102,7 @@ const ProblemSection = () => {
                       <div className="panel-premium p-6 sm:p-7">
                         <div className="flex items-start justify-between gap-4 mb-3">
                           <p className="text-[0.68rem] uppercase tracking-[0.12em] text-iplura-purple font-semibold">
-                            Etapa {String(index + 1).padStart(2, '0')}
+                            {problemSection.stepPrefix} {String(index + 1).padStart(2, '0')}
                           </p>
                           <span className="inline-flex w-10 h-10 items-center justify-center rounded-xl bg-iplura-purple/10 border border-iplura-purple/16">
                             <Icon className="w-5 h-5 text-iplura-purple" />

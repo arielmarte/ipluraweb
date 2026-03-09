@@ -2,26 +2,13 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ShieldCheck, LineChart, Scale, BadgeCheck } from 'lucide-react';
+import { homeContent } from '@/content/home';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const trustSignals = [
-  {
-    title: 'Governança verificável',
-    description: 'Protocolos e evidências prontos para auditoria.',
-  },
-  {
-    title: 'Proteção efetiva do usuário',
-    description: 'Prevenção ativa integrada ao fluxo operacional.',
-  },
-  {
-    title: 'Evolução contínua',
-    description: 'Treinamento recorrente e melhoria com foco em resultado.',
-  },
-];
-
 const Trust = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const { trust } = homeContent;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -63,7 +50,7 @@ const Trust = () => {
     <section
       id="credenciais"
       ref={sectionRef}
-      className="relative section-padding surface-alt overflow-hidden"
+      className="relative section-padding overflow-hidden bg-[linear-gradient(160deg,#F8F9FE_20%,#41237A_140%)]"
     >
       <div
         className="absolute -top-8 left-[8%] h-40 w-40 rounded-full bg-iplura-purple/10 blur-3xl parallax-soft"
@@ -76,37 +63,35 @@ const Trust = () => {
 
       <div className="container-clean relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-14 trust-reveal opacity-0">
-          <span className="badge mb-6 inline-flex">Base de Confiança</span>
+          <span className="badge mb-6 inline-flex">{trust.badge}</span>
           <h2 className="section-title mb-5">
-            Credenciais institucionais que sustentam a atuação do IPLURA
+            {trust.title}
           </h2>
           <p className="section-intro mx-auto">
-            Rigor técnico, visão regulatória e foco humano convertidos em estrutura operacional
-            sólida.
+            {trust.intro}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-7 items-stretch">
           <article className="lg:col-span-7 panel-premium p-8 sm:p-9 trust-reveal opacity-0">
             <p className="text-xs uppercase tracking-[0.12em] font-semibold text-iplura-purple mb-3">
-              Pilar principal
+              {trust.primary.label}
             </p>
             <h3 className="text-2xl sm:text-[1.78rem] font-semibold leading-[1.2] text-iplura-dark mb-4">
-              Estrutura técnica que protege reputação, operação e apostador
+              {trust.primary.title}
             </h3>
             <p className="text-base leading-[1.66] text-iplura-gray max-w-[62ch]">
-              O IPLURA conecta diagnóstico, protocolos e capacitação para transformar
-              responsabilidade em execução contínua.
+              {trust.primary.description}
             </p>
 
             <div className="mt-7 grid sm:grid-cols-3 gap-4">
-              {trustSignals.map((item, index) => (
+              {trust.fronts.map((item, index) => (
                 <div
                   key={item.title}
                   className="rounded-2xl border border-iplura-purple/14 bg-white/78 p-4"
                 >
                   <p className="text-[0.66rem] uppercase tracking-[0.12em] font-semibold text-iplura-purple mb-2">
-                    Frente {String(index + 1).padStart(2, '0')}
+                    {trust.frontPrefix} {String(index + 1).padStart(2, '0')}
                   </p>
                   <h4 className="text-base font-semibold text-iplura-dark leading-[1.3] mb-1.5">
                     {item.title}
@@ -122,9 +107,11 @@ const Trust = () => {
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
                 <LineChart className="w-5 h-5 text-iplura-purple" />
               </span>
-              <h4 className="text-lg font-semibold text-iplura-dark mb-2">Respaldo técnico</h4>
+              <h4 className="text-lg font-semibold text-iplura-dark mb-2">
+                {trust.sideCards[0].title}
+              </h4>
               <p className="text-sm leading-[1.62] text-iplura-gray">
-                Diagnóstico, priorização de riscos e plano de ação com foco prático.
+                {trust.sideCards[0].description}
               </p>
             </article>
 
@@ -132,9 +119,11 @@ const Trust = () => {
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
                 <Scale className="w-5 h-5 text-iplura-purple" />
               </span>
-              <h4 className="text-lg font-semibold text-iplura-dark mb-2">Segurança regulatória</h4>
+              <h4 className="text-lg font-semibold text-iplura-dark mb-2">
+                {trust.sideCards[1].title}
+              </h4>
               <p className="text-sm leading-[1.62] text-iplura-gray">
-                Alinhamento normativo com viabilidade operacional e consistência institucional.
+                {trust.sideCards[1].description}
               </p>
             </article>
 
@@ -144,16 +133,16 @@ const Trust = () => {
                   <ShieldCheck className="w-5 h-5 text-white" />
                 </span>
                 <p className="text-xs uppercase tracking-[0.1em] font-semibold text-white/90">
-                  Diferenciação IPLURA
+                  {trust.differentiation.label}
                 </p>
               </div>
               <p className="text-lg leading-[1.42] font-semibold text-white mb-3">
-                Conformidade completa é a que gera proteção real.
+                {trust.differentiation.title}
               </p>
               <div className="flex items-center gap-2 text-white">
                 <BadgeCheck className="w-4 h-4 text-white/95" />
                 <p className="text-sm leading-[1.5] text-white">
-                  Método proprietário com visão estratégica de longo prazo.
+                  {trust.differentiation.description}
                 </p>
               </div>
             </article>

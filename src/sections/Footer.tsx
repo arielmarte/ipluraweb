@@ -2,21 +2,13 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Linkedin, Instagram } from 'lucide-react';
+import { homeContent } from '@/content/home';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const quickLinks = [
-  { label: 'Início', href: '#hero' },
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Como funciona', href: '#como-funciona' },
-  { label: 'Benefícios', href: '#beneficios' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Credenciais', href: '#credenciais' },
-  { label: 'Contato', href: '#contato' },
-];
-
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
+  const { footer } = homeContent;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -69,14 +61,14 @@ const Footer = () => {
             >
               <img
                 src="/iplura-logo-icon-wordmark-description-white.svg"
-                alt="IPLURA"
+                alt={footer.logoAlt}
                 className="w-full max-w-[22rem] h-auto object-contain"
               />
             </a>
             <p className="text-[0.95rem] leading-[1.75] max-w-[34rem] text-[hsl(var(--iplura-dark-muted))]">
-              Instituto de Promoção da Legalidade e Uso Responsável de Apostas.
+              {footer.descriptionLines[0]}
               <br />
-              Transformando obrigação regulatória em cuidado real.
+              {footer.descriptionLines[1]}
             </p>
           </div>
 
@@ -86,11 +78,11 @@ const Footer = () => {
               className="text-sm font-semibold uppercase tracking-wider mb-4"
               style={{ color: 'hsl(var(--iplura-white))' }}
             >
-              Links
+              {footer.linksTitle}
             </h4>
             <ul className="space-y-2">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
+              {footer.quickLinks.map((link) => (
+                <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={(e) => {
@@ -112,15 +104,14 @@ const Footer = () => {
               className="text-sm font-semibold uppercase tracking-wider mb-4"
               style={{ color: 'hsl(var(--iplura-white))' }}
             >
-              Contato
+              {footer.contactTitle}
             </h4>
             <ul className="space-y-2">
-              <li className="text-sm text-white/86">
-                contato@iplura.org.br
-              </li>
-              <li className="text-sm text-white/86">
-                São Paulo, SP - Brasil
-              </li>
+              {footer.contactItems.map((contactItem) => (
+                <li key={contactItem} className="text-sm text-white/86">
+                  {contactItem}
+                </li>
+              ))}
             </ul>
 
             {/* Social Links */}
@@ -147,23 +138,19 @@ const Footer = () => {
         <div className="pt-8 border-t border-white/12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-white/82">
-              © 2026 IPLURA. Todos os direitos reservados.
+              {footer.copyright}
             </p>
             <div className="flex items-center gap-6">
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/82 hover:text-white transition-colors duration-300"
-              >
-                Política de Privacidade
-              </a>
-              <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                className="text-xs text-white/82 hover:text-white transition-colors duration-300"
-              >
-                Termos de Uso
-              </a>
+              {footer.legalLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => e.preventDefault()}
+                  className="text-xs text-white/82 hover:text-white transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>

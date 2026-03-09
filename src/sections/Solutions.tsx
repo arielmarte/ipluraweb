@@ -2,37 +2,28 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Heart, Building2, GraduationCap, ArrowUpRight } from 'lucide-react';
+import { homeContent } from '@/content/home';
+import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const solutions = [
-  {
-    icon: Heart,
-    title: 'Acolhimento Psicológico Estruturado',
-    description:
-      'Suporte especializado para usuários em situação de vulnerabilidade, com escuta qualificada e acompanhamento responsável.',
-    color: 'from-violet-500/10 to-violet-600/5',
-  },
-  {
-    icon: Building2,
-    title: 'Suporte Técnico à Operadora',
-    description:
-      'Apoio às equipes internas com diagnóstico de risco, capacitação, protocolos e orientação em jogo responsável.',
-    color: 'from-violet-500/10 to-violet-600/5',
-  },
-  {
-    icon: GraduationCap,
-    title: 'IPLURA Academy',
-    description:
-      'Treinamentos e conteúdos educativos para fortalecer a prevenção, a conformidade e o uso consciente.',
-    color: 'from-violet-500/10 to-violet-600/5',
-  },
-];
 
 const Solutions = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const { solutions } = homeContent;
+
+  const iconBySolutionId = {
+    'psychological-support': Heart,
+    'operator-support': Building2,
+    academy: GraduationCap,
+  } as const;
+
+  const gradientBySolutionId = {
+    'psychological-support': 'from-violet-500/10 to-violet-600/5',
+    'operator-support': 'from-violet-500/10 to-violet-600/5',
+    academy: 'from-violet-500/10 to-violet-600/5',
+  } as const;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -94,25 +85,25 @@ const Solutions = () => {
       <div className="container-clean">
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16 opacity-0">
-          <span className="badge mb-6 inline-flex">Nossas Soluções</span>
+          <span className="badge mb-6 inline-flex">{solutions.badge}</span>
           <h2 className="section-title">
-            Soluções para operadoras que querem atuar com{' '}
-            <span className="text-gradient">mais segurança e responsabilidade</span>
+            {renderTextSegments(solutions.titleSegments, { gradient: 'text-gradient' })}
           </h2>
         </div>
 
         {/* Cards */}
         <div ref={cardsRef} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {solutions.map((solution, index) => {
-            const Icon = solution.icon;
+          {solutions.cards.map((solution) => {
+            const Icon = iconBySolutionId[solution.id];
+            const gradient = gradientBySolutionId[solution.id];
             return (
               <div
-                key={index}
+                key={solution.id}
                 className="solution-card card-clean relative overflow-hidden p-8 group cursor-pointer opacity-0"
               >
                 {/* Gradient background */}
                 <div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
                 />
 
                 <div className="relative z-10">
@@ -136,15 +127,17 @@ const Solutions = () => {
 
                   {/* Link */}
                   <a
-                    href="#contato"
+                    href={solutions.linkHref}
                     onClick={(e) => {
                       e.preventDefault();
-                      document.querySelector('#contato')?.scrollIntoView({ behavior: 'smooth' });
+                      document
+                        .querySelector(solutions.linkHref)
+                        ?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className="inline-flex items-center gap-2 text-sm font-medium group/link"
                     style={{ color: 'hsl(var(--iplura-purple))' }}
                   >
-                    Saiba mais
+                    {solutions.linkLabel}
                     <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
                   </a>
                 </div>

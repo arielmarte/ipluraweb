@@ -2,36 +2,22 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Scale, HeartHandshake, GraduationCap, Building2, ArrowRight } from 'lucide-react';
+import { homeContent } from '@/content/home';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const pillars = [
-  {
-    icon: Scale,
-    title: 'Conformidade prática',
-    description: 'Exigências regulatórias traduzidas em processo operacional executável.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Acolhimento especializado',
-    description: 'Suporte qualificado para usuários em risco com protocolo de cuidado.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Educação preventiva',
-    description: 'Treinamentos contínuos para equipes e orientação ao usuário final.',
-  },
-  {
-    icon: Building2,
-    title: 'Atuação integrada',
-    description: 'Conexão entre Compliance, atendimento e estratégia institucional.',
-  },
-];
 
 const CredibilityStrip = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const { credibilityStrip } = homeContent;
+
+  const iconByPillarId = {
+    compliance: Scale,
+    care: HeartHandshake,
+    education: GraduationCap,
+    integration: Building2,
+  } as const;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -92,35 +78,36 @@ const CredibilityStrip = () => {
         <div className="panel-premium p-6 sm:p-8 lg:p-10">
           <div className="grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-8 lg:gap-10 items-start">
             <div ref={headerRef} className="opacity-0">
-              <span className="badge mb-5 inline-flex">Fundamentos Operacionais</span>
+              <span className="badge mb-5 inline-flex">{credibilityStrip.badge}</span>
               <h2 className="section-title text-[clamp(2rem,3.2vw,2.75rem)] mb-4 max-w-[14ch]">
-                Quatro frentes que sustentam a atuação do IPLURA
+                {credibilityStrip.title}
               </h2>
               <p className="text-base leading-[1.72] text-iplura-gray max-w-[34ch] mb-6">
-                Antes de avançar para o contexto do setor, este é o núcleo que organiza a entrega
-                técnica, humana e regulatória.
+                {credibilityStrip.intro}
               </p>
 
               <a
-                href="#como-funciona"
+                href={credibilityStrip.cta.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  document.querySelector('#como-funciona')?.scrollIntoView({ behavior: 'smooth' });
+                  document
+                    .querySelector(credibilityStrip.cta.href)
+                    ?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-iplura-purple hover:text-iplura-purple-accent transition-colors"
               >
-                Ver metodologia completa
+                {credibilityStrip.cta.label}
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
 
             <div ref={listRef} className="divide-y divide-iplura-purple/14">
-              {pillars.map((pillar) => {
-                const Icon = pillar.icon;
+              {credibilityStrip.pillars.map((pillar) => {
+                const Icon = iconByPillarId[pillar.id];
 
                 return (
                   <article
-                    key={pillar.title}
+                    key={pillar.id}
                     className="pillar-item opacity-0 py-5 first:pt-0 last:pb-0"
                   >
                     <div className="grid sm:grid-cols-[auto_1fr] gap-4 sm:gap-5 items-start">
