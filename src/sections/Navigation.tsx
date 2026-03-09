@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { homeContent } from '@/content/home';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { links, ctaLabel, logoAlt } = homeContent.navigation;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,16 +15,6 @@ const Navigation = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { label: 'Início', href: '#hero' },
-    { label: 'Soluções', href: '#solucoes' },
-    { label: 'Como funciona', href: '#como-funciona' },
-    { label: 'Benefícios', href: '#beneficios' },
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Credenciais', href: '#credenciais' },
-    { label: 'Contato', href: '#contato' },
-  ];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -54,14 +46,14 @@ const Navigation = () => {
           >
             <img
               src="/iplura-logo-icon-wordmark.svg"
-              alt="IPLURA"
+              alt={logoAlt}
               className="h-8 sm:h-9 w-auto object-contain"
             />
           </a>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -86,7 +78,7 @@ const Navigation = () => {
               }}
               className="btn-primary text-xs"
             >
-              Falar com o IPLURA
+              {ctaLabel}
             </a>
           </div>
 
@@ -110,7 +102,7 @@ const Navigation = () => {
           }`}
         >
           <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 border border-iplura-purple/10 max-h-[calc(100vh-7rem)] overflow-y-auto">
-            {navLinks.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -131,7 +123,7 @@ const Navigation = () => {
               }}
               className="block w-full text-center px-4 py-3 mt-2 btn-primary text-xs"
             >
-              Falar com o IPLURA
+              {ctaLabel}
             </a>
           </div>
         </div>

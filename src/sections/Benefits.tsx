@@ -2,36 +2,23 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Scale, ShieldCheck, Award, GraduationCap } from 'lucide-react';
+import { homeContent } from '@/content/home';
+import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const benefits = [
-  {
-    icon: Scale,
-    title: 'Mais consistência regulatória',
-    description: 'Apoio prático para fortalecer a conformidade.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Redução de riscos',
-    description: 'Mais preparo para lidar com vulnerabilidades, reputação e operação.',
-  },
-  {
-    icon: Award,
-    title: 'Fortalecimento institucional',
-    description: 'Uma atuação responsável gera mais confiança no mercado.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Capacitação interna',
-    description: 'Equipes mais preparadas para prevenir, orientar e agir.',
-  },
-];
 
 const Benefits = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const { benefits } = homeContent;
+
+  const iconByBenefitId = {
+    'regulatory-consistency': Scale,
+    'risk-reduction': ShieldCheck,
+    'institutional-strengthening': Award,
+    'internal-training': GraduationCap,
+  } as const;
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -93,9 +80,9 @@ const Benefits = () => {
       <div className="container-clean">
         {/* Header */}
         <div ref={headerRef} className="text-center max-w-2xl mx-auto mb-16 opacity-0">
-          <span className="badge mb-6 inline-flex">Benefícios</span>
+          <span className="badge mb-6 inline-flex">{benefits.badge}</span>
           <h2 className="section-title">
-            Benefícios para a <span className="text-gradient">operadora</span>
+            {renderTextSegments(benefits.titleSegments, { gradient: 'text-gradient' })}
           </h2>
         </div>
 
@@ -104,11 +91,11 @@ const Benefits = () => {
           ref={cardsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {benefits.map((benefit, index) => {
-            const Icon = benefit.icon;
+          {benefits.cards.map((benefit) => {
+            const Icon = iconByBenefitId[benefit.id];
             return (
               <div
-                key={index}
+                key={benefit.id}
                 className="benefit-card card-clean p-8 text-center group opacity-0"
               >
                 <div className="icon-box mx-auto mb-5 group-hover:scale-110 transition-transform duration-300">

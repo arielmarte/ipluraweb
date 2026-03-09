@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowRight, ShieldCheck, HeartHandshake } from 'lucide-react';
+import { homeContent } from '@/content/home';
+import { renderTextSegments } from '@/utils/renderTextSegments';
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -10,6 +12,8 @@ const Hero = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
   const visualRef = useRef<HTMLDivElement>(null);
+  const { hero } = homeContent;
+  const detailIcons = [ShieldCheck, HeartHandshake];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -101,7 +105,7 @@ const Hero = () => {
             <div ref={badgeRef} className="mb-8 opacity-0">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-[0.12em] uppercase border border-iplura-purple/20 bg-iplura-purple/10 text-iplura-purple">
                 <span className="w-1.5 h-1.5 rounded-full bg-iplura-purple animate-pulse" />
-                Instituto de Jogo Responsável
+                {hero.badge}
               </span>
             </div>
 
@@ -110,64 +114,67 @@ const Hero = () => {
               className="relative z-20 text-[clamp(2.26rem,4.05vw,3.78rem)] font-semibold leading-[1.15] mb-6 text-iplura-dark opacity-0 max-w-[17ch]"
               style={{ letterSpacing: '-0.035em' }}
             >
-              Jogo responsável com
-              <span className="text-gradient"><br/>estrutura técnica, humana e regulatória</span>
+              {renderTextSegments(hero.titleSegments, { gradient: 'text-gradient' })}
             </h1>
 
             <p
               ref={subheadlineRef}
               className="relative z-10 section-intro text-lg sm:text-[1.14rem] mb-9 max-w-[35rem] opacity-0"
             >
-              O IPLURA apoia operadoras de apostas com acolhimento especializado, educação
-              preventiva e implementação de processos que transformam conformidade em cuidado real.
+              {hero.subtitle}
             </p>
 
             <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4">
               <a
-                href="#contato"
+                href={hero.ctaPrimary.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection('#contato');
+                  scrollToSection(hero.ctaPrimary.href);
                 }}
                 className="btn-primary w-full sm:w-auto text-center"
               >
-                Falar com o IPLURA
+                {hero.ctaPrimary.label}
               </a>
               <a
-                href="#solucoes"
+                href={hero.ctaSecondary.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection('#solucoes');
+                  scrollToSection(hero.ctaSecondary.href);
                 }}
                 className="btn-secondary group w-full sm:w-auto text-center"
               >
-                Conhecer soluções
+                {hero.ctaSecondary.label}
                 <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
             <div ref={detailsRef} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[38rem]">
-              <div className="glass-chip opacity-0">
-                <ShieldCheck className="w-4 h-4 text-iplura-purple mb-2" />
-                <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Governança</p>
-                <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Conformidade prática e auditável</p>
-              </div>
-              <div className="glass-chip opacity-0">
-                <HeartHandshake className="w-4 h-4 text-iplura-purple mb-2" />
-                <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Cuidado</p>
-                <p className="text-sm text-iplura-dark font-medium leading-[1.4]">Acolhimento qualificado ao usuário</p>
-              </div>
+              {hero.details.map((detail, index) => {
+                const Icon = detailIcons[index] ?? ShieldCheck;
+
+                return (
+                  <div key={detail.label} className="glass-chip opacity-0">
+                    <Icon className="w-4 h-4 text-iplura-purple mb-2" />
+                    <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">
+                      {detail.label}
+                    </p>
+                    <p className="text-sm text-iplura-dark font-medium leading-[1.4]">
+                      {detail.text}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
 
             <a
-              href="#fundamentos"
+              href={hero.anchorLink.href}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('#fundamentos');
+                scrollToSection(hero.anchorLink.href);
               }}
               className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-iplura-purple hover:text-iplura-purple-accent transition-colors"
             >
-              Ver fundamentos operacionais
+              {hero.anchorLink.label}
               <ArrowRight className="w-4 h-4 rotate-90" />
             </a>
           </div>
@@ -183,7 +190,7 @@ const Hero = () => {
               <div className="hero-visual-media">
                 <img
                   src="/sasha-freemind-e_YlUfX0iKY-unsplash.jpg"
-                  alt="Profissional em acolhimento e suporte responsável"
+                  alt={hero.visual.imageAlt}
                   className="w-full h-[460px] sm:h-[520px] lg:h-[610px] object-cover object-center"
                 />
 
@@ -199,10 +206,12 @@ const Hero = () => {
             >
               <div className="flex items-center gap-2 mb-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-iplura-purple animate-pulse" />
-                <p className="text-xs tracking-[0.09em] uppercase text-iplura-dark/75">Atuação integrada</p>
+                <p className="text-xs tracking-[0.09em] uppercase text-iplura-dark/75">
+                  {hero.visual.topChipLabel}
+                </p>
               </div>
               <p className="text-sm text-iplura-dark font-semibold leading-[1.35]">
-                Técnico, humano e regulatório em um só fluxo.
+                {hero.visual.topChipText}
               </p>
             </div>
 
@@ -212,8 +221,10 @@ const Hero = () => {
             >
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">Maturidade operacional</p>
-                  <p className="text-sm text-iplura-dark font-semibold">Protocolos, evidências e prevenção contínua</p>
+                  <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">
+                    {hero.visual.bottomChipLabel}
+                  </p>
+                  <p className="text-sm text-iplura-dark font-semibold">{hero.visual.bottomChipText}</p>
                 </div>
                 <div className="w-11 h-11 rounded-xl bg-iplura-purple/12 border border-iplura-purple/20 flex items-center justify-center">
                   <ArrowRight className="w-5 h-5 text-iplura-purple" />
@@ -225,9 +236,11 @@ const Hero = () => {
               className="hidden lg:block absolute z-20 -left-4 bottom-24 glass-chip max-w-[190px] parallax-soft"
               data-parallax="0.12"
             >
-              <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70 mb-1">Implementação</p>
+              <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70 mb-1">
+                {hero.visual.sideChipLabel}
+              </p>
               <p className="text-sm text-iplura-dark font-semibold leading-[1.35]">
-                Protocolos aplicados ao dia a dia da operação.
+                {hero.visual.sideChipText}
               </p>
             </div>
           </div>
