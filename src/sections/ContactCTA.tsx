@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, MessageCircle } from 'lucide-react';
 import { homeContent } from '@/content/home';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
@@ -233,6 +233,16 @@ const ContactCTA = () => {
                   <Send className="w-4 h-4" />
                   {contact.form.submitLabel}
                 </button>
+
+                <a
+                  href={contact.form.whatsapp.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-secondary w-full flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {contact.form.whatsapp.label}
+                </a>
               </div>
             )}
           </form>

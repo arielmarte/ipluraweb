@@ -62,7 +62,7 @@ function App() {
   return (
     <div className="min-h-screen surface-base">
       <Navigation />
-      <main>
+      <main className="safe-area-main">
         <Hero />
         <CredibilityStrip />
         <ProblemSection />

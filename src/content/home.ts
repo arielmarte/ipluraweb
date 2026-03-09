@@ -419,6 +419,10 @@ export const homeContent = {
         mensagem: { label: 'Mensagem', placeholder: 'Conte-nos sobre sua necessidade...' },
       },
       submitLabel: 'Entrar em contato',
+      whatsapp: {
+        label: 'Falar no WhatsApp',
+        href: '#',
+      },
     },
   },
 
