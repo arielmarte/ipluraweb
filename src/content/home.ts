@@ -6,8 +6,8 @@ const heroTitle: TextSegment[] = [
 ];
 
 const solutionsTitle: TextSegment[] = [
-  { text: 'Soluções para operadoras que querem atuar com ' },
-  { text: 'mais segurança e responsabilidade', variant: 'gradient' },
+  { text: 'Soluções para operadoras que buscam ' },
+  { text: 'mais segurança, consistência e responsabilidade', variant: 'gradient' },
 ];
 
 const methodologyTitle: TextSegment[] = [
@@ -56,7 +56,7 @@ export const homeContent = {
     badge: 'Instituto de Jogo Responsável',
     titleSegments: heroTitle,
     subtitle:
-      'O IPLURA apoia operadoras de apostas com acolhimento especializado, educação preventiva e implementação de processos que transformam conformidade em cuidado real.',
+      'O IPLURA apoia operadoras de apostas com acolhimento especializado, educação preventiva e processos que transformam conformidade em proteção real.',
     ctaPrimary: { label: 'Falar com o IPLURA', href: '#contato' },
     ctaSecondary: { label: 'Conhecer soluções', href: '#solucoes' },
     details: [
@@ -69,73 +69,74 @@ export const homeContent = {
         text: 'Acolhimento qualificado ao usuário',
       },
     ],
-    anchorLink: { label: 'Ver fundamentos operacionais', href: '#fundamentos' },
+    anchorLink: { label: 'Ver arquitetura de atuação', href: '#fundamentos' },
     visual: {
       imageAlt: 'Profissional em acolhimento e suporte responsável',
       topChipLabel: 'Atuação integrada',
       topChipText: 'Técnico, humano e regulatório em um só fluxo.',
       bottomChipLabel: 'Maturidade operacional',
-      bottomChipText: 'Protocolos, evidências e prevenção contínua',
+      bottomChipText: 'Protocolos, evidências e prevenção contínua.',
       sideChipLabel: 'Implementação',
-      sideChipText: 'Protocolos aplicados ao dia a dia da operação.',
+      sideChipText: 'Processos aplicados ao dia a dia da operação.',
     },
   },
 
   credibilityStrip: {
-    badge: 'Fundamentos Operacionais',
-    title: 'Quatro frentes que sustentam a atuação do IPLURA',
+    badge: 'Arquitetura de Atuação',
+    title: 'Quatro frentes que estruturam a atuação do IPLURA',
     intro:
-      'Antes de avançar para o contexto do setor, este é o núcleo que organiza a entrega técnica, humana e regulatória.',
+      'Este é o núcleo que organiza a entrega do IPLURA e sustenta sua atuação técnica, humana e regulatória junto às operadoras.',
     cta: { label: 'Ver metodologia completa', href: '#como-funciona' },
     pillars: [
       {
         id: 'compliance',
         title: 'Conformidade prática',
-        description: 'Exigências regulatórias traduzidas em processo operacional executável.',
+        description: 'Exigências regulatórias traduzidas em processos operacionais viáveis.',
       },
       {
         id: 'care',
         title: 'Acolhimento especializado',
-        description: 'Suporte qualificado para usuários em risco com protocolo de cuidado.',
+        description:
+          'Suporte qualificado para usuários em risco, com escuta, protocolo e encaminhamento responsável.',
       },
       {
         id: 'education',
         title: 'Educação preventiva',
-        description: 'Treinamentos contínuos para equipes e orientação ao usuário final.',
+        description: 'Treinamentos e conteúdos para fortalecer prevenção, orientação e uso consciente.',
       },
       {
         id: 'integration',
         title: 'Atuação integrada',
-        description: 'Conexão entre Compliance, atendimento e estratégia institucional.',
+        description: 'Conexão entre compliance, atendimento e estratégia institucional.',
       },
     ],
   },
 
   problemSection: {
     badge: 'Contexto Estratégico',
-    title: 'O mercado cresceu e a régua de responsabilidade subiu junto',
+    title: 'O mercado cresceu. A responsabilidade também.',
     intro:
-      'No cenário atual, jogo responsável não é apenas uma exigência de conformidade. Ele se tornou componente central de sustentabilidade institucional e confiança pública.',
+      'No cenário atual, jogo responsável deixou de ser apenas uma exigência regulatória. Tornou-se condição para sustentar reputação, governança e confiança pública.',
     criticalLabel: 'Leitura crítica',
     stepPrefix: 'Etapa',
     criticalText:
-      'Quanto maior a escala da operação, maior a necessidade de processos claros, prevenção ativa e resposta técnica qualificada.',
+      'Quanto maior a escala da operação, maior a necessidade de prevenção ativa, protocolos claros e resposta qualificada.',
     steps: [
       {
         id: 'growth',
         title: 'Crescimento acelerado do setor',
         description:
-          'Com a expansão das apostas, aumenta a exposição da operação a risco social, reputacional e regulatório.',
+          'Com a expansão das apostas, aumenta a exposição da operação a riscos sociais, reputacionais e regulatórios.',
       },
       {
         id: 'operational-consequence',
-        title: 'Consequência operacional direta',
+        title: 'Impacto direto na operação',
         description:
-          'Sem estrutura robusta, o jogo responsável fica restrito a respostas reativas e pouco consistentes.',
+          'Sem estrutura consistente, o jogo responsável tende a se limitar a respostas reativas e pouco efetivas.',
       },
       {
         id: 'strategic-response',
-        title: 'Necessidade de resposta estratégica',
+        title: 'Resposta estratégica necessária',
         description:
           'É preciso integrar cuidado humano, governança e evidências para sustentar crescimento com responsabilidade.',
       },
@@ -173,12 +174,12 @@ export const homeContent = {
     badge: 'Como Funciona',
     titleSegments: methodologyTitle,
     intro:
-      'Uma metodologia estruturada para transformar cuidado em processo, conectando todas as áreas da operação.',
+      'Uma metodologia estruturada para transformar responsabilidade em processo, conectando operação, atendimento e governança.',
     steps: [
       {
         number: '01',
         title: 'Diagnóstico',
-        description: 'Entendemos o contexto e as necessidades da operação.',
+        description: 'Entendemos o contexto, os riscos e as necessidades da operação.',
       },
       {
         number: '02',
@@ -198,7 +199,7 @@ export const homeContent = {
       {
         number: '05',
         title: 'Evidências de conformidade',
-        description: 'Organizamos relatórios e registros que fortalecem a governança.',
+        description: 'Organizamos registros e relatórios que fortalecem a governança.',
       },
     ],
   },
@@ -210,7 +211,7 @@ export const homeContent = {
       {
         id: 'regulatory-consistency',
         title: 'Mais consistência regulatória',
-        description: 'Apoio prático para fortalecer a conformidade.',
+        description: 'Apoio prático para fortalecer a conformidade e qualificar a execução.',
       },
       {
         id: 'risk-reduction',
@@ -220,12 +221,14 @@ export const homeContent = {
       {
         id: 'institutional-strengthening',
         title: 'Fortalecimento institucional',
-        description: 'Uma atuação responsável gera mais confiança no mercado.',
+        description:
+          'Uma estrutura mais responsável fortalece reputação, confiança e posicionamento de mercado.',
       },
       {
         id: 'internal-training',
         title: 'Capacitação interna',
-        description: 'Equipes mais preparadas para prevenir, orientar e agir.',
+        description:
+          'Equipes mais preparadas para prevenir riscos, orientar usuários e atuar com consistência.',
       },
     ],
   },
@@ -234,22 +237,22 @@ export const homeContent = {
     badge: 'Diferenciais',
     titleSegments: differentiatorsTitle,
     intro:
-      'Unimos cuidado humano, suporte técnico e visão regulatória para ajudar operadoras a construir uma atuação mais ética, sólida e sustentável.',
+      'O IPLURA integra suporte técnico, acolhimento especializado e visão regulatória em uma estrutura única de implementação.',
     items: [
       {
         id: 'commitment',
-        title: 'Compromisso com empresa e jogador',
-        description: 'Proteção do usuário e maturidade operacional caminhando juntas.',
+        title: 'Proteção do usuário com viabilidade operacional',
+        description: 'Cuidado efetivo e estrutura institucional alinhados na mesma estratégia.',
       },
       {
         id: 'integrated-approach',
-        title: 'Abordagem integrada',
-        description: 'Compliance, acolhimento e educação em uma mesma estrutura.',
+        title: 'Atuação integrada',
+        description: 'Compliance, acolhimento e educação conectados em um mesmo fluxo operacional.',
       },
       {
         id: 'real-impact',
-        title: 'Impacto real',
-        description: 'Mais do que discurso institucional, foco em implementação prática.',
+        title: 'Implementação prática',
+        description: 'Protocolos, capacitação e evidências aplicados à rotina da operação.',
       },
     ],
   },
@@ -258,23 +261,23 @@ export const homeContent = {
     badge: 'Sobre',
     title: 'Arquitetura institucional para jogo responsável de alto padrão',
     intro:
-      'O IPLURA atua como parceiro estratégico das operadoras de apostas para transformar responsabilidade em prática operacional, governança contínua e proteção efetiva ao apostador.',
+      'O IPLURA atua como parceiro estratégico das operadoras de apostas para transformar responsabilidade em estrutura, governança contínua e proteção efetiva ao apostador.',
     pills: ['Suporte técnico aplicado', 'Acolhimento qualificado', 'Educação preventiva'],
     statement: {
       label: 'Declaração institucional',
-      title: 'O objetivo é unir crescimento de mercado e proteção real do usuário',
+      title: 'O objetivo é conectar crescimento de mercado e proteção real do usuário',
       description:
-        'A atuação do IPLURA conecta estratégia, execução e evidência de conformidade para que o jogo responsável deixe de ser apenas obrigação formal e passe a estruturar a maturidade institucional da operação.',
+        'A atuação do IPLURA integra estratégia, execução e evidências de conformidade para que o jogo responsável deixe de ser apenas obrigação formal e passe a sustentar a maturidade institucional da operação.',
     },
     mission: {
       title: 'Missão',
       description:
-        'Atuar como parceiro estratégico das operadoras, oferecendo suporte técnico às plataformas, acolhimento qualificado aos usuários em risco e ações educativas para saúde financeira, equilíbrio emocional e consumo consciente.',
+        'Atuar como parceiro estratégico das operadoras de apostas na construção de um ecossistema verdadeiramente responsável, oferecendo suporte técnico às plataformas, acolhimento qualificado aos usuários em risco e ações educativas que promovam saúde financeira, equilíbrio emocional e consumo consciente.',
     },
     vision: {
       title: 'Visão',
       description:
-        'Ser a principal referência em jogo responsável no Brasil, contribuindo para um setor mais ético, sustentável e centrado na proteção efetiva do apostador.',
+        'Ser reconhecido como a principal referência em jogo responsável no Brasil, contribuindo para um setor de apostas mais ético, sustentável e centrado na proteção efetiva dos apostadores, com práticas que vão além do cumprimento formal das normas e geram impacto humano real.',
     },
     values: {
       label: 'Valores',
@@ -283,52 +286,58 @@ export const homeContent = {
         {
           id: 'wellbeing',
           title: 'Compromisso com o bem-estar do apostador',
-          description: 'Proteção efetiva do usuário como prioridade contínua.',
+          description:
+            'Colocamos a saúde mental, emocional e financeira do usuário no centro das nossas ações, com respeito, empatia e escuta ativa.',
         },
         {
           id: 'shared-responsibility',
           title: 'Responsabilidade compartilhada',
-          description: 'Operadora, plataforma e suporte atuando de forma coordenada.',
+          description:
+            'Acreditamos que a proteção do jogador é uma construção coletiva entre operadoras, reguladores, profissionais técnicos e sociedade.',
         },
         {
           id: 'ethics',
           title: 'Transparência e ética institucional',
-          description: 'Decisões claras, rastreáveis e alinhadas ao interesse público.',
+          description:
+            'Atuamos com clareza, integridade e seriedade em todas as relações, preservando a confiança das operadoras e dos usuários.',
         },
         {
           id: 'education',
           title: 'Educação como ferramenta de transformação',
-          description: 'Conhecimento aplicado para prevenir risco e ampliar consciência.',
+          description:
+            'Investimos em trilhas formativas e conteúdos acessíveis como forma de prevenir riscos, fomentar o autocuidado e promover escolhas conscientes.',
         },
         {
           id: 'regulatory-effectiveness',
           title: 'Efetividade regulatória com impacto real',
-          description: 'Conformidade convertida em prática operacional consistente.',
+          description:
+            'Nosso objetivo é ir além do papel — transformar normas em práticas, regras em resultados, obrigação legal em valor estratégico.',
         },
         {
           id: 'innovation',
           title: 'Inovação com propósito',
-          description: 'Evolução contínua com foco em resultado humano e institucional.',
+          description:
+            'Buscamos constantemente soluções inteligentes, sustentáveis e adaptadas à realidade das operadoras e à complexidade do comportamento humano.',
         },
       ],
     },
   },
 
   trust: {
-    badge: 'Base de Confiança',
-    title: 'Credenciais institucionais que sustentam a atuação do IPLURA',
+    badge: 'Credenciais',
+    title: 'Estrutura institucional que sustenta a atuação do IPLURA',
     intro:
-      'Rigor técnico, visão regulatória e foco humano convertidos em estrutura operacional sólida.',
+      'Rigor técnico, visão regulatória e foco humano convertidos em operação consistente.',
     primary: {
       label: 'Pilar principal',
-      title: 'Estrutura técnica que protege reputação, operação e apostador',
+      title: 'Estrutura técnica para proteger operação, reputação e apostador',
       description:
         'O IPLURA conecta diagnóstico, protocolos e capacitação para transformar responsabilidade em execução contínua.',
     },
     fronts: [
       {
         title: 'Governança verificável',
-        description: 'Protocolos e evidências prontos para auditoria.',
+        description: 'Protocolos, registros e evidências preparados para auditoria.',
       },
       {
         title: 'Proteção efetiva do usuário',
@@ -336,7 +345,7 @@ export const homeContent = {
       },
       {
         title: 'Evolução contínua',
-        description: 'Treinamento recorrente e melhoria com foco em resultado.',
+        description: 'Treinamento recorrente e melhoria permanente com foco em resultado.',
       },
     ],
     frontPrefix: 'Frente',
@@ -355,7 +364,7 @@ export const homeContent = {
     ],
     differentiation: {
       label: 'Diferenciação IPLURA',
-      title: 'Conformidade completa é a que gera proteção real.',
+      title: 'Conformidade efetiva é a que gera proteção real.',
       description: 'Método proprietário com visão estratégica de longo prazo.',
     },
   },
@@ -380,8 +389,9 @@ export const homeContent = {
           'Sim. Os conteúdos podem ser adaptados à realidade e aos objetivos de cada operação.',
       },
       {
-        question: 'O IPLURA ajuda na conformidade regulatória?',
-        answer: 'Sim. Nossa atuação apoia a implementação prática de ações ligadas ao jogo responsável.',
+        question: 'O IPLURA apoia a conformidade regulatória?',
+        answer:
+          'Sim. Nossa atuação contribui para a implementação prática de ações ligadas ao jogo responsável.',
       },
       {
         question: 'O atendimento respeita confidencialidade?',
@@ -416,12 +426,12 @@ export const homeContent = {
     logoAlt: 'IPLURA',
     descriptionLines: [
       'Instituto de Promoção da Legalidade e Uso Responsável de Apostas.',
-      'Transformando obrigação regulatória em cuidado real.',
+      'Transformando conformidade em proteção real.',
     ],
     linksTitle: 'Links',
     contactTitle: 'Contato',
     quickLinks: navigationLinks,
-    contactItems: ['contato@iplura.org.br', 'São Paulo, SP - Brasil'],
+    contactItems: ['contato@iplura.org.br', 'São Paulo, SP — Brasil'],
     copyright: '© 2026 IPLURA. Todos os direitos reservados.',
     legalLinks: [
       { label: 'Política de Privacidade', href: '#' },
