@@ -150,7 +150,7 @@ const Trust = () => {
                 {trust.differentiation.title}
               </p>
               <div className="flex items-center gap-2 text-[hsl(var(--iplura-light))]">
-                <BadgeCheck className="w-4 h-4 text-[hsl(var(--iplura-light))/0.95]" />
+                <BadgeCheck className="w-5 h-5 sm:w-4 sm:h-4 text-[hsl(var(--iplura-light))/0.95]" />
                 <p className="text-sm leading-[1.5] text-[hsl(var(--iplura-light))]">
                   {trust.differentiation.description}
                 </p>
