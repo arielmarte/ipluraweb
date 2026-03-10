@@ -452,8 +452,8 @@ export const homeContent = {
     contactItems: ['contato@iplura.org.br', 'São Paulo, SP — Brasil'],
     copyright: '© 2026 IPLURA. Todos os direitos reservados.',
     legalLinks: [
-      { label: 'Política de Privacidade', href: '#' },
-      { label: 'Termos de Uso', href: '#' },
+      { label: 'Política de Privacidade', href: '/politica-de-privacidade' },
+      { label: 'Termos de Uso', href: '/termos-de-uso' },
     ],
   },
 } as const;

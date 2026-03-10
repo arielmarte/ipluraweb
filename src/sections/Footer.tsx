@@ -150,10 +150,9 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={(e) => e.preventDefault()}
                   className="text-xs text-white/82 hover:text-white transition-colors duration-300"
-                  aria-label={`${link.label} (em breve)`}
-                  title={`${link.label} (em breve)`}
+                  aria-label={link.label}
+                  title={link.label}
                 >
                   {link.label}
                 </a>

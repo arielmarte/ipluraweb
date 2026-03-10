@@ -29,6 +29,15 @@
       "destination": "https://iplura.org/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/termos-de-uso",
+      "destination": "/"
+    },
+    {
+      "source": "/politica-de-privacidade",
+      "destination": "/"
+    }
   ]
 }
-
