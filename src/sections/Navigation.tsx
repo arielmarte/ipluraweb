@@ -29,6 +29,19 @@ const Navigation = () => {
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1136px)');
+
+    const handleBreakpointChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    mediaQuery.addEventListener('change', handleBreakpointChange);
+    return () => mediaQuery.removeEventListener('change', handleBreakpointChange);
+  }, []);
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -66,7 +79,7 @@ const Navigation = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden min-[1136px]:flex items-center gap-6 xl:gap-8">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -83,7 +96,7 @@ const Navigation = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:block">
+          <div className="hidden min-[1136px]:block">
             <a
               href="#contato"
               onClick={(e) => {
@@ -100,7 +113,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-white/70 transition-colors"
+            className="min-[1136px]:hidden p-2 rounded-lg hover:bg-white/70 transition-colors"
             aria-label={isMobileMenuOpen ? 'Fechar menu principal' : 'Abrir menu principal'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu-panel"
@@ -118,7 +131,7 @@ const Navigation = () => {
         <div
           id="mobile-menu-panel"
           aria-hidden={!isMobileMenuOpen}
-          className={`lg:hidden overflow-hidden transition-all duration-300 ${
+          className={`min-[1136px]:hidden overflow-hidden transition-all duration-300 ${
             isMobileMenuOpen ? 'max-h-[calc(100vh-6.5rem)] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >

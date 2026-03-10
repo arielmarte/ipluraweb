@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iplura.org.br/sitemap.xml
+Sitemap: https://iplura.org/sitemap.xml
