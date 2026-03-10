@@ -1,11 +1,60 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import {
+  DESKTOP_LINK_HIDE_ORDER,
+  DESKTOP_NAV_LAYOUT,
+  NAVIGATION_BREAKPOINTS,
+} from '@/config/navigation';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [visibleDesktopLinks, setVisibleDesktopLinks] = useState(homeContent.navigation.links);
+  const desktopLinksViewportRef = useRef<HTMLDivElement>(null);
+  const linkMeasureRefs = useRef<Record<string, HTMLSpanElement | null>>({});
   const { links, ctaLabel, logoAlt } = homeContent.navigation;
+
+  const computeVisibleDesktopLinks = useCallback(() => {
+    if (typeof window === 'undefined') return;
+
+    if (window.innerWidth < NAVIGATION_BREAKPOINTS.mobile) {
+      setVisibleDesktopLinks(links);
+      return;
+    }
+
+    const viewport = desktopLinksViewportRef.current;
+    if (!viewport) return;
+
+    const availableWidth = viewport.clientWidth;
+    if (availableWidth <= 0) return;
+
+    const widthMap = new Map(
+      links.map((link) => [
+        link.href,
+        linkMeasureRefs.current[link.href]?.getBoundingClientRect().width ?? 0,
+      ])
+    );
+
+    const getTotalWidth = (items: typeof links) =>
+      items.reduce((total, link) => total + (widthMap.get(link.href) ?? 0), 0) +
+      Math.max(0, items.length - 1) * DESKTOP_NAV_LAYOUT.linkGapPx;
+
+    const nextVisible = [...links];
+    let totalWidth = getTotalWidth(nextVisible);
+
+    for (const href of DESKTOP_LINK_HIDE_ORDER) {
+      if (totalWidth <= availableWidth - DESKTOP_NAV_LAYOUT.safetyPx) break;
+
+      const indexToRemove = nextVisible.findIndex((link) => link.href === href);
+      if (indexToRemove === -1) continue;
+
+      nextVisible.splice(indexToRemove, 1);
+      totalWidth = getTotalWidth(nextVisible);
+    }
+
+    setVisibleDesktopLinks(nextVisible);
+  }, [links]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,17 +79,48 @@ const Navigation = () => {
   }, [isMobileMenuOpen]);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1136px)');
+    const mediaQuery = window.matchMedia(`(min-width: ${NAVIGATION_BREAKPOINTS.mobile}px)`);
 
     const handleBreakpointChange = (event: MediaQueryListEvent) => {
       if (event.matches) {
         setIsMobileMenuOpen(false);
       }
+
+      computeVisibleDesktopLinks();
     };
 
     mediaQuery.addEventListener('change', handleBreakpointChange);
     return () => mediaQuery.removeEventListener('change', handleBreakpointChange);
-  }, []);
+  }, [computeVisibleDesktopLinks]);
+
+  useEffect(() => {
+    computeVisibleDesktopLinks();
+
+    const handleResize = () => {
+      computeVisibleDesktopLinks();
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    const resizeObserver = new ResizeObserver(() => {
+      computeVisibleDesktopLinks();
+    });
+
+    if (desktopLinksViewportRef.current) {
+      resizeObserver.observe(desktopLinksViewportRef.current);
+    }
+
+    if ('fonts' in document) {
+      document.fonts.ready.then(() => {
+        computeVisibleDesktopLinks();
+      });
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
+    };
+  }, [computeVisibleDesktopLinks]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -60,7 +140,7 @@ const Navigation = () => {
       }`}
     >
       <div className="container-clean">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4 lg:gap-6">
           {/* Logo */}
           <a
             href="#hero"
@@ -68,7 +148,7 @@ const Navigation = () => {
               e.preventDefault();
               scrollToSection('#hero');
             }}
-            className="inline-flex items-center"
+            className="inline-flex items-center shrink-0"
             aria-label="IPLURA"
           >
             <img
@@ -79,24 +159,29 @@ const Navigation = () => {
           </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden min-[1136px]:flex items-center gap-6 xl:gap-8">
-            {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
-                className="text-sm font-medium tracking-[0.01em] text-iplura-dark/75 hover:text-iplura-purple transition-colors duration-300 underline-subtle"
-              >
-                {link.label}
-              </a>
-            ))}
+          <div
+            ref={desktopLinksViewportRef}
+            className="hidden lg:flex min-w-0 flex-1 justify-center px-2 xl:px-4"
+          >
+            <div className="flex min-w-0 items-center gap-6">
+              {visibleDesktopLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(link.href);
+                  }}
+                  className="text-sm font-medium tracking-[0.01em] text-iplura-dark/75 hover:text-iplura-purple transition-colors duration-300 underline-subtle whitespace-nowrap"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* CTA Button */}
-          <div className="hidden min-[1136px]:block">
+          <div className="hidden lg:block shrink-0">
             <a
               href="#contato"
               onClick={(e) => {
@@ -113,7 +198,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="min-[1136px]:hidden p-2 rounded-lg hover:bg-white/70 transition-colors"
+            className="lg:hidden ml-auto p-2 rounded-lg hover:bg-white/70 transition-colors"
             aria-label={isMobileMenuOpen ? 'Fechar menu principal' : 'Abrir menu principal'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu-panel"
@@ -131,7 +216,7 @@ const Navigation = () => {
         <div
           id="mobile-menu-panel"
           aria-hidden={!isMobileMenuOpen}
-          className={`min-[1136px]:hidden overflow-hidden transition-all duration-300 ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 ${
             isMobileMenuOpen ? 'max-h-[calc(100vh-6.5rem)] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
         >
@@ -162,6 +247,24 @@ const Navigation = () => {
               {ctaLabel}
             </a>
           </div>
+        </div>
+
+        {/* Hidden measurement layer for progressive desktop simplification */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute h-0 overflow-hidden opacity-0 whitespace-nowrap"
+        >
+          {links.map((link) => (
+            <span
+              key={link.href}
+              ref={(node) => {
+                linkMeasureRefs.current[link.href] = node;
+              }}
+              className="text-sm font-medium tracking-[0.01em]"
+            >
+              {link.label}
+            </span>
+          ))}
         </div>
       </div>
     </nav>
