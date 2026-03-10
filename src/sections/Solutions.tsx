@@ -80,7 +80,7 @@ const Solutions = () => {
     <section
       id="solucoes"
       ref={sectionRef}
-      className="section-padding surface-base"
+      className="section-padding surface-base section-separator-soft"
     >
       <div className="container-clean">
         {/* Header */}

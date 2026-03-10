@@ -13,7 +13,7 @@
     --iplura-gray: 220 20% 42%;          /* #566A80 - stronger legibility on light surfaces */
     --iplura-gray-soft: 220 16% 50%;     /* #6D7F98 */
     --iplura-surface: 230 75% 98%;       /* #F8F9FE */
-    --iplura-surface-alt: 223 43% 96%;   /* #F1F4FB */
+    --iplura-surface-alt: 223 45% 95%;   /* #EAF0FA - subtle stronger distinction from base */
     --iplura-surface-contrast: 223 40% 94%; /* #E9EEF8 */
     --iplura-dark-surface: 232 33% 14%;  /* #171B2F */
     --iplura-dark-muted: 223 23% 75%;    /* #AAB7CF */
@@ -127,6 +127,10 @@
         hsl(var(--iplura-white)) 0%,
         hsl(var(--iplura-surface-alt)) 100%
       );
+  }
+
+  .section-separator-soft {
+    border-top: 1px solid hsl(var(--iplura-purple) / 0.08);
   }
 
   .surface-contrast {

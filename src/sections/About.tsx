@@ -59,7 +59,7 @@ const About = () => {
     <section
       id="sobre"
       ref={sectionRef}
-      className="relative section-padding surface-base overflow-hidden"
+      className="relative section-padding surface-base overflow-hidden section-separator-soft"
     >
       <div
         className="absolute top-10 left-[5%] h-40 w-40 rounded-full bg-iplura-purple/11 blur-3xl parallax-soft"

@@ -50,7 +50,7 @@ const Trust = () => {
     <section
       id="credenciais"
       ref={sectionRef}
-      className="relative section-padding overflow-hidden bg-[linear-gradient(160deg,#F8F9FE_20%,#41237A_140%)]"
+      className="relative section-padding overflow-hidden bg-[linear-gradient(160deg,#F8F9FE_0%,#EEF1FA_34%,#41237A_122%)]"
     >
       <div
         className="absolute -top-8 left-[8%] h-40 w-40 rounded-full bg-iplura-purple/10 blur-3xl parallax-soft"
