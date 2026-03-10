@@ -63,7 +63,7 @@ const Footer = () => {
               <img
                 src="/iplura-logo-icon-wordmark-description-white.svg"
                 alt={footer.logoAlt}
-                className="w-full max-w-[22rem] h-auto object-contain"
+                className="w-full max-w-[24rem] h-auto object-contain"
               />
             </a>
             <p className="text-[0.95rem] leading-[1.75] max-w-[34rem] text-[hsl(var(--iplura-dark-muted))]">
@@ -150,10 +150,9 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={(e) => e.preventDefault()}
                   className="text-xs text-white/82 hover:text-white transition-colors duration-300"
-                  aria-label={`${link.label} (em breve)`}
-                  title={`${link.label} (em breve)`}
+                  aria-label={link.label}
+                  title={link.label}
                 >
                   {link.label}
                 </a>

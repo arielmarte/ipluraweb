@@ -97,8 +97,8 @@ const FAQ = () => {
                   key={item.question}
                   className={`faq-item rounded-2xl border transition-all duration-300 opacity-0 ${
                     isOpen
-                      ? 'border-iplura-purple/24 bg-white shadow-[0_16px_40px_rgba(65,35,122,0.12)]'
-                      : 'border-iplura-purple/10 bg-white/88 hover:border-iplura-purple/18'
+                      ? 'border-iplura-purple-accent/28 bg-white shadow-[0_16px_40px_rgba(109,42,167,0.12)]'
+                      : 'border-iplura-purple/10 bg-white/88 hover:border-iplura-purple-accent/22'
                   }`}
                 >
                   <h3 className="text-base">
@@ -112,20 +112,20 @@ const FAQ = () => {
                     >
                       <span
                         className={`text-base font-medium pr-4 transition-colors duration-300 ${
-                          isOpen ? 'text-iplura-purple' : 'text-iplura-dark'
+                          isOpen ? 'text-iplura-purple-accent' : 'text-iplura-dark'
                         }`}
                       >
                         {item.question}
                       </span>
                       <div
                         className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                          isOpen ? 'bg-iplura-purple' : 'bg-iplura-purple/10'
+                          isOpen ? 'bg-iplura-purple-accent' : 'bg-iplura-purple-accent/10'
                         }`}
                       >
                         {isOpen ? (
                           <Minus className="w-4 h-4 text-white" aria-hidden="true" />
                         ) : (
-                          <Plus className="w-4 h-4 text-iplura-gray" aria-hidden="true" />
+                          <Plus className="w-4 h-4 text-iplura-purple-accent" aria-hidden="true" />
                         )}
                       </div>
                     </button>

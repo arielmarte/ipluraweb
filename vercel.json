@@ -1,0 +1,43 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": ".*\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www\\.iplura\\.org"
+        }
+      ],
+      "destination": "https://iplura.org/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/termos-de-uso",
+      "destination": "/"
+    },
+    {
+      "source": "/politica-de-privacidade",
+      "destination": "/"
+    }
+  ]
+}

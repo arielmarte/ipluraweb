@@ -311,7 +311,7 @@ export const homeContent = {
           id: 'regulatory-effectiveness',
           title: 'Efetividade regulatória com impacto real',
           description:
-            'Nosso objetivo é ir além do papel — transformar normas em práticas, regras em resultados, obrigação legal em valor estratégico.',
+            'Nosso objetivo é ir além do papel, transformar normas em práticas, regras em resultados, obrigação legal em valor estratégico.',
         },
         {
           id: 'innovation',
@@ -437,6 +437,15 @@ export const homeContent = {
       whatsapp: {
         label: 'Falar no WhatsApp',
       },
+      privacyNotice: {
+        usage: 'Seus dados serão usados apenas para responder ao seu contato.',
+        agreementPrefix: 'Ao enviar, você aceita nossos ',
+        termsLabel: 'Termos de Uso',
+        termsHref: '/termos-de-uso',
+        connector: ' e a ',
+        policyLabel: 'Política de Privacidade',
+        policyHref: '/politica-de-privacidade',
+      },
     },
   },
 
@@ -452,8 +461,8 @@ export const homeContent = {
     contactItems: ['contato@iplura.org.br', 'São Paulo, SP — Brasil'],
     copyright: '© 2026 IPLURA. Todos os direitos reservados.',
     legalLinks: [
-      { label: 'Política de Privacidade', href: '#' },
-      { label: 'Termos de Uso', href: '#' },
+      { label: 'Política de Privacidade', href: '/politica-de-privacidade' },
+      { label: 'Termos de Uso', href: '/termos-de-uso' },
     ],
   },
 } as const;

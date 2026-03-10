@@ -16,12 +16,24 @@ import Trust from './sections/Trust';
 import FAQ from './sections/FAQ';
 import ContactCTA from './sections/ContactCTA';
 import Footer from './sections/Footer';
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton';
+import TermsOfUsePage from './pages/TermsOfUsePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  const normalizedPath = window.location.pathname.replace(/\/+$/, '') || '/';
+  const isTermsOfUsePage = normalizedPath === '/termos-de-uso';
+  const isPrivacyPolicyPage = normalizedPath === '/politica-de-privacidade';
+  const isLegalPage = isTermsOfUsePage || isPrivacyPolicyPage;
+
   useEffect(() => {
+    if (isLegalPage) {
+      return;
+    }
+
     // Configure ScrollTrigger defaults
     ScrollTrigger.defaults({
       toggleActions: 'play none none none',
@@ -57,7 +69,15 @@ function App() {
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [isLegalPage]);
+
+  if (isTermsOfUsePage) {
+    return <TermsOfUsePage />;
+  }
+
+  if (isPrivacyPolicyPage) {
+    return <PrivacyPolicyPage />;
+  }
 
   return (
     <div className="min-h-screen surface-base">
@@ -84,6 +104,7 @@ function App() {
         <ContactCTA />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }

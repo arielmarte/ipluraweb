@@ -52,8 +52,8 @@ const FormStatusFeedback = ({
       title: statusContent.loadingTitle,
       description: statusContent.loadingDescription,
       icon: Loader2,
-      iconClass: 'animate-spin text-iplura-purple',
-      panelClass: 'border-iplura-purple/20 bg-iplura-purple/6',
+      iconClass: 'animate-spin text-iplura-purple-accent',
+      panelClass: 'border-iplura-purple-accent/24 bg-iplura-purple-accent/8',
     },
     success: {
       title: statusContent.successTitle,
@@ -73,8 +73,8 @@ const FormStatusFeedback = ({
       title: statusContent.unavailableTitle,
       description: statusContent.unavailableDescription,
       icon: Info,
-      iconClass: 'text-iplura-purple',
-      panelClass: 'border-iplura-purple/20 bg-iplura-purple/6',
+      iconClass: 'text-iplura-purple-accent',
+      panelClass: 'border-iplura-purple-accent/24 bg-iplura-purple-accent/8',
     },
   } as const;
 
@@ -138,6 +138,8 @@ const ContactCTA = () => {
   const directWhatsappUrl = buildWhatsappUrl(EMPTY_CONTACT_FORM_DATA);
   const whatsappUrl = buildWhatsappUrl(formData);
   const requiredNoteId = 'contact-required-note';
+  const privacyNoticeId = 'contact-privacy-notice';
+  const privacyNotice = contact.form.privacyNotice;
 
   const fieldIds: Record<keyof ContactFormData, string> = {
     nome: 'contact-nome',
@@ -247,7 +249,7 @@ const ContactCTA = () => {
     setErrors(validationErrors);
 
     if (hasContactFormErrors(validationErrors)) {
-      setFormStatus('error');
+      setFormStatus('idle');
       return;
     }
 
@@ -518,6 +520,25 @@ const ContactCTA = () => {
                   {contact.form.whatsapp.label}
                 </button>
               </div>
+
+              <p id={privacyNoticeId} className="text-xs leading-[1.6] text-iplura-gray-soft">
+                {privacyNotice.usage}{' '}
+                {privacyNotice.agreementPrefix}
+                <a
+                  href={privacyNotice.termsHref}
+                  className="font-medium text-iplura-gray underline decoration-iplura-purple-accent/40 underline-offset-2 hover:text-iplura-purple-accent focus-visible:text-iplura-purple-accent transition-colors"
+                >
+                  {privacyNotice.termsLabel}
+                </a>
+                {privacyNotice.connector}
+                <a
+                  href={privacyNotice.policyHref}
+                  className="font-medium text-iplura-gray underline decoration-iplura-purple-accent/40 underline-offset-2 hover:text-iplura-purple-accent focus-visible:text-iplura-purple-accent transition-colors"
+                >
+                  {privacyNotice.policyLabel}
+                </a>
+                .
+              </p>
 
               <FormStatusFeedback
                 status={formStatus}

@@ -10,7 +10,9 @@ import {
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSectionHref, setActiveSectionHref] = useState('#hero');
   const [visibleDesktopLinks, setVisibleDesktopLinks] = useState(homeContent.navigation.links);
+  const navRef = useRef<HTMLElement>(null);
   const desktopLinksViewportRef = useRef<HTMLDivElement>(null);
   const linkMeasureRefs = useRef<Record<string, HTMLSpanElement | null>>({});
   const { links, ctaLabel, logoAlt } = homeContent.navigation;
@@ -66,6 +68,105 @@ const Navigation = () => {
   }, []);
 
   useEffect(() => {
+    const sectionTargets = links
+      .filter((link) => link.href.startsWith('#'))
+      .map((link) => ({
+        href: link.href,
+        element: document.querySelector<HTMLElement>(link.href),
+      }))
+      .filter((item): item is { href: string; element: HTMLElement } => Boolean(item.element));
+
+    if (sectionTargets.length === 0) {
+      return;
+    }
+
+    const getHeaderHeight = () => navRef.current?.getBoundingClientRect().height ?? 0;
+    const intersectionRatios = new Map<string, number>();
+    let rafId: number | null = null;
+
+    const updateActiveSection = () => {
+      const viewportHeight = window.innerHeight;
+      const pageBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      const headerHeight = getHeaderHeight();
+
+      if (window.scrollY <= 8) {
+        setActiveSectionHref('#hero');
+        return;
+      }
+
+      if (pageBottom) {
+        setActiveSectionHref(sectionTargets[sectionTargets.length - 1].href);
+        return;
+      }
+
+      const focusLineY = Math.min(viewportHeight - 1, headerHeight + viewportHeight * 0.3);
+
+      let bestHref = sectionTargets[0].href;
+      let bestScore = Number.NEGATIVE_INFINITY;
+
+      for (const target of sectionTargets) {
+        const rect = target.element.getBoundingClientRect();
+        const ratio = intersectionRatios.get(target.href) ?? 0;
+        const containsFocusLine = rect.top <= focusLineY && rect.bottom >= focusLineY;
+        const distanceToFocusLine = Math.abs(rect.top - focusLineY);
+        const intersectsViewport = rect.bottom > headerHeight && rect.top < viewportHeight;
+
+        const score =
+          (containsFocusLine ? 1000 : 0) +
+          ratio * 120 +
+          (intersectsViewport ? 10 : 0) -
+          distanceToFocusLine * 0.02;
+
+        if (score > bestScore) {
+          bestScore = score;
+          bestHref = target.href;
+        }
+      }
+
+      setActiveSectionHref(bestHref);
+    };
+
+    const queueUpdate = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      rafId = requestAnimationFrame(() => {
+        updateActiveSection();
+      });
+    };
+
+    const observerRootMarginTop = Math.round(getHeaderHeight() + 12);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const href = `#${entry.target.id}`;
+          intersectionRatios.set(href, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        queueUpdate();
+      },
+      {
+        rootMargin: `-${observerRootMarginTop}px 0px -58% 0px`,
+        threshold: [0, 0.1, 0.25, 0.4, 0.6, 0.8, 1],
+      }
+    );
+
+    sectionTargets.forEach((target) => observer.observe(target.element));
+
+    window.addEventListener('scroll', queueUpdate, { passive: true });
+    window.addEventListener('resize', queueUpdate, { passive: true });
+    queueUpdate();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', queueUpdate);
+      window.removeEventListener('resize', queueUpdate);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+    };
+  }, [links]);
+
+  useEffect(() => {
     if (!isMobileMenuOpen) return;
 
     const handleEscape = (event: KeyboardEvent) => {
@@ -92,6 +193,24 @@ const Navigation = () => {
     mediaQuery.addEventListener('change', handleBreakpointChange);
     return () => mediaQuery.removeEventListener('change', handleBreakpointChange);
   }, [computeVisibleDesktopLinks]);
+
+  const getNavLinkClassName = (href: string) => {
+    const isActive = activeSectionHref === href;
+    return `text-sm font-medium tracking-[0.01em] transition-colors duration-300 underline-subtle whitespace-nowrap ${
+      isActive
+        ? 'text-iplura-purple-accent'
+        : 'text-iplura-dark/75 hover:text-iplura-purple-accent focus-visible:text-iplura-purple-accent'
+    }`;
+  };
+
+  const getMobileLinkClassName = (href: string) => {
+    const isActive = activeSectionHref === href;
+    return `block px-4 py-3 text-sm font-medium rounded-lg transition-all ${
+      isActive
+        ? 'text-iplura-purple-accent bg-iplura-purple-accent/10'
+        : 'text-iplura-dark/75 hover:text-iplura-purple-accent hover:bg-iplura-purple-accent/6'
+    }`;
+  };
 
   useEffect(() => {
     computeVisibleDesktopLinks();
@@ -125,6 +244,7 @@ const Navigation = () => {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
+      setActiveSectionHref(href);
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
@@ -132,6 +252,7 @@ const Navigation = () => {
 
   return (
     <nav
+      ref={navRef}
       aria-label="Navegação principal"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
@@ -172,7 +293,9 @@ const Navigation = () => {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="text-sm font-medium tracking-[0.01em] text-iplura-dark/75 hover:text-iplura-purple transition-colors duration-300 underline-subtle whitespace-nowrap"
+                  className={getNavLinkClassName(link.href)}
+                  aria-current={activeSectionHref === link.href ? 'page' : undefined}
+                  data-active={activeSectionHref === link.href ? 'true' : 'false'}
                 >
                   {link.label}
                 </a>
@@ -230,7 +353,8 @@ const Navigation = () => {
                   scrollToSection(link.href);
                 }}
                 tabIndex={isMobileMenuOpen ? 0 : -1}
-                className="block px-4 py-3 text-sm font-medium text-iplura-dark/75 hover:text-iplura-purple hover:bg-iplura-purple/5 rounded-lg transition-all"
+                className={getMobileLinkClassName(link.href)}
+                aria-current={activeSectionHref === link.href ? 'page' : undefined}
               >
                 {link.label}
               </a>
