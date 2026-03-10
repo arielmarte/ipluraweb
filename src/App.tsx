@@ -16,6 +16,7 @@ import Trust from './sections/Trust';
 import FAQ from './sections/FAQ';
 import ContactCTA from './sections/ContactCTA';
 import Footer from './sections/Footer';
+import FloatingWhatsAppButton from './components/FloatingWhatsAppButton';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -84,6 +85,7 @@ function App() {
         <ContactCTA />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }
