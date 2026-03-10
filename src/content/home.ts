@@ -281,7 +281,7 @@ export const homeContent = {
     },
     values: {
       label: 'Valores',
-      title: 'Princípios que orientam decisões e execução institucional',
+      title: 'Os valores que sustentam nossa atuação',
       items: [
         {
           id: 'wellbeing',
