@@ -84,12 +84,13 @@ const FormStatusFeedback = ({
   return (
     <div
       role="status"
-      aria-live="polite"
+      aria-live={status === 'error' ? 'assertive' : 'polite'}
+      aria-atomic="true"
       className={`rounded-2xl border p-4 sm:p-5 ${activeConfig.panelClass}`}
     >
       <div className="flex items-start gap-3">
         <span className="inline-flex w-9 h-9 rounded-lg items-center justify-center bg-white/75 border border-white/70 shrink-0">
-          <Icon className={`w-4 h-4 ${activeConfig.iconClass}`} />
+          <Icon className={`w-4 h-4 ${activeConfig.iconClass}`} aria-hidden="true" />
         </span>
         <div className="min-w-0">
           <p className="text-sm font-semibold text-iplura-dark mb-1">{activeConfig.title}</p>
@@ -115,7 +116,7 @@ const FormStatusFeedback = ({
             onClick={onWhatsAppFallback}
             className="btn-secondary w-full sm:w-auto inline-flex items-center justify-center gap-2"
           >
-            <WhatsAppIcon className="w-4 h-4" />
+            <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
             {homeContent.contact.form.whatsapp.label}
           </button>
         </div>
@@ -136,6 +137,16 @@ const ContactCTA = () => {
 
   const directWhatsappUrl = buildWhatsappUrl(EMPTY_CONTACT_FORM_DATA);
   const whatsappUrl = buildWhatsappUrl(formData);
+  const requiredNoteId = 'contact-required-note';
+
+  const fieldIds: Record<keyof ContactFormData, string> = {
+    nome: 'contact-nome',
+    empresa: 'contact-empresa',
+    cargo: 'contact-cargo',
+    email: 'contact-email',
+    telefone: 'contact-telefone',
+    mensagem: 'contact-mensagem',
+  };
 
   useEffect(() => {
     const triggers: ScrollTrigger[] = [];
@@ -260,6 +271,11 @@ const ContactCTA = () => {
       : 'input-clean';
   };
 
+  const getFieldDescribedBy = (field: keyof ContactFormData) => {
+    const errorId = errors[field] ? `error-${field}` : null;
+    return [requiredNoteId, errorId].filter(Boolean).join(' ');
+  };
+
   return (
     <section
       id="contato"
@@ -287,7 +303,7 @@ const ContactCTA = () => {
               onClick={handleDirectWhatsAppClick}
               className="mt-6 btn-secondary inline-flex items-center gap-2"
             >
-              <WhatsAppIcon className="w-4 h-4" />
+              <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
               {contact.quickWhatsappCtaLabel}
             </button>
           </div>
@@ -296,48 +312,66 @@ const ContactCTA = () => {
             ref={formRef}
             noValidate
             onSubmit={handleEmailClick}
+            aria-busy={formStatus === 'loading'}
             className="panel-premium p-8 opacity-0 parallax-soft"
             data-parallax="0.06"
           >
             <div className="space-y-4">
+              <p id={requiredNoteId} className="sr-only">
+                Todos os campos deste formulário são obrigatórios.
+              </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                  <label
+                    htmlFor={fieldIds.nome}
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: 'hsl(var(--iplura-dark))' }}
+                  >
                     {contact.form.fields.nome.label}
                   </label>
                   <input
+                    id={fieldIds.nome}
                     type="text"
                     name="nome"
                     value={formData.nome}
                     onChange={handleChange}
                     className={getInputClassName('nome')}
                     placeholder={contact.form.fields.nome.placeholder}
+                    required
+                    aria-required="true"
                     aria-invalid={Boolean(errors.nome)}
-                    aria-describedby={errors.nome ? 'error-nome' : undefined}
+                    aria-describedby={getFieldDescribedBy('nome')}
                   />
                   {errors.nome ? (
-                    <p id="error-nome" className="mt-2 text-xs text-rose-600 font-medium">
+                    <p id="error-nome" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                       {errors.nome}
                     </p>
                   ) : null}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                  <label
+                    htmlFor={fieldIds.empresa}
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: 'hsl(var(--iplura-dark))' }}
+                  >
                     {contact.form.fields.empresa.label}
                   </label>
                   <input
+                    id={fieldIds.empresa}
                     type="text"
                     name="empresa"
                     value={formData.empresa}
                     onChange={handleChange}
                     className={getInputClassName('empresa')}
                     placeholder={contact.form.fields.empresa.placeholder}
+                    required
+                    aria-required="true"
                     aria-invalid={Boolean(errors.empresa)}
-                    aria-describedby={errors.empresa ? 'error-empresa' : undefined}
+                    aria-describedby={getFieldDescribedBy('empresa')}
                   />
                   {errors.empresa ? (
-                    <p id="error-empresa" className="mt-2 text-xs text-rose-600 font-medium">
+                    <p id="error-empresa" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                       {errors.empresa}
                     </p>
                   ) : null}
@@ -346,42 +380,57 @@ const ContactCTA = () => {
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                  <label
+                    htmlFor={fieldIds.cargo}
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: 'hsl(var(--iplura-dark))' }}
+                  >
                     {contact.form.fields.cargo.label}
                   </label>
                   <input
+                    id={fieldIds.cargo}
                     type="text"
                     name="cargo"
                     value={formData.cargo}
                     onChange={handleChange}
                     className={getInputClassName('cargo')}
                     placeholder={contact.form.fields.cargo.placeholder}
+                    required
+                    aria-required="true"
                     aria-invalid={Boolean(errors.cargo)}
-                    aria-describedby={errors.cargo ? 'error-cargo' : undefined}
+                    aria-describedby={getFieldDescribedBy('cargo')}
                   />
                   {errors.cargo ? (
-                    <p id="error-cargo" className="mt-2 text-xs text-rose-600 font-medium">
+                    <p id="error-cargo" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                       {errors.cargo}
                     </p>
                   ) : null}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                  <label
+                    htmlFor={fieldIds.email}
+                    className="block text-sm font-medium mb-2"
+                    style={{ color: 'hsl(var(--iplura-dark))' }}
+                  >
                     {contact.form.fields.email.label}
                   </label>
                   <input
+                    id={fieldIds.email}
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     className={getInputClassName('email')}
                     placeholder={contact.form.fields.email.placeholder}
+                    autoComplete="email"
+                    required
+                    aria-required="true"
                     aria-invalid={Boolean(errors.email)}
-                    aria-describedby={errors.email ? 'error-email' : undefined}
+                    aria-describedby={getFieldDescribedBy('email')}
                   />
                   {errors.email ? (
-                    <p id="error-email" className="mt-2 text-xs text-rose-600 font-medium">
+                    <p id="error-email" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                       {errors.email}
                     </p>
                   ) : null}
@@ -389,42 +438,58 @@ const ContactCTA = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                <label
+                  htmlFor={fieldIds.telefone}
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--iplura-dark))' }}
+                >
                   {contact.form.fields.telefone.label}
                 </label>
                 <input
+                  id={fieldIds.telefone}
                   type="tel"
                   name="telefone"
                   value={formData.telefone}
                   onChange={handleChange}
                   className={getInputClassName('telefone')}
                   placeholder={contact.form.fields.telefone.placeholder}
+                  autoComplete="tel"
+                  inputMode="tel"
+                  required
+                  aria-required="true"
                   aria-invalid={Boolean(errors.telefone)}
-                  aria-describedby={errors.telefone ? 'error-telefone' : undefined}
+                  aria-describedby={getFieldDescribedBy('telefone')}
                 />
                 {errors.telefone ? (
-                  <p id="error-telefone" className="mt-2 text-xs text-rose-600 font-medium">
+                  <p id="error-telefone" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                     {errors.telefone}
                   </p>
                 ) : null}
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{ color: 'hsl(var(--iplura-dark))' }}>
+                <label
+                  htmlFor={fieldIds.mensagem}
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: 'hsl(var(--iplura-dark))' }}
+                >
                   {contact.form.fields.mensagem.label}
                 </label>
                 <textarea
+                  id={fieldIds.mensagem}
                   name="mensagem"
                   value={formData.mensagem}
                   onChange={handleChange}
                   rows={4}
                   className={`${getInputClassName('mensagem')} resize-none`}
                   placeholder={contact.form.fields.mensagem.placeholder}
+                  required
+                  aria-required="true"
                   aria-invalid={Boolean(errors.mensagem)}
-                  aria-describedby={errors.mensagem ? 'error-mensagem' : undefined}
+                  aria-describedby={getFieldDescribedBy('mensagem')}
                 />
                 {errors.mensagem ? (
-                  <p id="error-mensagem" className="mt-2 text-xs text-rose-600 font-medium">
+                  <p id="error-mensagem" role="alert" className="mt-2 text-xs text-rose-600 font-medium">
                     {errors.mensagem}
                   </p>
                 ) : null}
@@ -436,7 +501,11 @@ const ContactCTA = () => {
                   disabled={formStatus === 'loading'}
                   className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  {formStatus === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                  {formStatus === 'loading' ? (
+                    <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Send className="w-4 h-4" aria-hidden="true" />
+                  )}
                   {formStatus === 'loading' ? contact.status.loadingTitle : contact.form.submitLabel}
                 </button>
 
@@ -445,7 +514,7 @@ const ContactCTA = () => {
                   onClick={handleWhatsAppClick}
                   className="btn-secondary w-full flex items-center justify-center gap-2"
                 >
-                  <WhatsAppIcon className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
                   {contact.form.whatsapp.label}
                 </button>
               </div>

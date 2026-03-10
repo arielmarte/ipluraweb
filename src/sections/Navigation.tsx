@@ -16,6 +16,19 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isMobileMenuOpen]);
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -26,6 +39,7 @@ const Navigation = () => {
 
   return (
     <nav
+      aria-label="Navegação principal"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'bg-white/84 backdrop-blur-xl py-4 border-b border-iplura-purple/10 shadow-[0_8px_32px_rgba(26,28,46,0.08)]'
@@ -84,19 +98,26 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden p-2 rounded-lg hover:bg-white/70 transition-colors"
+            aria-label={isMobileMenuOpen ? 'Fechar menu principal' : 'Abrir menu principal'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu-panel"
+            aria-haspopup="true"
           >
             {isMobileMenuOpen ? (
-              <X className="w-5 h-5" style={{ color: 'hsl(var(--iplura-dark))' }} />
+              <X className="w-5 h-5" style={{ color: 'hsl(var(--iplura-dark))' }} aria-hidden="true" />
             ) : (
-              <Menu className="w-5 h-5" style={{ color: 'hsl(var(--iplura-dark))' }} />
+              <Menu className="w-5 h-5" style={{ color: 'hsl(var(--iplura-dark))' }} aria-hidden="true" />
             )}
           </button>
         </div>
 
         {/* Mobile Menu */}
         <div
+          id="mobile-menu-panel"
+          aria-hidden={!isMobileMenuOpen}
           className={`lg:hidden overflow-hidden transition-all duration-300 ${
             isMobileMenuOpen ? 'max-h-[calc(100vh-6.5rem)] opacity-100 mt-4' : 'max-h-0 opacity-0'
           }`}
@@ -110,6 +131,7 @@ const Navigation = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
+                tabIndex={isMobileMenuOpen ? 0 : -1}
                 className="block px-4 py-3 text-sm font-medium text-iplura-dark/75 hover:text-iplura-purple hover:bg-iplura-purple/5 rounded-lg transition-all"
               >
                 {link.label}
@@ -121,6 +143,7 @@ const Navigation = () => {
                 e.preventDefault();
                 scrollToSection('#contato');
               }}
+              tabIndex={isMobileMenuOpen ? 0 : -1}
               className="block w-full text-center px-4 py-3 mt-2 btn-primary text-xs"
             >
               {ctaLabel}
