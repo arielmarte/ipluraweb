@@ -437,6 +437,15 @@ export const homeContent = {
       whatsapp: {
         label: 'Falar no WhatsApp',
       },
+      privacyNotice: {
+        usage: 'Seus dados serão usados apenas para responder ao seu contato.',
+        agreementPrefix: 'Ao enviar, você aceita nossos ',
+        termsLabel: 'Termos de Uso',
+        termsHref: '/termos-de-uso',
+        connector: ' e a ',
+        policyLabel: 'Política de Privacidade',
+        policyHref: '/politica-de-privacidade',
+      },
     },
   },
 

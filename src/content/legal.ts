@@ -13,12 +13,12 @@ export type LegalDocument = {
   sections: LegalSection[];
 };
 
-const lastUpdatedPlaceholder = '[inserir data]';
+const lastUpdatedDate = '01 de março de 2026';
 
 export const termsOfUseContent: LegalDocument = {
   title: 'Termos de Uso',
   slug: '/termos-de-uso',
-  lastUpdated: lastUpdatedPlaceholder,
+  lastUpdated: lastUpdatedDate,
   introduction: [
     'Bem-vindo ao site do IPLURA — Instituto de Promoção da Legalidade e Uso Responsável de Apostas.',
     'Estes Termos de Uso regulam o acesso e a navegação neste site. Ao acessar e utilizar este ambiente digital, o usuário declara estar ciente destas condições.',
@@ -101,7 +101,7 @@ export const termsOfUseContent: LegalDocument = {
 export const privacyPolicyContent: LegalDocument = {
   title: 'Política de Privacidade',
   slug: '/politica-de-privacidade',
-  lastUpdated: lastUpdatedPlaceholder,
+  lastUpdated: lastUpdatedDate,
   introduction: [
     'Esta Política de Privacidade explica, de forma clara e objetiva, como o IPLURA — Instituto de Promoção da Legalidade e Uso Responsável de Apostas trata dados pessoais no contexto deste site institucional.',
     'A LGPD define “controlador” como quem toma as decisões sobre o tratamento de dados e “tratamento” como toda operação realizada com dados pessoais, como coleta, uso, armazenamento e eliminação.',
