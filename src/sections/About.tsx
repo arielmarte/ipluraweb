@@ -114,8 +114,8 @@ const About = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-5 mt-10 lg:mt-12">
-          <article className="panel-premium p-6 about-reveal opacity-0">
+        <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-5 lg:gap-8 xl:gap-10 mt-10 lg:mt-12">
+          <article className="panel-premium p-6 about-reveal opacity-0 lg:col-span-6">
             <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
               <Target className="w-5 h-5 text-iplura-purple" />
             </div>
@@ -125,7 +125,7 @@ const About = () => {
             </p>
           </article>
 
-          <article className="panel-premium p-6 about-reveal opacity-0">
+          <article className="panel-premium p-6 about-reveal opacity-0 lg:col-span-6">
             <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
               <Eye className="w-5 h-5 text-iplura-purple" />
             </div>

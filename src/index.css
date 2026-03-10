@@ -29,17 +29,17 @@
     --popover-foreground: 230 26% 14%;
     --primary: 263 54% 31%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 282 70% 38%;
+    --secondary: 277 59% 41%;
     --secondary-foreground: 0 0% 100%;
     --muted: 223 43% 96%;
     --muted-foreground: 220 18% 45%;
-    --accent: 282 70% 38%;
+    --accent: 277 59% 41%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 220 22% 88%;
     --input: 220 22% 88%;
-    --ring: 263 54% 31%;
+    --ring: 277 59% 41%;
     --radius: 0.75rem;
 
     /* Animation Easings */
@@ -130,7 +130,7 @@
   }
 
   .section-separator-soft {
-    border-top: 1px solid hsl(var(--iplura-purple) / 0.08);
+    border-top: 1px solid hsl(var(--iplura-purple-accent) / 0.08);
   }
 
   .surface-contrast {
@@ -190,31 +190,43 @@
   .btn-primary:hover {
     background: hsl(var(--iplura-purple-accent));
     transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(65, 35, 122, 0.28);
+    box-shadow: 0 14px 36px rgba(109, 42, 167, 0.28);
+  }
+
+  .btn-primary:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px hsl(var(--iplura-purple-accent) / 0.2),
+      0 14px 36px rgba(109, 42, 167, 0.24);
+  }
+
+  .btn-primary:active {
+    background: hsl(var(--iplura-purple-accent));
+    transform: translateY(0);
   }
 
   .btn-secondary {
     @apply px-8 py-4 rounded-full font-semibold text-sm border transition-all duration-300;
     letter-spacing: 0.01em;
-    border-color: hsl(var(--iplura-purple) / 0.3);
+    border-color: hsl(var(--iplura-purple-accent) / 0.3);
     color: hsl(var(--iplura-dark));
     background: hsl(var(--iplura-white) / 0.78);
     backdrop-filter: blur(8px);
   }
 
   .btn-secondary:hover {
-    background: hsl(var(--iplura-purple));
+    background: hsl(var(--iplura-purple-accent));
     color: white;
     transform: translateY(-2px);
   }
 
   .btn-ghost {
     @apply px-6 py-3 rounded-full font-medium text-sm tracking-wide transition-all duration-300;
-    color: hsl(var(--iplura-purple));
+    color: hsl(var(--iplura-purple-accent));
   }
 
   .btn-ghost:hover {
-    background: hsl(var(--iplura-purple) / 0.08);
+    background: hsl(var(--iplura-purple-accent) / 0.08);
   }
 
   /* Layout */
@@ -241,7 +253,7 @@
 
   /* Text gradient */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--iplura-purple)) 0%, hsl(var(--iplura-purple-accent)) 100%);
+    background: linear-gradient(132deg, hsl(var(--iplura-purple)) 0%, hsl(var(--iplura-purple-accent)) 74%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -259,7 +271,7 @@
     left: 0;
     width: 0;
     height: 1px;
-    background: hsl(var(--iplura-purple));
+    background: hsl(var(--iplura-purple-accent));
     transition: width 0.3s var(--ease-out-expo);
   }
 
@@ -267,27 +279,32 @@
     width: 100%;
   }
 
+  .underline-subtle:focus-visible::after,
+  .underline-subtle[data-active='true']::after {
+    width: 100%;
+  }
+
   .badge {
     @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-[0.12em] uppercase;
-    background: hsl(var(--iplura-purple) / 0.1);
-    color: hsl(var(--iplura-purple));
-    border: 1px solid hsl(var(--iplura-purple) / 0.18);
+    background: hsl(var(--iplura-purple-accent) / 0.1);
+    color: hsl(var(--iplura-purple-accent));
+    border: 1px solid hsl(var(--iplura-purple-accent) / 0.2);
   }
 
   .icon-box {
     @apply w-12 h-12 rounded-xl flex items-center justify-center;
-    background: hsl(var(--iplura-purple) / 0.1);
-    border: 1px solid hsl(var(--iplura-purple) / 0.16);
+    background: hsl(var(--iplura-purple-accent) / 0.1);
+    border: 1px solid hsl(var(--iplura-purple-accent) / 0.2);
   }
 
   .icon-box svg {
     @apply w-5 h-5;
-    color: hsl(var(--iplura-purple));
+    color: hsl(var(--iplura-purple-accent));
   }
 
   .number-indicator {
     @apply w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold;
-    background: hsl(var(--iplura-purple));
+    background: hsl(var(--iplura-purple-accent));
     color: white;
   }
 
@@ -300,8 +317,8 @@
 
   .input-clean:focus {
     outline: none;
-    border-color: hsl(var(--iplura-purple));
-    box-shadow: 0 0 0 3px hsl(var(--iplura-purple) / 0.1);
+    border-color: hsl(var(--iplura-purple-accent));
+    box-shadow: 0 0 0 3px hsl(var(--iplura-purple-accent) / 0.14);
   }
 
   .input-clean::placeholder {
@@ -353,9 +370,9 @@
 
   .metric-pill {
     @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.09em];
-    border-color: hsl(var(--iplura-purple) / 0.18);
-    background: hsl(var(--iplura-purple) / 0.08);
-    color: hsl(var(--iplura-dark));
+    border-color: hsl(var(--iplura-purple-accent) / 0.2);
+    background: hsl(var(--iplura-purple-accent) / 0.08);
+    color: hsl(var(--iplura-purple-accent));
   }
 
   .glass-chip {

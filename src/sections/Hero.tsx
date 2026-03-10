@@ -148,7 +148,7 @@ const Hero = () => {
               </a>
             </div>
 
-            <div ref={detailsRef} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-[38rem]">
+            <div ref={detailsRef} className="mt-8 grid w-full max-w-[35rem] grid-cols-1 gap-4 sm:grid-cols-2">
               {hero.details.map((detail, index) => {
                 const Icon = detailIcons[index] ?? ShieldCheck;
 

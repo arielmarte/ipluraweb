@@ -74,7 +74,7 @@ const Trust = () => {
 
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-7 items-stretch">
           <article className="lg:col-span-7 panel-premium p-8 sm:p-9 trust-reveal opacity-0">
-            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-iplura-purple mb-3">
+            <p className="text-xs uppercase tracking-[0.12em] font-semibold text-iplura-purple-accent mb-3">
               {trust.primary.label}
             </p>
             <h3 className="text-2xl sm:text-[1.78rem] font-semibold leading-[1.2] text-iplura-dark mb-4">
@@ -84,13 +84,13 @@ const Trust = () => {
               {trust.primary.description}
             </p>
 
-            <div className="mt-7 grid sm:grid-cols-3 gap-4">
+            <div className="mt-7 grid gap-4 md:grid-cols-2">
               {trust.fronts.map((item, index) => (
                 <div
                   key={item.title}
                   className="rounded-2xl border border-iplura-purple/14 bg-white/78 p-4"
                 >
-                  <p className="text-[0.66rem] uppercase tracking-[0.12em] font-semibold text-iplura-purple mb-2">
+                  <p className="text-[0.66rem] uppercase tracking-[0.12em] font-semibold text-iplura-purple-accent mb-2">
                     {trust.frontPrefix} {String(index + 1).padStart(2, '0')}
                   </p>
                   <h4 className="text-base font-semibold text-iplura-dark leading-[1.3] mb-1.5">
@@ -99,13 +99,23 @@ const Trust = () => {
                   <p className="text-sm leading-[1.6] text-iplura-gray">{item.description}</p>
                 </div>
               ))}
+
+              <div className="flex items-center justify-center min-h-[142px]">
+                <img
+                  src="/iplura-logo-icon.svg"
+                  alt="Logo do IPLURA"
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </div>
           </article>
 
           <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-6">
             <article className="panel-premium p-6 trust-reveal opacity-0">
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
-                <LineChart className="w-5 h-5 text-iplura-purple" />
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple-accent/10 border border-iplura-purple-accent/20 mb-4">
+                <LineChart className="w-5 h-5 text-iplura-purple-accent" />
               </span>
               <h4 className="text-lg font-semibold text-iplura-dark mb-2">
                 {trust.sideCards[0].title}
@@ -116,8 +126,8 @@ const Trust = () => {
             </article>
 
             <article className="panel-premium p-6 trust-reveal opacity-0">
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple/10 border border-iplura-purple/16 mb-4">
-                <Scale className="w-5 h-5 text-iplura-purple" />
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-iplura-purple-accent/10 border border-iplura-purple-accent/20 mb-4">
+                <Scale className="w-5 h-5 text-iplura-purple-accent" />
               </span>
               <h4 className="text-lg font-semibold text-iplura-dark mb-2">
                 {trust.sideCards[1].title}
@@ -127,21 +137,21 @@ const Trust = () => {
               </p>
             </article>
 
-            <article className="panel-premium-dark p-6 trust-reveal opacity-0 text-white sm:col-span-2 lg:col-span-1">
+            <article className="panel-premium-dark p-6 trust-reveal opacity-0 text-[hsl(var(--iplura-light))] sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-3 mb-3">
                 <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/12 border border-white/24">
-                  <ShieldCheck className="w-5 h-5 text-white" />
+                  <ShieldCheck className="w-5 h-5 text-[hsl(var(--iplura-light))]" />
                 </span>
-                <p className="text-xs uppercase tracking-[0.1em] font-semibold text-white/90">
+                <p className="text-xs uppercase tracking-[0.1em] font-semibold text-[hsl(var(--iplura-light))/0.9]">
                   {trust.differentiation.label}
                 </p>
               </div>
-              <p className="text-lg leading-[1.42] font-semibold text-white mb-3">
+              <p className="text-lg leading-[1.42] font-semibold text-[hsl(var(--iplura-light))] mb-3">
                 {trust.differentiation.title}
               </p>
-              <div className="flex items-center gap-2 text-white">
-                <BadgeCheck className="w-4 h-4 text-white/95" />
-                <p className="text-sm leading-[1.5] text-white">
+              <div className="flex items-center gap-2 text-[hsl(var(--iplura-light))]">
+                <BadgeCheck className="w-4 h-4 text-[hsl(var(--iplura-light))/0.95]" />
+                <p className="text-sm leading-[1.5] text-[hsl(var(--iplura-light))]">
                   {trust.differentiation.description}
                 </p>
               </div>

@@ -90,8 +90,8 @@ const Methodology = () => {
                 {/* Number */}
                 <div className="flex-shrink-0">
                   <span
-                    className="text-2xl font-bold group-hover:text-iplura-purple transition-colors duration-300"
-                    style={{ color: 'hsl(var(--iplura-gray-soft))' }}
+                    className="text-2xl font-bold group-hover:text-iplura-purple-accent transition-colors duration-300"
+                    style={{ color: 'hsl(var(--iplura-purple-accent) / 0.72)' }}
                   >
                     {step.number}
                   </span>
@@ -100,7 +100,7 @@ const Methodology = () => {
                 {/* Content */}
                 <div>
                   <h3
-                    className="text-lg font-semibold mb-2 group-hover:text-iplura-purple transition-colors duration-300"
+                    className="text-lg font-semibold mb-2 group-hover:text-iplura-purple-accent transition-colors duration-300"
                     style={{ color: 'hsl(var(--iplura-dark))' }}
                   >
                     {step.title}

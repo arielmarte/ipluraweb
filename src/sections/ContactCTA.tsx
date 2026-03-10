@@ -52,8 +52,8 @@ const FormStatusFeedback = ({
       title: statusContent.loadingTitle,
       description: statusContent.loadingDescription,
       icon: Loader2,
-      iconClass: 'animate-spin text-iplura-purple',
-      panelClass: 'border-iplura-purple/20 bg-iplura-purple/6',
+      iconClass: 'animate-spin text-iplura-purple-accent',
+      panelClass: 'border-iplura-purple-accent/24 bg-iplura-purple-accent/8',
     },
     success: {
       title: statusContent.successTitle,
@@ -73,8 +73,8 @@ const FormStatusFeedback = ({
       title: statusContent.unavailableTitle,
       description: statusContent.unavailableDescription,
       icon: Info,
-      iconClass: 'text-iplura-purple',
-      panelClass: 'border-iplura-purple/20 bg-iplura-purple/6',
+      iconClass: 'text-iplura-purple-accent',
+      panelClass: 'border-iplura-purple-accent/24 bg-iplura-purple-accent/8',
     },
   } as const;
 
@@ -247,7 +247,7 @@ const ContactCTA = () => {
     setErrors(validationErrors);
 
     if (hasContactFormErrors(validationErrors)) {
-      setFormStatus('error');
+      setFormStatus('idle');
       return;
     }
 
