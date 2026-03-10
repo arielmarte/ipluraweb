@@ -89,6 +89,8 @@ const FAQ = () => {
           <div ref={itemsRef} className="space-y-3">
             {faq.items.map((item, index) => {
               const isOpen = openIndex === index;
+              const questionId = `faq-question-${index}`;
+              const panelId = `faq-panel-${index}`;
 
               return (
                 <div
@@ -99,31 +101,41 @@ const FAQ = () => {
                       : 'border-iplura-purple/10 bg-white/88 hover:border-iplura-purple/18'
                   }`}
                 >
-                  <button
-                    onClick={() => toggleItem(index)}
-                    className="w-full flex items-center justify-between p-6 text-left"
-                  >
-                    <span
-                      className={`text-base font-medium pr-4 transition-colors duration-300 ${
-                        isOpen ? 'text-iplura-purple' : 'text-iplura-dark'
-                      }`}
+                  <h3 className="text-base">
+                    <button
+                      id={questionId}
+                      type="button"
+                      onClick={() => toggleItem(index)}
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                      className="w-full flex items-center justify-between p-6 text-left"
                     >
-                      {item.question}
-                    </span>
-                    <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isOpen ? 'bg-iplura-purple' : 'bg-iplura-purple/10'
-                      }`}
-                    >
-                      {isOpen ? (
-                        <Minus className="w-4 h-4 text-white" />
-                      ) : (
-                        <Plus className="w-4 h-4 text-iplura-gray" />
-                      )}
-                    </div>
-                  </button>
+                      <span
+                        className={`text-base font-medium pr-4 transition-colors duration-300 ${
+                          isOpen ? 'text-iplura-purple' : 'text-iplura-dark'
+                        }`}
+                      >
+                        {item.question}
+                      </span>
+                      <div
+                        className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                          isOpen ? 'bg-iplura-purple' : 'bg-iplura-purple/10'
+                        }`}
+                      >
+                        {isOpen ? (
+                          <Minus className="w-4 h-4 text-white" aria-hidden="true" />
+                        ) : (
+                          <Plus className="w-4 h-4 text-iplura-gray" aria-hidden="true" />
+                        )}
+                      </div>
+                    </button>
+                  </h3>
 
                   <div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={questionId}
+                    aria-hidden={!isOpen}
                     className={`overflow-hidden transition-all duration-300 ${
                       isOpen ? 'max-h-40' : 'max-h-0'
                     }`}

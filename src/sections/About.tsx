@@ -90,17 +90,28 @@ const About = () => {
             </div>
           </div>
 
-          <article className="lg:col-span-6 panel-premium about-reveal opacity-0 p-7 sm:p-8">
-            <p className="text-xs uppercase tracking-[0.11em] text-iplura-purple font-semibold mb-3">
-              {about.statement.label}
-            </p>
-            <h3 className="text-2xl font-semibold text-iplura-dark leading-[1.24] mb-4">
-              {about.statement.title}
-            </h3>
-            <p className="text-base leading-[1.72] text-iplura-gray">
-              {about.statement.description}
-            </p>
-          </article>
+          <div className="lg:col-span-6 about-reveal opacity-0 lg:pt-10 xl:pt-12">
+            <div className="flex justify-center px-3 sm:px-4 py-3 sm:py-4 mb-5 sm:mb-6 lg:mb-9 xl:mb-10">
+              <img
+                src="/iplura-logo-icon-wordmark-description.svg"
+                alt="IPLURA - Instituto de Promoção da Legalidade e Uso Responsável de Apostas"
+                className="w-full max-w-[25rem] h-auto object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <article className="panel-premium p-7 sm:p-8">
+              <p className="text-xs uppercase tracking-[0.11em] text-iplura-purple font-semibold mb-3">
+                {about.statement.label}
+              </p>
+              <h3 className="text-2xl font-semibold text-iplura-dark leading-[1.24] mb-4">
+                {about.statement.title}
+              </h3>
+              <p className="text-base leading-[1.72] text-iplura-gray">
+                {about.statement.description}
+              </p>
+            </article>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-5 mt-10 lg:mt-12">

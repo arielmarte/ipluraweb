@@ -45,6 +45,7 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
+      aria-label="Rodapé"
       className="py-20 border-t border-white/10 opacity-0 surface-dark text-white"
     >
       <div className="container-clean">
@@ -120,15 +121,19 @@ const Footer = () => {
                 href="#"
                 onClick={(e) => e.preventDefault()}
                 className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/92"
+                aria-label="LinkedIn do IPLURA (em breve)"
+                title="LinkedIn do IPLURA (em breve)"
               >
-                <Linkedin className="w-4 h-4" />
+                <Linkedin className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
                 href="#"
                 onClick={(e) => e.preventDefault()}
                 className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/92"
+                aria-label="Instagram do IPLURA (em breve)"
+                title="Instagram do IPLURA (em breve)"
               >
-                <Instagram className="w-4 h-4" />
+                <Instagram className="w-4 h-4" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -147,6 +152,8 @@ const Footer = () => {
                   href={link.href}
                   onClick={(e) => e.preventDefault()}
                   className="text-xs text-white/82 hover:text-white transition-colors duration-300"
+                  aria-label={`${link.label} (em breve)`}
+                  title={`${link.label} (em breve)`}
                 >
                   {link.label}
                 </a>

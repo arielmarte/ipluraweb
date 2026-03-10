@@ -61,8 +61,16 @@ function App() {
 
   return (
     <div className="min-h-screen surface-base">
-      <Navigation />
-      <main className="safe-area-main">
+      <a
+        href="#main-content"
+        className="sr-only"
+      >
+        Pular para o conteúdo principal
+      </a>
+      <header role="banner">
+        <Navigation />
+      </header>
+      <main id="main-content" tabIndex={-1} className="safe-area-main">
         <Hero />
         <CredibilityStrip />
         <ProblemSection />
