@@ -104,7 +104,6 @@ const Hero = () => {
           <div>
             <div ref={badgeRef} className="mb-8 opacity-0">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-[0.12em] uppercase border border-iplura-purple/20 bg-iplura-purple/10 text-iplura-purple">
-                <span className="w-1.5 h-1.5 rounded-full bg-iplura-purple animate-pulse" />
                 {hero.badge}
               </span>
             </div>
@@ -221,14 +220,22 @@ const Hero = () => {
             >
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70 mb-1">
-                    {hero.visual.bottomChipLabel}
-                  </p>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-iplura-purple animate-pulse" />
+                    <p className="text-xs uppercase tracking-[0.1em] text-iplura-dark/70">
+                      {hero.visual.bottomChipLabel}
+                    </p>
+                  </div>
                   <p className="text-sm text-iplura-dark font-semibold">{hero.visual.bottomChipText}</p>
                 </div>
-                <div className="w-11 h-11 rounded-xl bg-iplura-purple/12 border border-iplura-purple/20 flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection(hero.anchorLink.href)}
+                  className="w-11 h-11 rounded-xl bg-iplura-purple/12 border border-iplura-purple/20 flex items-center justify-center transition-colors hover:bg-iplura-purple/18"
+                  aria-label={hero.anchorLink.label}
+                >
                   <ArrowRight className="w-5 h-5 text-iplura-purple" />
-                </div>
+                </button>
               </div>
             </div>
 
@@ -236,9 +243,12 @@ const Hero = () => {
               className="hidden lg:block absolute z-20 -left-4 bottom-24 glass-chip max-w-[190px] parallax-soft"
               data-parallax="0.12"
             >
-              <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70 mb-1">
-                {hero.visual.sideChipLabel}
-              </p>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-iplura-purple animate-pulse" />
+                <p className="text-xs tracking-[0.1em] uppercase text-iplura-dark/70">
+                  {hero.visual.sideChipLabel}
+                </p>
+              </div>
               <p className="text-sm text-iplura-dark font-semibold leading-[1.35]">
                 {hero.visual.sideChipText}
               </p>

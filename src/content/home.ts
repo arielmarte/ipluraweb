@@ -311,7 +311,7 @@ export const homeContent = {
           id: 'regulatory-effectiveness',
           title: 'Efetividade regulatória com impacto real',
           description:
-            'Nosso objetivo é ir além do papel — transformar normas em práticas, regras em resultados, obrigação legal em valor estratégico.',
+            'Nosso objetivo é ir além do papel, transformar normas em práticas, regras em resultados, obrigação legal em valor estratégico.',
         },
         {
           id: 'innovation',
