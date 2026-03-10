@@ -63,7 +63,7 @@ const Footer = () => {
               <img
                 src="/iplura-logo-icon-wordmark-description-white.svg"
                 alt={footer.logoAlt}
-                className="w-full max-w-[22rem] h-auto object-contain"
+                className="w-full max-w-[24rem] h-auto object-contain"
               />
             </a>
             <p className="text-[0.95rem] leading-[1.75] max-w-[34rem] text-[hsl(var(--iplura-dark-muted))]">
