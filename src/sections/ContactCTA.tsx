@@ -292,7 +292,7 @@ const ContactCTA = () => {
         className="absolute bottom-0 left-[4%] h-44 w-44 rounded-full bg-iplura-purple-accent/12 blur-3xl parallax-soft"
         data-parallax="0.1"
       />
-      <div className="container-clean">
+      <div className="container-clean px-4 sm:px-8 lg:px-16 xl:px-24">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           <div ref={contentRef} className="opacity-0">
             <span className="badge mb-6 inline-flex">{contact.badge}</span>
@@ -315,7 +315,7 @@ const ContactCTA = () => {
             noValidate
             onSubmit={handleEmailClick}
             aria-busy={formStatus === 'loading'}
-            className="panel-premium p-8 opacity-0 parallax-soft"
+            className="panel-premium p-5 sm:p-7 lg:p-8 opacity-0 parallax-soft"
             data-parallax="0.06"
           >
             <div className="space-y-4">
