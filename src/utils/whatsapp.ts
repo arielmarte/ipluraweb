@@ -7,7 +7,7 @@ export type ContactFormData = {
   mensagem: string;
 };
 
-const WHATSAPP_PHONE = '5562995504444';
+const WHATSAPP_PHONE = '5562985464200';
 export const EMPTY_CONTACT_FORM_DATA: ContactFormData = {
   nome: '',
   empresa: '',

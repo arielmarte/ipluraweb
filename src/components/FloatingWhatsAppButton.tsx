@@ -1,6 +1,6 @@
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
-const FLOATING_WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=5562995504444';
+const FLOATING_WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=5562985464200';
 
 const FloatingWhatsAppButton = () => {
   return (
