@@ -1,6 +1,7 @@
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
+import { buildWhatsappUrl } from '@/utils/whatsapp';
 
-const FLOATING_WHATSAPP_URL = 'https://api.whatsapp.com/send?phone=5562985464200';
+const FLOATING_WHATSAPP_URL = buildWhatsappUrl();
 
 const FloatingWhatsAppButton = () => {
   return (
