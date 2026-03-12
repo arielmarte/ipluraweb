@@ -1,9 +1,6 @@
-import type { ContactFormErrors } from '@/utils/contactForm';
-import type { ContactFormData } from '@/utils/whatsapp';
+import type { ContactFormErrors, ContactRequestPayload } from '@/lib/contact-contract';
 
-export type ContactApiPayload = ContactFormData & {
-  website?: string;
-};
+export type ContactApiPayload = ContactRequestPayload;
 
 export type ContactApiErrorCode = 'unavailable' | 'error' | 'validation';
 

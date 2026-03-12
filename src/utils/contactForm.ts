@@ -1,14 +1,19 @@
-import type { ContactFormData } from './whatsapp';
+import {
+  CONTACT_EMAIL_REGEX,
+  CONTACT_MESSAGE_MAX_LENGTH,
+  CONTACT_PHONE_MAX_DIGITS,
+  CONTACT_PHONE_MIN_DIGITS,
+  CONTACT_REQUIRED_FIELDS,
+  type ContactField,
+  type ContactFormData,
+  type ContactFormErrors,
+} from '@/lib/contact-contract';
 
 export type ContactFormStatus = 'idle' | 'loading' | 'success' | 'error' | 'unavailable';
-export type ContactFormErrors = Partial<Record<keyof ContactFormData, string>>;
+export type { ContactFormErrors };
+export { CONTACT_MESSAGE_MAX_LENGTH };
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-const MIN_PHONE_DIGITS = 10;
-const MAX_PHONE_DIGITS = 11;
-export const CONTACT_MESSAGE_MAX_LENGTH = 2000;
-
-const getPhoneDigits = (value: string) => value.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS);
+const getPhoneDigits = (value: string) => value.replace(/\D/g, '').slice(0, CONTACT_PHONE_MAX_DIGITS);
 
 export const formatPhoneInput = (value: string): string => {
   const digits = getPhoneDigits(value);
@@ -33,7 +38,7 @@ export const formatPhoneInput = (value: string): string => {
 };
 
 export const validateContactField = (
-  field: keyof ContactFormData,
+  field: ContactField,
   value: string
 ): string | undefined => {
   const trimmedValue = value.trim();
@@ -42,11 +47,11 @@ export const validateContactField = (
     return 'Campo obrigatório.';
   }
 
-  if (field === 'email' && !EMAIL_REGEX.test(trimmedValue)) {
+  if (field === 'email' && !CONTACT_EMAIL_REGEX.test(trimmedValue)) {
     return 'Informe um e-mail válido.';
   }
 
-  if (field === 'telefone' && getPhoneDigits(trimmedValue).length < MIN_PHONE_DIGITS) {
+  if (field === 'telefone' && getPhoneDigits(trimmedValue).length < CONTACT_PHONE_MIN_DIGITS) {
     return 'Informe um telefone válido.';
   }
 
@@ -58,16 +63,7 @@ export const validateContactField = (
 };
 
 export const validateContactForm = (formData: ContactFormData): ContactFormErrors => {
-  const fields: Array<keyof ContactFormData> = [
-    'nome',
-    'empresa',
-    'cargo',
-    'email',
-    'telefone',
-    'mensagem',
-  ];
-
-  return fields.reduce<ContactFormErrors>((errors, field) => {
+  return CONTACT_REQUIRED_FIELDS.reduce<ContactFormErrors>((errors, field) => {
     const error = validateContactField(field, formData[field]);
 
     if (error) {

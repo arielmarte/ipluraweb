@@ -1,11 +1,6 @@
-export type ContactEmailPayload = {
-  nome: string;
-  empresa: string;
-  cargo: string;
-  email: string;
-  telefone: string;
-  mensagem: string;
-};
+import type { ContactFormData } from '../../src/lib/contact-contract.js';
+
+export type ContactEmailPayload = ContactFormData;
 
 const WHATSAPP_LOCAL_MIN_DIGITS = 10;
 const WHATSAPP_LOCAL_MAX_DIGITS = 11;
@@ -26,16 +21,6 @@ const toSingleLine = (value: string) => value.trim().replace(/\s+/g, ' ');
 const getFirstName = (name: string) => {
   const firstName = toSingleLine(name).split(' ')[0];
   return firstName || 'Contato';
-};
-
-const buildSubjectIdentifier = (date = new Date()) => {
-  const year = String(date.getFullYear()).slice(-2);
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-
-  return `${year}${month}${day}-${hours}${minutes}`;
 };
 
 const formatReceivedAt = (date = new Date()) => {
@@ -96,7 +81,7 @@ export const buildContactEmailSubject = (payload: ContactEmailPayload) => {
   const company = toSingleLine(payload.empresa);
   const companyPart = company ? `, da ${company}` : '';
 
-  return `Novo contato de ${firstName}${companyPart} pelo site do IPLURA · ${buildSubjectIdentifier()}`;
+  return `Novo contato de ${firstName}${companyPart} pelo site do IPLURA`;
 };
 
 export const buildContactEmailText = (payload: ContactEmailPayload) => {

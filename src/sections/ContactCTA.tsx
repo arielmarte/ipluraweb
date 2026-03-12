@@ -12,10 +12,10 @@ import { Send, CheckCircle2, AlertTriangle, Info, Loader2 } from 'lucide-react';
 import { homeContent } from '@/content/home';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 import { ContactApiError, submitEmailContact } from '@/lib/contactApi';
+import type { ContactFormData } from '@/lib/contact-contract';
 import {
   buildWhatsappUrl,
   EMPTY_CONTACT_FORM_DATA,
-  type ContactFormData,
 } from '@/utils/whatsapp';
 import {
   CONTACT_MESSAGE_MAX_LENGTH,
