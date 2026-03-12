@@ -131,32 +131,47 @@ export const buildContactEmailHtml = (payload: ContactEmailPayload) => {
         </div>
 
         <div style="padding:20px 24px 4px;">
+          <div style="padding:14px 16px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:12px;">
+            <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748B;">Nome</p>
+            <p style="margin:0;font-size:18px;font-weight:700;line-height:1.35;color:#1A1C2E;">${escapeHtml(payload.nome)}</p>
+          </div>
+
+          <div style="height:10px;line-height:10px;font-size:10px;">&nbsp;</div>
+
+          <div style="padding:14px 16px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;">
+            <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748B;">Empresa</p>
+            <p style="margin:0;font-size:16px;font-weight:600;line-height:1.45;color:#1A1C2E;">${escapeHtml(payload.empresa)}</p>
+          </div>
+
+          <div style="height:10px;line-height:10px;font-size:10px;">&nbsp;</div>
+
           <table role="presentation" style="width:100%;border-collapse:separate;border-spacing:0 10px;">
             <tbody>
               <tr>
-                <td style="width:140px;padding:10px 12px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#475569;">Nome</td>
-                <td style="padding:10px 12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;font-size:15px;font-weight:600;color:#1A1C2E;">${escapeHtml(payload.nome)}</td>
-              </tr>
-              <tr>
-                <td style="width:140px;padding:10px 12px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#475569;">Empresa</td>
-                <td style="padding:10px 12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;font-size:15px;font-weight:600;color:#1A1C2E;">${escapeHtml(payload.empresa)}</td>
-              </tr>
-              <tr>
-                <td style="width:140px;padding:10px 12px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#475569;">Cargo</td>
-                <td style="padding:10px 12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;font-size:15px;font-weight:500;color:#1A1C2E;">${escapeHtml(payload.cargo)}</td>
-              </tr>
-              <tr>
-                <td style="width:140px;padding:10px 12px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#475569;">E-mail</td>
-                <td style="padding:10px 12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;font-size:15px;font-weight:600;color:#1A1C2E;">
-                  <a href="mailto:${escapeHtml(payload.email)}" style="color:#2D5DA8;text-decoration:none;">${escapeHtml(payload.email)}</a>
+                <td style="vertical-align:top;width:50%;padding-right:5px;">
+                  <div style="padding:12px 14px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;">
+                    <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748B;">E-mail</p>
+                    <p style="margin:0;font-size:14px;line-height:1.5;color:#1A1C2E;word-break:break-word;">
+                      <a href="mailto:${escapeHtml(payload.email)}" style="color:#2D5DA8;text-decoration:none;">${escapeHtml(payload.email)}</a>
+                    </p>
+                  </div>
                 </td>
-              </tr>
-              <tr>
-                <td style="width:140px;padding:10px 12px;background:#F8F9FE;border:1px solid #E2E8F0;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#475569;">Telefone</td>
-                <td style="padding:10px 12px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:10px;font-size:15px;font-weight:600;color:#1A1C2E;">${escapeHtml(payload.telefone)}</td>
+                <td style="vertical-align:top;width:50%;padding-left:5px;">
+                  <div style="padding:12px 14px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;">
+                    <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748B;">Telefone</p>
+                    <p style="margin:0;font-size:14px;line-height:1.5;color:#1A1C2E;">${escapeHtml(payload.telefone)}</p>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
+
+          <div style="height:2px;line-height:2px;font-size:2px;">&nbsp;</div>
+
+          <div style="padding:12px 14px;background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;">
+            <p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#64748B;">Cargo</p>
+            <p style="margin:0;font-size:14px;line-height:1.55;color:#1A1C2E;">${escapeHtml(payload.cargo)}</p>
+          </div>
         </div>
 
         <div style="padding:8px 24px 0;">

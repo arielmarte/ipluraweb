@@ -17,6 +17,7 @@ import {
   type ContactFormData,
 } from '@/utils/whatsapp';
 import {
+  CONTACT_MESSAGE_MAX_LENGTH,
   hasContactFormErrors,
   formatPhoneInput,
   validateContactField,
@@ -642,6 +643,7 @@ const ContactCTA = () => {
                       value={formData.mensagem}
                       onChange={handleChange}
                       rows={4}
+                      maxLength={CONTACT_MESSAGE_MAX_LENGTH}
                       className={`${getInputClassName('mensagem')} resize-none`}
                       placeholder={contact.form.fields.mensagem.placeholder}
                       required
