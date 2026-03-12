@@ -1,53 +1,46 @@
-# IPLURA Website
+# IPLURA Web
 
-Site institucional onepage do IPLURA, com páginas legais e fluxo de contato integrado (E-mail + WhatsApp), desenvolvido em React + TypeScript e hospedado na Vercel.
+Aplicação React (SPA) para site institucional, com páginas legais e formulário de contato integrado.
 
-## Visão geral
+## O que este projeto entrega
 
-- SPA institucional com seções de apresentação, credenciais, FAQ e contato.
-- Páginas legais:
+- Página institucional onepage.
+- Rotas legais:
   - `/termos-de-uso`
   - `/politica-de-privacidade`
-- Formulário de contato com envio server-side via Resend.
-- Proteção anti-bot com honeypot + Vercel BotID (modo basic) + rate limit por IP.
-- Preview social e metadados SEO configurados para produção em `https://iplura.org`.
+- Endpoint server-side de contato em `/api/contact` (Resend).
+- Integração de contato por WhatsApp.
+- SEO técnico básico (canonical, Open Graph, JSON-LD, sitemap e robots).
 
 ## Stack
 
-- React 19
-- TypeScript (strict)
-- Vite 7
-- Tailwind CSS 3 + PostCSS + Autoprefixer
-- GSAP + ScrollTrigger
-- Lucide React
-- shadcn/ui + Radix UI
-- Vercel Functions (`/api/contact`)
-- Resend
-- BotID
-- Vercel Analytics
+- React 19 + TypeScript + Vite
+- Tailwind CSS
+- GSAP (animações)
+- Vercel Functions
+- Resend (envio de e-mail)
+- BotID + honeypot + rate limit (proteção anti-abuso)
 
-## Estrutura de pastas
+## Estrutura principal
 
 ```txt
-api/                 # Funções serverless (contato)
-public/              # Assets estáticos, robots e sitemap
-scripts/             # Scripts utilitários (geração de sitemap)
+api/                 # Funções serverless
+public/              # Arquivos estáticos, SEO e 404 fallback
+scripts/             # Scripts de build (ex.: sitemap)
 src/
-  components/        # Componentes reutilizáveis (inclui ui/)
-  config/            # Configurações centralizadas (ex.: navegação)
-  content/           # Conteúdo institucional centralizado
-  lib/               # Helpers de domínio e integrações
-  pages/             # Páginas legais
+  content/           # Conteúdo textual centralizado
   sections/          # Seções da onepage
-  utils/             # Utilitários gerais (form, whatsapp etc.)
+  pages/             # Páginas legais
+  features/contact/  # Fluxo do formulário de contato
+  lib/ utils/        # Helpers compartilhados
 ```
 
 ## Requisitos
 
-- Node.js `24.x` (recomendado para manter paridade com o deploy)
-- npm 10+
+- Node `24.x`
+- npm `>=10`
 
-## Como rodar localmente
+## Setup local
 
 ```bash
 nvm use 24
@@ -55,54 +48,46 @@ npm install
 npm run dev
 ```
 
-App local: `http://localhost:5173`
+Aplicação local: `http://localhost:5173`
 
-## Scripts disponíveis
+## Scripts úteis
 
-- `npm run dev`: inicia ambiente de desenvolvimento
-- `npm run build`: type-check + build de produção
-- `npm run preview`: pré-visualiza build local
-- `npm run lint`: executa ESLint
+- `npm run dev` inicia desenvolvimento
+- `npm run lint` valida código
+- `npm run typecheck:api` valida tipagem da API
+- `npm run build` gera build de produção
+- `npm run preview` sobe preview local do build
 
 ## Variáveis de ambiente
 
-Use `.env.example` como referência:
+Baseie-se no `.env.example`:
 
 - `VITE_WHATSAPP_PHONE`
 - `FORM_EMAIL_FROM`
 - `FORM_EMAIL_TO`
 - `RESEND_API_KEY`
 
-Observações:
-- Nunca comitar `.env` com valores reais.
-- Variáveis server-side devem ser configuradas também no painel da Vercel.
+Nunca versionar segredos no repositório.
 
-## Fluxo de contato (resumo técnico)
+## Fluxo de contato (resumo)
 
-1. Front-end valida campos obrigatórios e envia `POST /api/contact`.
-2. API processa na ordem:
-   - Honeypot (`website`)
-   - Validação server-side
-   - Rate limit por IP/fingerprint (5 requisições por 10 minutos)
-   - Verificação BotID (`fail-open` em falhas de infraestrutura)
-   - Envio via Resend
-3. A API retorna códigos padronizados para o front-end:
-   - `200` sucesso
-   - `400` `validation_error`
-   - `429` `rate_limited` (+ header `Retry-After`)
-   - `503` `unavailable`
-   - `500` `send_failed`
+1. Front envia formulário para `POST /api/contact`.
+2. API valida payload e aplica proteção:
+   - honeypot
+   - validação server-side
+   - rate limit
+   - BotID (fail-open em falha de infraestrutura)
+3. API envia e-mail via Resend e retorna status para o front.
 
-## SEO e metadados
+## Deploy
 
-- Canonical de produção: `https://iplura.org`
-- Open Graph/Twitter com `iplura-og.png`
-- `robots.txt` e `sitemap.xml` em `public/`
-- JSON-LD (Organization, WebSite, WebPage e FAQPage) em `index.html`
+- Plataforma alvo: Vercel.
+- Configurações de roteamento/headers em `vercel.json`.
+- `404.html` em `public/` redireciona para `/`.
+- Ajuste as variáveis de ambiente no painel da Vercel por ambiente.
 
-## Deploy (Vercel)
+## Observações para manutenção
 
-- Deploy principal em `iplura.org`
-- Regras de noindex para previews `*.vercel.app`
-- Rewrites configurados para páginas legais e BotID em `vercel.json`
-- Variáveis de ambiente devem ser definidas por ambiente (Production/Preview/Development)
+- O projeto não usa React Router; as páginas legais são resolvidas pela URL atual no `App`.
+- Conteúdo institucional deve ser alterado prioritariamente em `src/content`.
+- Sempre valide `lint`, `typecheck:api` e `build` antes de publicar.
