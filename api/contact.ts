@@ -1,5 +1,10 @@
 import { Resend } from 'resend';
 import { checkBotId } from 'botid/server';
+import {
+  buildContactEmailHtml,
+  buildContactEmailSubject,
+  buildContactEmailText,
+} from './_lib/contactEmail';
 
 type ContactPayload = {
   nome?: string;
@@ -51,14 +56,6 @@ const parsePayload = (body: unknown): ContactPayload => {
   return typeof body === 'object' && body !== null ? (body as ContactPayload) : {};
 };
 
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-
 const validatePayload = (payload: ContactPayload): ValidationErrors => {
   const errors: ValidationErrors = {};
 
@@ -87,38 +84,6 @@ const validatePayload = (payload: ContactPayload): ValidationErrors => {
 };
 
 const hasValidationErrors = (errors: ValidationErrors) => Object.keys(errors).length > 0;
-
-const buildEmailHtml = (payload: Required<Omit<ContactPayload, 'website'>>) => {
-  const fields: Array<{ label: string; value: string }> = [
-    { label: 'Nome', value: payload.nome },
-    { label: 'Empresa', value: payload.empresa },
-    { label: 'Cargo', value: payload.cargo },
-    { label: 'E-mail', value: payload.email },
-    { label: 'Telefone', value: payload.telefone },
-    { label: 'Mensagem', value: payload.mensagem },
-  ];
-
-  const rows = fields
-    .map(
-      ({ label, value }) =>
-        `<tr><td style="padding:8px 0;font-weight:600;color:#1A1C2E;vertical-align:top;">${label}</td><td style="padding:8px 0;color:#334155;">${escapeHtml(
-          value
-        )}</td></tr>`
-    )
-    .join('');
-
-  return `
-    <div style="font-family:Manrope,Arial,sans-serif;max-width:640px;margin:0 auto;color:#1A1C2E;">
-      <h2 style="margin:0 0 16px;font-size:20px;line-height:1.3;">Novo contato pelo site IPLURA</h2>
-      <p style="margin:0 0 20px;color:#475569;line-height:1.6;">
-        Mensagem enviada pelo formulário institucional.
-      </p>
-      <table style="width:100%;border-collapse:collapse;">
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-  `;
-};
 
 const normalizePayload = (payload: ContactPayload): Required<Omit<ContactPayload, 'website'>> => ({
   nome: toSafeString(payload.nome),
@@ -194,12 +159,17 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     .filter(Boolean);
 
   try {
+    const subject = buildContactEmailSubject(normalizedPayload);
+    const html = buildContactEmailHtml(normalizedPayload);
+    const text = buildContactEmailText(normalizedPayload);
+
     const result = await resend.emails.send({
       from: emailFrom,
       to: toList,
-      subject: 'Novo contato pelo site IPLURA',
+      subject,
       replyTo: normalizedPayload.email,
-      html: buildEmailHtml(normalizedPayload),
+      html,
+      text,
     });
 
     if (result.error) {
