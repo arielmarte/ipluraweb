@@ -40,6 +40,7 @@ const REQUIRED_FIELDS: Array<keyof Omit<ContactPayload, 'website'>> = [
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 const MIN_PHONE_DIGITS = 10;
+const MAX_MESSAGE_LENGTH = 2000;
 
 const toSafeString = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
 
@@ -77,6 +78,10 @@ const validatePayload = (payload: ContactPayload): ValidationErrors => {
       if (digits.length < MIN_PHONE_DIGITS) {
         errors[field] = 'Informe um telefone válido.';
       }
+    }
+
+    if (field === 'mensagem' && value.length > MAX_MESSAGE_LENGTH) {
+      errors[field] = `A mensagem deve ter no máximo ${MAX_MESSAGE_LENGTH} caracteres.`;
     }
   }
 

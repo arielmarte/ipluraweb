@@ -6,6 +6,7 @@ export type ContactFormErrors = Partial<Record<keyof ContactFormData, string>>;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 const MIN_PHONE_DIGITS = 10;
 const MAX_PHONE_DIGITS = 11;
+export const CONTACT_MESSAGE_MAX_LENGTH = 2000;
 
 const getPhoneDigits = (value: string) => value.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS);
 
@@ -47,6 +48,10 @@ export const validateContactField = (
 
   if (field === 'telefone' && getPhoneDigits(trimmedValue).length < MIN_PHONE_DIGITS) {
     return 'Informe um telefone válido.';
+  }
+
+  if (field === 'mensagem' && trimmedValue.length > CONTACT_MESSAGE_MAX_LENGTH) {
+    return `A mensagem deve ter no máximo ${CONTACT_MESSAGE_MAX_LENGTH} caracteres.`;
   }
 
   return undefined;
