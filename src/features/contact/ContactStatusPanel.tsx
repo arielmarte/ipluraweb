@@ -61,7 +61,7 @@ export const ContactRecoverableStatusPanel = ({
           onClick={onWhatsAppFallback}
           className="btn-secondary w-full sm:w-auto inline-flex items-center justify-center gap-2"
         >
-          <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
+          <WhatsAppIcon className="w-[1.125rem] h-[1.125rem] shrink-0" aria-hidden="true" />
           {homeContent.contact.form.whatsapp.label}
         </button>
       </div>
@@ -109,7 +109,7 @@ export const ContactSuccessPanel = ({
           onClick={onWhatsAppAction}
           className="btn-secondary w-full inline-flex items-center justify-center gap-2"
         >
-          <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
+          <WhatsAppIcon className="w-[1.125rem] h-[1.125rem] shrink-0" aria-hidden="true" />
           {statusContent.successSecondaryActionLabel}
         </button>
       </div>
