@@ -4,7 +4,7 @@ import {
   buildContactEmailHtml,
   buildContactEmailSubject,
   buildContactEmailText,
-} from './_lib/contactEmail';
+} from './_lib/contactEmail.js';
 
 type ContactPayload = {
   nome?: string;
