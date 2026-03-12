@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowRight, ShieldCheck, HeartHandshake } from 'lucide-react';
 import { homeContent } from '@/content/home';
@@ -16,10 +16,18 @@ const Hero = () => {
   const { hero } = homeContent;
   const detailIcons = [ShieldCheck, HeartHandshake];
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const ctaItems = ctaRef.current
+        ? Array.from(ctaRef.current.children) as HTMLElement[]
+        : [];
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+      if (!prefersReducedMotion && ctaItems.length > 0) {
+        // Pre-set CTA state before paint to prevent mobile flicker.
+        gsap.set(ctaItems, { autoAlpha: 0, y: 20 });
+      }
 
       tl.fromTo(
         badgeRef.current,
@@ -37,25 +45,45 @@ const Hero = () => {
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6 },
           '-=0.4'
-        )
-        .fromTo(
-          ctaRef.current?.children || [],
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
-          '-=0.3'
-        )
-        .fromTo(
-          detailsRef.current?.children || [],
-          { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.55, stagger: 0.08 },
-          '-=0.25'
-        )
-        .fromTo(
-          visualRef.current,
-          { opacity: 0, x: 30, scale: 0.98 },
-          { opacity: 1, x: 0, scale: 1, duration: 1 },
-          '-=0.45'
         );
+
+      if (ctaItems.length > 0) {
+        if (prefersReducedMotion) {
+          tl.set(
+            ctaItems,
+            {
+              autoAlpha: 1,
+              y: 0,
+              clearProps: 'opacity,visibility,transform',
+            },
+            '-=0.3'
+          );
+        } else {
+          tl.to(
+            ctaItems,
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.5,
+              stagger: 0.1,
+              clearProps: 'opacity,visibility,transform',
+            },
+            '-=0.3'
+          );
+        }
+      }
+
+      tl.fromTo(
+        detailsRef.current?.children || [],
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.55, stagger: 0.08 },
+        '-=0.25'
+      ).fromTo(
+        visualRef.current,
+        { opacity: 0, x: 30, scale: 0.98 },
+        { opacity: 1, x: 0, scale: 1, duration: 1 },
+        '-=0.45'
+      );
 
       if (!prefersReducedMotion && sectionRef.current && visualRef.current) {
         gsap.to(visualRef.current, {
