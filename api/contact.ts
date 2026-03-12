@@ -130,14 +130,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       });
       return;
     }
-  } catch {
-    if (process.env.NODE_ENV === 'production') {
-      res.status(503).json({
-        ok: false,
-        code: 'unavailable',
-      });
-      return;
-    }
+  } catch (error) {
+    // Fail-open for BotID infra/config issues so legitimate contacts are not blocked.
+    // Bot traffic is still blocked when BotID returns `isBot: true`.
+    console.warn('[contact] BotID check failed, continuing without bot verdict:', error);
   }
 
   const apiKey = process.env.RESEND_API_KEY;
