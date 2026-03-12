@@ -56,7 +56,7 @@ const Hero = () => {
               y: 0,
               clearProps: 'opacity,visibility,transform',
             },
-            '-=0.3'
+            '-=0.55'
           );
         } else {
           tl.to(
@@ -68,7 +68,7 @@ const Hero = () => {
               stagger: 0.1,
               clearProps: 'opacity,visibility,transform',
             },
-            '-=0.3'
+            '-=0.55'
           );
         }
       }
