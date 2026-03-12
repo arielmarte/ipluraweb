@@ -19,9 +19,65 @@ import Footer from './sections/Footer';
 import FloatingWhatsAppButton from './components/FloatingWhatsAppButton';
 import TermsOfUsePage from './pages/TermsOfUsePage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import { homeContent } from './content/home';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
+
+const SITE_URL = 'https://iplura.org';
+const HOME_SCHEMA_IDS = {
+  webpage: 'iplura-home-webpage-schema',
+  faq: 'iplura-home-faq-schema',
+} as const;
+
+const HOME_WEBPAGE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'IPLURA | Jogo responsável com estrutura técnica, humana e regulatória',
+  url: SITE_URL,
+  description:
+    'Instituto de Promoção da Legalidade e Uso Responsável de Apostas. Suporte técnico, acolhimento especializado e educação preventiva para operadoras.',
+  inLanguage: 'pt-BR',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'IPLURA',
+    url: SITE_URL,
+  },
+  about: {
+    '@type': 'Organization',
+    name: 'IPLURA',
+  },
+} as const;
+
+const buildHomeFaqSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: homeContent.faq.items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+});
+
+const upsertJsonLdScript = (id: string, payload: unknown) => {
+  let script = window.document.querySelector<HTMLScriptElement>(`script#${id}`);
+
+  if (!script) {
+    script = window.document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    window.document.head.appendChild(script);
+  }
+
+  script.text = JSON.stringify(payload);
+};
+
+const removeJsonLdScript = (id: string) => {
+  window.document.querySelector(`script#${id}`)?.remove();
+};
 
 function App() {
   const normalizedPath = window.location.pathname.replace(/\/+$/, '') || '/';
@@ -68,6 +124,22 @@ function App() {
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, [isLegalPage]);
+
+  useEffect(() => {
+    if (isLegalPage) {
+      removeJsonLdScript(HOME_SCHEMA_IDS.webpage);
+      removeJsonLdScript(HOME_SCHEMA_IDS.faq);
+      return;
+    }
+
+    upsertJsonLdScript(HOME_SCHEMA_IDS.webpage, HOME_WEBPAGE_SCHEMA);
+    upsertJsonLdScript(HOME_SCHEMA_IDS.faq, buildHomeFaqSchema());
+
+    return () => {
+      removeJsonLdScript(HOME_SCHEMA_IDS.webpage);
+      removeJsonLdScript(HOME_SCHEMA_IDS.faq);
     };
   }, [isLegalPage]);
 
