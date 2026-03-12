@@ -414,7 +414,7 @@ export const homeContent = {
       errorTitle: 'Não foi possível enviar sua mensagem agora',
       errorDescription:
         'Tente novamente em instantes ou fale conosco pelo WhatsApp.',
-      unavailableTitle: 'Envio por e-mail em breve',
+      unavailableTitle: 'Serviço de e-mail indisponível',
       unavailableDescription:
         'No momento, utilize o WhatsApp para falar com o IPLURA.',
       resetActionLabel: 'Enviar nova mensagem',

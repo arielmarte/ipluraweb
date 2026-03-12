@@ -7,7 +7,12 @@ export type ContactFormData = {
   mensagem: string;
 };
 
-const WHATSAPP_PHONE = '5562985464200';
+const resolveWhatsappPhone = (): string => {
+  const rawPhone = import.meta.env.VITE_WHATSAPP_PHONE ?? '';
+  return rawPhone.replace(/\D/g, '');
+};
+
+const WHATSAPP_PHONE = resolveWhatsappPhone();
 export const EMPTY_CONTACT_FORM_DATA: ContactFormData = {
   nome: '',
   empresa: '',
@@ -45,5 +50,11 @@ export const buildWhatsappMessage = (formData: ContactFormData): string => {
 
 export const buildWhatsappUrl = (formData: ContactFormData = EMPTY_CONTACT_FORM_DATA): string => {
   const message = buildWhatsappMessage(formData);
-  return `https://api.whatsapp.com/send?phone=${WHATSAPP_PHONE}&text=${encodeURIComponent(message)}`;
+  const query = new URLSearchParams({ text: message });
+
+  if (WHATSAPP_PHONE) {
+    query.set('phone', WHATSAPP_PHONE);
+  }
+
+  return `https://api.whatsapp.com/send?${query.toString()}`;
 };
