@@ -11,6 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Send, CheckCircle2, AlertTriangle, Info, Loader2 } from 'lucide-react';
 import { homeContent } from '@/content/home';
 import { renderTextSegments } from '@/utils/renderTextSegments';
+import { ContactApiError, submitEmailContact } from '@/lib/contactApi';
 import {
   buildWhatsappUrl,
   EMPTY_CONTACT_FORM_DATA,
@@ -28,67 +29,6 @@ import {
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 gsap.registerPlugin(ScrollTrigger);
-
-type ContactApiPayload = ContactFormData & {
-  website?: string;
-};
-
-type ContactApiErrorCode = 'unavailable' | 'error' | 'validation';
-
-const CONTACT_REQUEST_TIMEOUT_MS = 15000;
-
-class ContactApiError extends Error {
-  code: ContactApiErrorCode;
-  fieldErrors?: ContactFormErrors;
-
-  constructor(code: ContactApiErrorCode, fieldErrors?: ContactFormErrors) {
-    super(code);
-    this.code = code;
-    this.fieldErrors = fieldErrors;
-  }
-}
-
-const submitEmailContact = async (formData: ContactApiPayload) => {
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => {
-    controller.abort();
-  }, CONTACT_REQUEST_TIMEOUT_MS);
-
-  let response: Response;
-
-  try {
-    response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-      signal: controller.signal,
-    });
-  } catch (error) {
-    if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new ContactApiError('error');
-    }
-    throw error;
-  } finally {
-    window.clearTimeout(timeoutId);
-  }
-
-  if (response.ok) {
-    return;
-  }
-
-  const responseBody = await response.json().catch(() => null) as
-    | { code?: string; errors?: ContactFormErrors }
-    | null;
-
-  if (responseBody?.code === 'validation_error' && responseBody.errors) {
-    throw new ContactApiError('validation', responseBody.errors);
-  }
-
-  const isUnavailable = response.status === 503 || responseBody?.code === 'unavailable';
-  throw new ContactApiError(isUnavailable ? 'unavailable' : 'error');
-};
 
 type RecoverableStatus = Extract<ContactFormStatus, 'error' | 'unavailable'>;
 
@@ -316,8 +256,9 @@ const ContactCTA = () => {
 
       const fieldError = validateContactField(field, value);
       if (!fieldError) {
-        const { [field]: _removed, ...rest } = prev;
-        return rest;
+        const nextErrors = { ...prev };
+        delete nextErrors[field];
+        return nextErrors;
       }
 
       return { ...prev, [field]: fieldError };
