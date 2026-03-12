@@ -1,5 +1,6 @@
 import { Resend } from 'resend';
 import { checkBotId } from 'botid/server';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import {
   CONTACT_EMAIL_REGEX,
   CONTACT_MESSAGE_MAX_LENGTH,
@@ -17,23 +18,6 @@ import {
 
 type ValidationErrors = ContactFormErrors;
 
-type HeaderValue = string | string[] | undefined;
-
-type ApiRequest = {
-  method?: string;
-  body?: unknown;
-  headers?: Record<string, HeaderValue>;
-  socket?: {
-    remoteAddress?: string;
-  };
-};
-
-type ApiResponse = {
-  status: (code: number) => ApiResponse;
-  setHeader: (name: string, value: string) => void;
-  json: (body: unknown) => void;
-};
-
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 const RATE_LIMIT_MAX_ENTRIES = 5000;
@@ -47,8 +31,8 @@ const rateLimitStore = new Map<string, RateLimitEntry>();
 
 const toSafeString = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
 
-const getHeader = (req: ApiRequest, name: string) => {
-  const value = req.headers?.[name] ?? req.headers?.[name.toLowerCase()];
+const getHeader = (req: VercelRequest, name: string) => {
+  const value = req.headers[name.toLowerCase()];
 
   if (Array.isArray(value)) {
     return value[0] ?? '';
@@ -57,7 +41,7 @@ const getHeader = (req: ApiRequest, name: string) => {
   return typeof value === 'string' ? value : '';
 };
 
-const getClientFingerprint = (req: ApiRequest) => {
+const getClientFingerprint = (req: VercelRequest) => {
   const forwardedFor = getHeader(req, 'x-forwarded-for')
     .split(',')
     .map((value) => value.trim())
@@ -127,7 +111,7 @@ const getRateLimitDecision = (fingerprint: string, now = Date.now()) => {
 };
 
 const sendJson = (
-  res: ApiResponse,
+  res: VercelResponse,
   statusCode: number,
   body: unknown,
   headers: Record<string, string> = {}
@@ -139,7 +123,7 @@ const sendJson = (
   res.status(statusCode).json(body);
 };
 
-const parsePayload = (body: unknown): ContactRequestPayload => {
+const parsePayload = (body: VercelRequest['body']): ContactRequestPayload => {
   if (typeof body === 'string') {
     try {
       const parsed = JSON.parse(body);
@@ -194,7 +178,7 @@ const normalizePayload = (payload: ContactRequestPayload): ContactFormData => ({
   mensagem: toSafeString(payload.mensagem),
 });
 
-export default async function handler(req: ApiRequest, res: ApiResponse) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     sendJson(
       res,

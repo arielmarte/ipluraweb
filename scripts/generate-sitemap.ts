@@ -7,7 +7,13 @@ const sitemapPath = resolve(process.cwd(), 'public', 'sitemap.xml');
 const now = new Date();
 const lastmod = now.toISOString().slice(0, 10);
 
-const sitemapEntries = [
+type SitemapEntry = {
+  path: string;
+  changefreq: 'weekly' | 'monthly';
+  priority: string;
+};
+
+const sitemapEntries: SitemapEntry[] = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
   { path: '/termos-de-uso', changefreq: 'monthly', priority: '0.4' },
   { path: '/politica-de-privacidade', changefreq: 'monthly', priority: '0.4' },

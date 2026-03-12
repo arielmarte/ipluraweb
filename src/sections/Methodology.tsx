@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,44 +17,36 @@ const Methodology = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      // Header animation
-      const headerTrigger = ScrollTrigger.create({
+      const headerTrigger = createRevealTrigger({
         trigger: headerRef.current,
+        target: headerRef.current,
         start: 'top 85%',
-        onEnter: () => {
-          gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 30 },
+        to: { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' },
       });
-      triggers.push(headerTrigger);
+      if (headerTrigger) {
+        triggers.push(headerTrigger);
+      }
 
-      // Steps animation
       if (stepsRef.current) {
         const stepItems = stepsRef.current.querySelectorAll('.step-item');
 
-        const stepsTrigger = ScrollTrigger.create({
+        const stepsTrigger = createRevealTrigger({
           trigger: stepsRef.current,
+          target: stepItems,
           start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(
-              stepItems,
-              { opacity: 0, x: -30 },
-              {
-                opacity: 1,
-                x: 0,
-                duration: 0.6,
-                stagger: 0.12,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, x: -30 },
+          to: {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(stepsTrigger);
+        if (stepsTrigger) {
+          triggers.push(stepsTrigger);
+        }
       }
     }, sectionRef);
 

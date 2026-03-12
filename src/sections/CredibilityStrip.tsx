@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Scale, HeartHandshake, GraduationCap, Building2, ArrowRight } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
+import { scrollToAnchor } from '@/lib/scrollToAnchor';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,42 +25,36 @@ const CredibilityStrip = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      const headerTrigger = ScrollTrigger.create({
+      const headerTrigger = createRevealTrigger({
         trigger: headerRef.current,
+        target: headerRef.current,
         start: 'top 86%',
-        onEnter: () => {
-          gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 28 },
-            { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 28 },
+        to: { opacity: 1, y: 0, duration: 0.65, ease: 'expo.out' },
       });
-      triggers.push(headerTrigger);
+      if (headerTrigger) {
+        triggers.push(headerTrigger);
+      }
 
       if (listRef.current) {
         const listItems = listRef.current.querySelectorAll('.pillar-item');
 
-        const listTrigger = ScrollTrigger.create({
+        const listTrigger = createRevealTrigger({
           trigger: listRef.current,
+          target: listItems,
           start: 'top 84%',
-          onEnter: () => {
-            gsap.fromTo(
-              listItems,
-              { opacity: 0, y: 24 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.58,
-                stagger: 0.08,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, y: 24 },
+          to: {
+            opacity: 1,
+            y: 0,
+            duration: 0.58,
+            stagger: 0.08,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(listTrigger);
+        if (listTrigger) {
+          triggers.push(listTrigger);
+        }
       }
     }, sectionRef);
 
@@ -90,9 +86,7 @@ const CredibilityStrip = () => {
                 href={credibilityStrip.cta.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .querySelector(credibilityStrip.cta.href)
-                    ?.scrollIntoView({ behavior: 'smooth' });
+                  scrollToAnchor(credibilityStrip.cta.href);
                 }}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-iplura-purple hover:text-iplura-purple-accent transition-colors"
               >

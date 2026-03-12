@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "node_modules/.tmp/scripts",
+    "rootDir": "scripts"
+  },
+  "include": ["scripts/generate-sitemap.ts"]
+}

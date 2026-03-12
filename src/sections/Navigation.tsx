@@ -6,6 +6,7 @@ import {
   DESKTOP_NAV_LAYOUT,
   NAVIGATION_BREAKPOINTS,
 } from '@/config/navigation';
+import { scrollToAnchor } from '@/lib/scrollToAnchor';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -257,10 +258,8 @@ const Navigation = () => {
   }, [computeVisibleDesktopLinks]);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
+    if (scrollToAnchor(href)) {
       setActiveSectionHref(href);
-      element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
   };
