@@ -183,7 +183,7 @@ const Hero = () => {
             className="relative opacity-0 parallax-soft"
             data-parallax="0.09"
           >
-            <div className="absolute -inset-7 rounded-[2.4rem] bg-gradient-to-br from-iplura-purple/14 via-transparent to-iplura-purple-accent/10 blur-2xl -z-10 pointer-events-none" />
+            <div className="absolute -inset-3 sm:-inset-5 lg:-inset-7 rounded-[2.4rem] bg-gradient-to-br from-iplura-purple/14 via-transparent to-iplura-purple-accent/10 blur-2xl -z-10 pointer-events-none" />
 
             <div className="hero-visual-shell">
               <div className="hero-visual-media">
