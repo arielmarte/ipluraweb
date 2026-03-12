@@ -409,16 +409,17 @@ export const homeContent = {
     status: {
       loadingTitle: 'Enviando mensagem...',
       loadingDescription: 'Estamos processando seus dados com segurança.',
+      loadingOverlayLabel: 'Aguarde enquanto enviamos seu contato.',
       successTitle: 'Mensagem enviada com sucesso',
       successDescription: 'Recebemos seu contato e nossa equipe retornará em breve.',
+      successPrimaryActionLabel: 'Enviar nova mensagem',
+      successSecondaryActionLabel: 'Continuar no WhatsApp',
       errorTitle: 'Não foi possível enviar sua mensagem agora',
       errorDescription:
         'Tente novamente em instantes ou fale conosco pelo WhatsApp.',
       unavailableTitle: 'Serviço de e-mail indisponível',
       unavailableDescription:
         'No momento, utilize o WhatsApp para falar com o IPLURA.',
-      resetActionLabel: 'Enviar nova mensagem',
-      backToTopLabel: 'Voltar ao início',
     },
     success: {
       title: 'Mensagem enviada!',
