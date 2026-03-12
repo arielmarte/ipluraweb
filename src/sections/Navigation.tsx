@@ -213,16 +213,28 @@ const Navigation = () => {
   };
 
   useEffect(() => {
-    computeVisibleDesktopLinks();
+    let rafId: number | null = null;
+
+    const scheduleVisibleDesktopLinksCompute = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+
+      rafId = requestAnimationFrame(() => {
+        computeVisibleDesktopLinks();
+      });
+    };
+
+    scheduleVisibleDesktopLinksCompute();
 
     const handleResize = () => {
-      computeVisibleDesktopLinks();
+      scheduleVisibleDesktopLinksCompute();
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
 
     const resizeObserver = new ResizeObserver(() => {
-      computeVisibleDesktopLinks();
+      scheduleVisibleDesktopLinksCompute();
     });
 
     if (desktopLinksViewportRef.current) {
@@ -231,11 +243,14 @@ const Navigation = () => {
 
     if ('fonts' in document) {
       document.fonts.ready.then(() => {
-        computeVisibleDesktopLinks();
+        scheduleVisibleDesktopLinksCompute();
       });
     }
 
     return () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
       window.removeEventListener('resize', handleResize);
       resizeObserver.disconnect();
     };

@@ -1,22 +1,21 @@
 import { Resend } from 'resend';
 import { checkBotId } from 'botid/server';
 import {
+  CONTACT_EMAIL_REGEX,
+  CONTACT_MESSAGE_MAX_LENGTH,
+  CONTACT_PHONE_MIN_DIGITS,
+  CONTACT_REQUIRED_FIELDS,
+  type ContactFormData,
+  type ContactFormErrors,
+  type ContactRequestPayload,
+} from '../src/lib/contact-contract.js';
+import {
   buildContactEmailHtml,
   buildContactEmailSubject,
   buildContactEmailText,
 } from './_lib/contactEmail.js';
 
-type ContactPayload = {
-  nome?: string;
-  empresa?: string;
-  cargo?: string;
-  email?: string;
-  telefone?: string;
-  mensagem?: string;
-  website?: string;
-};
-
-type ValidationErrors = Partial<Record<keyof Omit<ContactPayload, 'website'>, string>>;
+type ValidationErrors = ContactFormErrors;
 
 type HeaderValue = string | string[] | undefined;
 
@@ -35,18 +34,6 @@ type ApiResponse = {
   json: (body: unknown) => void;
 };
 
-const REQUIRED_FIELDS: Array<keyof Omit<ContactPayload, 'website'>> = [
-  'nome',
-  'empresa',
-  'cargo',
-  'email',
-  'telefone',
-  'mensagem',
-];
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-const MIN_PHONE_DIGITS = 10;
-const MAX_MESSAGE_LENGTH = 2000;
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 const RATE_LIMIT_MAX_ENTRIES = 5000;
@@ -152,23 +139,23 @@ const sendJson = (
   res.status(statusCode).json(body);
 };
 
-const parsePayload = (body: unknown): ContactPayload => {
+const parsePayload = (body: unknown): ContactRequestPayload => {
   if (typeof body === 'string') {
     try {
       const parsed = JSON.parse(body);
-      return typeof parsed === 'object' && parsed !== null ? (parsed as ContactPayload) : {};
+      return typeof parsed === 'object' && parsed !== null ? (parsed as ContactRequestPayload) : {};
     } catch {
       return {};
     }
   }
 
-  return typeof body === 'object' && body !== null ? (body as ContactPayload) : {};
+  return typeof body === 'object' && body !== null ? (body as ContactRequestPayload) : {};
 };
 
-const validatePayload = (payload: ContactPayload): ValidationErrors => {
+const validatePayload = (payload: ContactRequestPayload): ValidationErrors => {
   const errors: ValidationErrors = {};
 
-  for (const field of REQUIRED_FIELDS) {
+  for (const field of CONTACT_REQUIRED_FIELDS) {
     const value = toSafeString(payload[field]);
 
     if (!value) {
@@ -176,20 +163,20 @@ const validatePayload = (payload: ContactPayload): ValidationErrors => {
       continue;
     }
 
-    if (field === 'email' && !EMAIL_REGEX.test(value)) {
+    if (field === 'email' && !CONTACT_EMAIL_REGEX.test(value)) {
       errors[field] = 'Informe um e-mail válido.';
       continue;
     }
 
     if (field === 'telefone') {
       const digits = value.replace(/\D/g, '');
-      if (digits.length < MIN_PHONE_DIGITS) {
+      if (digits.length < CONTACT_PHONE_MIN_DIGITS) {
         errors[field] = 'Informe um telefone válido.';
       }
     }
 
-    if (field === 'mensagem' && value.length > MAX_MESSAGE_LENGTH) {
-      errors[field] = `A mensagem deve ter no máximo ${MAX_MESSAGE_LENGTH} caracteres.`;
+    if (field === 'mensagem' && value.length > CONTACT_MESSAGE_MAX_LENGTH) {
+      errors[field] = `A mensagem deve ter no máximo ${CONTACT_MESSAGE_MAX_LENGTH} caracteres.`;
     }
   }
 
@@ -198,7 +185,7 @@ const validatePayload = (payload: ContactPayload): ValidationErrors => {
 
 const hasValidationErrors = (errors: ValidationErrors) => Object.keys(errors).length > 0;
 
-const normalizePayload = (payload: ContactPayload): Required<Omit<ContactPayload, 'website'>> => ({
+const normalizePayload = (payload: ContactRequestPayload): ContactFormData => ({
   nome: toSafeString(payload.nome),
   empresa: toSafeString(payload.empresa),
   cargo: toSafeString(payload.cargo),

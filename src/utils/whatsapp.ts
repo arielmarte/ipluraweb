@@ -1,11 +1,4 @@
-export type ContactFormData = {
-  nome: string;
-  empresa: string;
-  cargo: string;
-  email: string;
-  telefone: string;
-  mensagem: string;
-};
+import type { ContactFormData } from '@/lib/contact-contract';
 
 const resolveWhatsappPhone = (): string => {
   const rawPhone = import.meta.env.VITE_WHATSAPP_PHONE ?? '';
