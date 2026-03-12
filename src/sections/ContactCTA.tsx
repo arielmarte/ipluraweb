@@ -475,14 +475,6 @@ const ContactCTA = () => {
                   />
                 </div>
 
-                {showRecoverableStatus ? (
-                  <FormStatusFeedback
-                    status={formStatus}
-                    panelRef={statusPanelRef}
-                    onWhatsAppFallback={handleWhatsAppClick}
-                  />
-                ) : null}
-
                 <fieldset disabled={isLoading} className="space-y-4">
                   <p id={requiredNoteId} className="sr-only">
                     Todos os campos deste formulário são obrigatórios.
@@ -664,29 +656,37 @@ const ContactCTA = () => {
                     ) : null}
                   </div>
 
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    <button
-                      type="submit"
-                      disabled={isLoading}
-                      className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {isLoading ? (
-                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                      ) : (
-                        <Send className="w-4 h-4" aria-hidden="true" />
-                      )}
-                      {isLoading ? contact.status.loadingTitle : contact.form.submitLabel}
-                    </button>
+                  {showRecoverableStatus ? (
+                    <FormStatusFeedback
+                      status={formStatus}
+                      panelRef={statusPanelRef}
+                      onWhatsAppFallback={handleWhatsAppClick}
+                    />
+                  ) : (
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                      >
+                        {isLoading ? (
+                          <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                        ) : (
+                          <Send className="w-4 h-4" aria-hidden="true" />
+                        )}
+                        {isLoading ? contact.status.loadingTitle : contact.form.submitLabel}
+                      </button>
 
-                    <button
-                      type="button"
-                      onClick={handleWhatsAppClick}
-                      className="btn-secondary w-full flex items-center justify-center gap-2"
-                    >
-                      <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
-                      {contact.form.whatsapp.label}
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        onClick={handleWhatsAppClick}
+                        className="btn-secondary w-full flex items-center justify-center gap-2"
+                      >
+                        <WhatsAppIcon className="w-4 h-4" aria-hidden="true" />
+                        {contact.form.whatsapp.label}
+                      </button>
+                    </div>
+                  )}
 
                   <p id={privacyNoticeId} className="text-xs leading-[1.6] text-iplura-gray-soft">
                     {privacyNotice.usage}{' '}

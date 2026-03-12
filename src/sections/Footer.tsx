@@ -127,11 +127,12 @@ const Footer = () => {
                 <Linkedin className="w-4 h-4" aria-hidden="true" />
               </a>
               <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
+                href="https://www.instagram.com/ipluraorg?igsh=MTRncTJwbWd1eGZxeg=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center hover:bg-white/18 hover:text-white transition-all duration-300 text-white/92"
-                aria-label="Instagram do IPLURA (em breve)"
-                title="Instagram do IPLURA (em breve)"
+                aria-label="Instagram do IPLURA"
+                title="Instagram do IPLURA"
               >
                 <Instagram className="w-4 h-4" aria-hidden="true" />
               </a>
