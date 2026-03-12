@@ -44,13 +44,13 @@ src/
 
 ## Requisitos
 
-- Node.js `20.19.0` (recomendado para manter paridade com o projeto)
+- Node.js `24.x` (recomendado para manter paridade com o deploy)
 - npm 10+
 
 ## Como rodar localmente
 
 ```bash
-nvm use 20.19.0
+nvm use 24
 npm install
 npm run dev
 ```
@@ -95,7 +95,7 @@ Observações:
 
 ## SEO e metadados
 
-- Canonical de produção: `https://iplura.org/`
+- Canonical de produção: `https://iplura.org`
 - Open Graph/Twitter com `iplura-og.png`
 - `robots.txt` e `sitemap.xml` em `public/`
 - JSON-LD (Organization, WebSite, WebPage e FAQPage) em `index.html`
@@ -106,19 +106,3 @@ Observações:
 - Regras de noindex para previews `*.vercel.app`
 - Rewrites configurados para páginas legais e BotID em `vercel.json`
 - Variáveis de ambiente devem ser definidas por ambiente (Production/Preview/Development)
-
-## Boas práticas de contribuição
-
-1. Criar branch por tarefa.
-2. Rodar `npm run lint` antes de abrir PR.
-3. Não versionar artefatos de build (`dist/`).
-4. Manter separação de conteúdo (`src/content`) e apresentação (`src/sections`).
-5. Preservar a direção visual aprovada (evitar mudanças de layout sem alinhamento prévio).
-
-## Segurança para repositório público
-
-- Não expor segredos, tokens ou chaves em código.
-- Evitar logs com dados pessoais do formulário.
-- Validar entrada no servidor (não confiar apenas no front-end).
-- Manter dependências atualizadas e revisar advisories periodicamente.
-- Em mudanças de API, documentar claramente o contrato de erro/sucesso.

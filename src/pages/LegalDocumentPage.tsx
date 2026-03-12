@@ -6,14 +6,35 @@ type LegalDocumentPageProps = {
 };
 
 const PRODUCTION_URL = 'https://iplura.org';
+const SITE_TITLE_SUFFIX = ' | IPLURA';
+
+const setMetaTag = (selector: string, content: string) => {
+  const element = window.document.querySelector<HTMLMetaElement>(selector);
+
+  if (element) {
+    element.content = content;
+  }
+};
 
 const LegalDocumentPage = ({ legalDocument }: LegalDocumentPageProps) => {
   useEffect(() => {
-    window.document.title = `${legalDocument.title} | IPLURA`;
+    const pageTitle = `${legalDocument.title}${SITE_TITLE_SUFFIX}`;
+    const pageUrl = `${PRODUCTION_URL}${legalDocument.slug}`;
+    const pageDescription =
+      legalDocument.introduction[0] ??
+      'Instituto de Promoção da Legalidade e Uso Responsável de Apostas.';
+
+    window.document.title = pageTitle;
+    setMetaTag('meta[name="description"]', pageDescription);
+    setMetaTag('meta[property="og:title"]', pageTitle);
+    setMetaTag('meta[property="og:description"]', pageDescription);
+    setMetaTag('meta[property="og:url"]', pageUrl);
+    setMetaTag('meta[name="twitter:title"]', pageTitle);
+    setMetaTag('meta[name="twitter:description"]', pageDescription);
 
     const canonical = window.document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) {
-      canonical.href = `${PRODUCTION_URL}${legalDocument.slug}`;
+      canonical.href = pageUrl;
     }
   }, [legalDocument]);
 
