@@ -20,12 +20,35 @@ import WhatsAppIcon from '@/components/icons/WhatsAppIcon';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EMAIL_INTEGRATION_ENABLED = false;
+type ContactApiPayload = ContactFormData & {
+  website?: string;
+};
 
-const submitEmailContact = async (_formData: ContactFormData) => {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1100);
+type ContactApiErrorCode = 'unavailable' | 'error';
+
+class ContactApiError extends Error {
+  code: ContactApiErrorCode;
+
+  constructor(code: ContactApiErrorCode) {
+    super(code);
+    this.code = code;
+  }
+}
+
+const submitEmailContact = async (formData: ContactApiPayload) => {
+  const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
   });
+
+  if (!response.ok) {
+    const responseBody = await response.json().catch(() => null);
+    const isUnavailable = response.status === 503 || responseBody?.code === 'unavailable';
+    throw new ContactApiError(isUnavailable ? 'unavailable' : 'error');
+  }
 };
 
 type FormStatusFeedbackProps = {
@@ -134,6 +157,7 @@ const ContactCTA = () => {
   const [formData, setFormData] = useState<ContactFormData>(EMPTY_CONTACT_FORM_DATA);
   const [errors, setErrors] = useState<ContactFormErrors>({});
   const [formStatus, setFormStatus] = useState<ContactFormStatus>('idle');
+  const [website, setWebsite] = useState('');
 
   const directWhatsappUrl = buildWhatsappUrl(EMPTY_CONTACT_FORM_DATA);
   const whatsappUrl = buildWhatsappUrl(formData);
@@ -218,6 +242,7 @@ const ContactCTA = () => {
 
   const handleResetForm = () => {
     setFormData(EMPTY_CONTACT_FORM_DATA);
+    setWebsite('');
     setErrors({});
     setFormStatus('idle');
   };
@@ -253,16 +278,19 @@ const ContactCTA = () => {
       return;
     }
 
-    if (!EMAIL_INTEGRATION_ENABLED) {
-      setFormStatus('unavailable');
-      return;
-    }
-
     try {
       setFormStatus('loading');
-      await submitEmailContact(formData);
+      await submitEmailContact({
+        ...formData,
+        website,
+      });
       setFormStatus('success');
-    } catch (_error) {
+    } catch (error) {
+      if (error instanceof ContactApiError && error.code === 'unavailable') {
+        setFormStatus('unavailable');
+        return;
+      }
+
       setFormStatus('error');
     }
   };
@@ -319,6 +347,19 @@ const ContactCTA = () => {
             data-parallax="0.06"
           >
             <div className="space-y-4">
+              <div aria-hidden="true" className="sr-only">
+                <label htmlFor="contact-website">Website</label>
+                <input
+                  id="contact-website"
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={(event) => setWebsite(event.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <p id={requiredNoteId} className="sr-only">
                 Todos os campos deste formulário são obrigatórios.
               </p>
