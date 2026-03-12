@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ArrowRight, ShieldCheck, HeartHandshake } from 'lucide-react';
 import { homeContent } from '@/content/home';
 import { renderTextSegments } from '@/utils/renderTextSegments';
+import { scrollToAnchor } from '@/lib/scrollToAnchor';
 
 const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -74,10 +75,7 @@ const Hero = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToAnchor(href);
   };
 
   return (

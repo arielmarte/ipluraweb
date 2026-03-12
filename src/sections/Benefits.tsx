@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Scale, ShieldCheck, Award, GraduationCap } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -24,44 +25,36 @@ const Benefits = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      // Header animation
-      const headerTrigger = ScrollTrigger.create({
+      const headerTrigger = createRevealTrigger({
         trigger: headerRef.current,
+        target: headerRef.current,
         start: 'top 85%',
-        onEnter: () => {
-          gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 30 },
+        to: { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' },
       });
-      triggers.push(headerTrigger);
+      if (headerTrigger) {
+        triggers.push(headerTrigger);
+      }
 
-      // Cards animation
       if (cardsRef.current) {
         const cards = cardsRef.current.querySelectorAll('.benefit-card');
 
-        const cardsTrigger = ScrollTrigger.create({
+        const cardsTrigger = createRevealTrigger({
           trigger: cardsRef.current,
+          target: cards,
           start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(
-              cards,
-              { opacity: 0, y: 30 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, y: 30 },
+          to: {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(cardsTrigger);
+        if (cardsTrigger) {
+          triggers.push(cardsTrigger);
+        }
       }
     }, sectionRef);
 

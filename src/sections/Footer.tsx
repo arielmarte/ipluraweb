@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Linkedin, Instagram } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
+import { scrollToAnchor } from '@/lib/scrollToAnchor';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,19 +16,17 @@ const Footer = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      const footerTrigger = ScrollTrigger.create({
+      const footerTrigger = createRevealTrigger({
         trigger: footerRef.current,
+        target: footerRef.current,
         start: 'top 95%',
-        onEnter: () => {
-          gsap.fromTo(
-            footerRef.current,
-            { opacity: 0 },
-            { opacity: 1, duration: 0.6, ease: 'power2.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0 },
+        to: { opacity: 1, duration: 0.6, ease: 'power2.out' },
       });
-      triggers.push(footerTrigger);
+
+      if (footerTrigger) {
+        triggers.push(footerTrigger);
+      }
     }, footerRef);
 
     return () => {
@@ -36,10 +36,7 @@ const Footer = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToAnchor(href);
   };
 
   return (

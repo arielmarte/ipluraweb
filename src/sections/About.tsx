@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Target, Eye, Handshake, ShieldCheck, BookOpenCheck, Sparkles } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -27,26 +28,23 @@ const About = () => {
 
       if (!revealItems || revealItems.length === 0) return;
 
-      const revealTrigger = ScrollTrigger.create({
+      const revealTrigger = createRevealTrigger({
         trigger: sectionRef.current,
+        target: revealItems,
         start: 'top 78%',
-        onEnter: () => {
-          gsap.fromTo(
-            revealItems,
-            { opacity: 0, y: 32 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.72,
-              stagger: 0.08,
-              ease: 'expo.out',
-            }
-          );
+        from: { opacity: 0, y: 32 },
+        to: {
+          opacity: 1,
+          y: 0,
+          duration: 0.72,
+          stagger: 0.08,
+          ease: 'expo.out',
         },
-        once: true,
       });
 
-      triggers.push(revealTrigger);
+      if (revealTrigger) {
+        triggers.push(revealTrigger);
+      }
     }, sectionRef);
 
     return () => {

@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Handshake, Layers, Target } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,44 +24,36 @@ const Differentiators = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      // Content animation
-      const contentTrigger = ScrollTrigger.create({
+      const contentTrigger = createRevealTrigger({
         trigger: contentRef.current,
+        target: contentRef.current,
         start: 'top 85%',
-        onEnter: () => {
-          gsap.fromTo(
-            contentRef.current,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 30 },
+        to: { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' },
       });
-      triggers.push(contentTrigger);
+      if (contentTrigger) {
+        triggers.push(contentTrigger);
+      }
 
-      // Cards animation
       if (cardsRef.current) {
         const cards = cardsRef.current.querySelectorAll('.diff-card');
 
-        const cardsTrigger = ScrollTrigger.create({
+        const cardsTrigger = createRevealTrigger({
           trigger: cardsRef.current,
+          target: cards,
           start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(
-              cards,
-              { opacity: 0, y: 30 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                stagger: 0.1,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, y: 30 },
+          to: {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(cardsTrigger);
+        if (cardsTrigger) {
+          triggers.push(cardsTrigger);
+        }
       }
     }, sectionRef);
 

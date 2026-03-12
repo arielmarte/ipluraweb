@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Plus, Minus } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,44 +19,36 @@ const FAQ = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      // Header animation
-      const headerTrigger = ScrollTrigger.create({
+      const headerTrigger = createRevealTrigger({
         trigger: headerRef.current,
+        target: headerRef.current,
         start: 'top 85%',
-        onEnter: () => {
-          gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 30 },
+        to: { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' },
       });
-      triggers.push(headerTrigger);
+      if (headerTrigger) {
+        triggers.push(headerTrigger);
+      }
 
-      // Items animation
       if (itemsRef.current) {
         const items = itemsRef.current.querySelectorAll('.faq-item');
 
-        const itemsTrigger = ScrollTrigger.create({
+        const itemsTrigger = createRevealTrigger({
           trigger: itemsRef.current,
+          target: items,
           start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(
-              items,
-              { opacity: 0, y: 20 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.08,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, y: 20 },
+          to: {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.08,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(itemsTrigger);
+        if (itemsTrigger) {
+          triggers.push(itemsTrigger);
+        }
       }
     }, sectionRef);
 

@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Heart, Building2, GraduationCap, ArrowUpRight } from 'lucide-react';
 import { homeContent } from '@/content/home';
+import { createRevealTrigger } from '@/lib/gsap/reveal';
+import { scrollToAnchor } from '@/lib/scrollToAnchor';
 import { renderTextSegments } from '@/utils/renderTextSegments';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,44 +31,36 @@ const Solutions = () => {
     const triggers: ScrollTrigger[] = [];
 
     const ctx = gsap.context(() => {
-      // Header animation
-      const headerTrigger = ScrollTrigger.create({
+      const headerTrigger = createRevealTrigger({
         trigger: headerRef.current,
+        target: headerRef.current,
         start: 'top 85%',
-        onEnter: () => {
-          gsap.fromTo(
-            headerRef.current,
-            { opacity: 0, y: 30 },
-            { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }
-          );
-        },
-        once: true,
+        from: { opacity: 0, y: 30 },
+        to: { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' },
       });
-      triggers.push(headerTrigger);
+      if (headerTrigger) {
+        triggers.push(headerTrigger);
+      }
 
-      // Cards animation
       if (cardsRef.current) {
         const cards = cardsRef.current.querySelectorAll('.solution-card');
 
-        const cardsTrigger = ScrollTrigger.create({
+        const cardsTrigger = createRevealTrigger({
           trigger: cardsRef.current,
+          target: cards,
           start: 'top 80%',
-          onEnter: () => {
-            gsap.fromTo(
-              cards,
-              { opacity: 0, y: 40 },
-              {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                stagger: 0.15,
-                ease: 'expo.out',
-              }
-            );
+          from: { opacity: 0, y: 40 },
+          to: {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.15,
+            ease: 'expo.out',
           },
-          once: true,
         });
-        triggers.push(cardsTrigger);
+        if (cardsTrigger) {
+          triggers.push(cardsTrigger);
+        }
       }
     }, sectionRef);
 
@@ -130,9 +124,7 @@ const Solutions = () => {
                     href={solutions.linkHref}
                     onClick={(e) => {
                       e.preventDefault();
-                      document
-                        .querySelector(solutions.linkHref)
-                        ?.scrollIntoView({ behavior: 'smooth' });
+                      scrollToAnchor(solutions.linkHref);
                     }}
                     className="inline-flex items-center gap-2 text-sm font-medium group/link"
                     style={{ color: 'hsl(var(--iplura-purple))' }}
