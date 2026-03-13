@@ -390,6 +390,14 @@
     transform: translateZ(0);
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-cta-enter {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+  }
+
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
