@@ -24,11 +24,6 @@ const Hero = () => {
         : [];
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
 
-      if (!prefersReducedMotion && ctaItems.length > 0) {
-        // Pre-set CTA state before paint to prevent mobile flicker.
-        gsap.set(ctaItems, { autoAlpha: 0, y: 20 });
-      }
-
       tl.fromTo(
         badgeRef.current,
         { opacity: 0, y: 20 },
@@ -56,7 +51,7 @@ const Hero = () => {
               y: 0,
               clearProps: 'opacity,visibility,transform',
             },
-            '-=0.55'
+            '<+0.08'
           );
         } else {
           tl.to(
@@ -68,7 +63,7 @@ const Hero = () => {
               stagger: 0.1,
               clearProps: 'opacity,visibility,transform',
             },
-            '-=0.55'
+            '<+0.08'
           );
         }
       }
@@ -156,7 +151,7 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToSection(hero.ctaPrimary.href);
                 }}
-                className="btn-primary w-full sm:w-auto text-center"
+                className="btn-primary hero-cta-enter w-full sm:w-auto text-center"
               >
                 {hero.ctaPrimary.label}
               </a>
@@ -166,7 +161,7 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToSection(hero.ctaSecondary.href);
                 }}
-                className="btn-secondary group w-full sm:w-auto text-center"
+                className="btn-secondary hero-cta-enter group w-full sm:w-auto text-center"
               >
                 {hero.ctaSecondary.label}
                 <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
