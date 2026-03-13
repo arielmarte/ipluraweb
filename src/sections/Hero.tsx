@@ -19,10 +19,18 @@ const Hero = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const ctaItems = ctaRef.current
-        ? Array.from(ctaRef.current.children) as HTMLElement[]
-        : [];
+      const ctaBlock = ctaRef.current;
       const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+
+      if (ctaBlock) {
+        if (prefersReducedMotion) {
+          // Keep CTA immediately visible when reduced motion is enabled.
+          gsap.set(ctaBlock, { autoAlpha: 1, y: 0 });
+        } else {
+          // Pre-set CTA block before paint to avoid first-frame flash.
+          gsap.set(ctaBlock, { autoAlpha: 0, y: 20 });
+        }
+      }
 
       tl.fromTo(
         badgeRef.current,
@@ -42,30 +50,16 @@ const Hero = () => {
           '-=0.4'
         );
 
-      if (ctaItems.length > 0) {
-        if (prefersReducedMotion) {
-          tl.set(
-            ctaItems,
-            {
-              autoAlpha: 1,
-              y: 0,
-              clearProps: 'opacity,visibility,transform',
-            },
-            '<+0.08'
-          );
-        } else {
-          tl.to(
-            ctaItems,
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.5,
-              stagger: 0.1,
-              clearProps: 'opacity,visibility,transform',
-            },
-            '<+0.08'
-          );
-        }
+      if (ctaBlock && !prefersReducedMotion) {
+        tl.to(
+          ctaBlock,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.5,
+          },
+          '-=0.58'
+        );
       }
 
       tl.fromTo(
@@ -144,14 +138,14 @@ const Hero = () => {
               {hero.subtitle}
             </p>
 
-            <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row items-start gap-4 opacity-0">
               <a
                 href={hero.ctaPrimary.href}
                 onClick={(e) => {
                   e.preventDefault();
                   scrollToSection(hero.ctaPrimary.href);
                 }}
-                className="btn-primary hero-cta-enter w-full sm:w-auto text-center"
+                className="btn-primary w-full sm:w-auto text-center"
               >
                 {hero.ctaPrimary.label}
               </a>
@@ -161,7 +155,7 @@ const Hero = () => {
                   e.preventDefault();
                   scrollToSection(hero.ctaSecondary.href);
                 }}
-                className="btn-secondary hero-cta-enter group w-full sm:w-auto text-center"
+                className="btn-secondary group w-full sm:w-auto text-center"
               >
                 {hero.ctaSecondary.label}
                 <ArrowRight className="w-4 h-4 ml-2 inline group-hover:translate-x-1 transition-transform" />
