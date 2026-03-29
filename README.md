@@ -9,7 +9,7 @@ Aplicação React (SPA) para site institucional, com páginas legais e formulár
   - `/termos-de-uso`
   - `/politica-de-privacidade`
 - Rota de cartão em server-side:
-  - `/cartao` (Vercel Function com tela minimalista + auto-redirect)
+  - `/cartao` (Vercel Function com redirect HTTP 307)
 - Endpoint server-side de contato em `/api/contact` (Resend).
 - Integração de contato por WhatsApp.
 - SEO técnico básico (canonical, Open Graph, JSON-LD, sitemap e robots).
@@ -86,9 +86,7 @@ Nunca versionar segredos no repositório.
 
 1. Acessar `https://iplura.org/cartao`.
 2. `vercel.json` faz rewrite para `/api/cartao`.
-3. A Function renderiza HTML minimalista (inline CSS), com:
-   - `meta refresh` para auto-redirect;
-   - botão manual "Abrir link" como fallback.
+3. A Function valida o destino e retorna `307 Temporary Redirect` com `Location`.
 4. O destino vem de `CARD_DESTINATION_URL` (fallback para home se ausente/inválido).
 
 ## Deploy
