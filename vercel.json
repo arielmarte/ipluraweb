@@ -49,6 +49,10 @@
       "destination": "https://api.vercel.com/bot-protection/v1/proxy/:path*"
     },
     {
+      "source": "/cartao",
+      "destination": "/api/cartao"
+    },
+    {
       "source": "/termos-de-uso",
       "destination": "/"
     },

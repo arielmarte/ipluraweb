@@ -8,6 +8,8 @@ Aplicação React (SPA) para site institucional, com páginas legais e formulár
 - Rotas legais:
   - `/termos-de-uso`
   - `/politica-de-privacidade`
+- Rota de cartão em server-side:
+  - `/cartao` (Vercel Function com tela minimalista + auto-redirect)
 - Endpoint server-side de contato em `/api/contact` (Resend).
 - Integração de contato por WhatsApp.
 - SEO técnico básico (canonical, Open Graph, JSON-LD, sitemap e robots).
@@ -63,6 +65,7 @@ Aplicação local: `http://localhost:5173`
 Baseie-se no `.env.example`:
 
 - `VITE_WHATSAPP_PHONE`
+- `CARD_DESTINATION_URL` (URL destino para o fluxo do cartão em `/cartao`)
 - `FORM_EMAIL_FROM`
 - `FORM_EMAIL_TO`
 - `RESEND_API_KEY`
@@ -79,6 +82,15 @@ Nunca versionar segredos no repositório.
    - BotID (fail-open em falha de infraestrutura)
 3. API envia e-mail via Resend e retorna status para o front.
 
+## Fluxo do cartão `/cartao` (resumo)
+
+1. Acessar `https://iplura.org/cartao`.
+2. `vercel.json` faz rewrite para `/api/cartao`.
+3. A Function renderiza HTML minimalista (inline CSS), com:
+   - `meta refresh` para auto-redirect;
+   - botão manual "Abrir link" como fallback.
+4. O destino vem de `CARD_DESTINATION_URL` (fallback para home se ausente/inválido).
+
 ## Deploy
 
 - Plataforma alvo: Vercel.
@@ -89,5 +101,6 @@ Nunca versionar segredos no repositório.
 ## Observações para manutenção
 
 - O projeto não usa React Router; as páginas legais são resolvidas pela URL atual no `App`.
+- A rota `/cartao` não passa pelo React; é atendida diretamente por Vercel Function.
 - Conteúdo institucional deve ser alterado prioritariamente em `src/content`.
 - Sempre valide `lint`, `typecheck:api` e `build` antes de publicar.
